@@ -1,0 +1,25 @@
+.teacher-main {
+  text-align: center;
+}
+
+.teacher-main label {
+  margin-bottom: 10px;
+  display: block;
+  text-align: center;
+}
+
+.teacher-main input {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.teacher-main button {
+  display: block;
+  margin: 0 auto 20px auto;
+  text-align: center;
+}
+
+.teacher-main .toggle-login-register button {
+  display: initial;
+  margin: 0 0 0 8px;
+}
