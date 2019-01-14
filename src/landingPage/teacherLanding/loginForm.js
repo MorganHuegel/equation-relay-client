@@ -4,10 +4,10 @@ export function LoginForm(props){
   return (
     <form id='login-form' name='login-form' onSubmit={(e) => props.onSubmitLogin(e)}>
       <label htmlFor='username'>Username or Email:</label>
-      <input type='text' name='username' id='username'/>
+      <input type='text' name='username' id='username' onChange={e => e.target.classList.remove('error-input')}/>
 
       <label htmlFor='password'>Password: </label>
-      <input type='password' name='password' id='password'/>
+      <input type='password' name='password' id='password' onChange={e => e.target.classList.remove('error-input')}/>
 
       <button type='submit'>Login</button>
       <button type='button'>See demo account</button>

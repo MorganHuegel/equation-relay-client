@@ -1,4 +1,18 @@
+html {
+  font-size: 16px;
+}
+
 body, body * {
   margin: 0;
   padding: 0;
 }
+
+.error-message {
+  color: red;
+  margin: 10px 0;
+}
+
+.error-input {
+  background-color: rgb(255, 230, 230);
+}
+
