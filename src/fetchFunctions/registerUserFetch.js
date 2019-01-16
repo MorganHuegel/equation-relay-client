@@ -1,4 +1,5 @@
-import { SERVER_BASE_URL } from './config';
+import { SERVER_BASE_URL } from '../config';
+import { loginUserFetch } from './loginUserFetch';
 
 export function registerUserFetch (username, password, email) {
   const query = `
@@ -13,7 +14,7 @@ export function registerUserFetch (username, password, email) {
     }
   `;
 
-  return fetch(`${SERVER_BASE_URL}/graphql?query=${query}`, {
+  return fetch(`${SERVER_BASE_URL}/graphql/unprotected`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -26,16 +27,15 @@ export function registerUserFetch (username, password, email) {
       if (response.errors) {
         return Promise.reject(response.errors);
       } else {
-        // TO-DO: Call login fetch function
-        console.log('RESPONSE: ', response);
+        return loginUserFetch(username, password);
       }
     })
     .catch(err => {
-      // TO-DO: Set state of error message
-      console.log('ERROR:', err);
+      if (err instanceof Array) { // <---- Graphql error
+        return err[0].message;
+      } else {
+        return "somehow not a graphql error?";
+      }
     })
 }
 
-export function loginUserFetch (username, password, email) {
-  
-}

@@ -7,7 +7,8 @@ import { LoginForm } from './loginForm';
 import { RegisterForm } from './registerForm';
 
 import { validateRegisterSubmission, validateLoginSubmission } from './teachersMainUtils';
-import { registerUserFetch } from '../../fetchFunctions';
+import { registerUserFetch } from '../../fetchFunctions/registerUserFetch';
+import { loginUserFetch } from '../../fetchFunctions/loginUserFetch';
 
 export class TeachersMain extends React.Component {
   constructor(props){
@@ -16,6 +17,14 @@ export class TeachersMain extends React.Component {
       registering: true,
       errorMessage: '',
       fetchingData: false
+    }
+  }
+
+  componentWillUpdate(){
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      /* FETCH USER DATA... */
+      console.log('JUST GOTTA FETCH DATA NOW USING PROTECTED ENDPOINT!');
     }
   }
 
@@ -31,7 +40,9 @@ export class TeachersMain extends React.Component {
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
       this.setState({fetchingData: true}, () => {
-        console.log("Username: ", username, " Password: ", password);
+        return loginUserFetch(username, password)
+          .then(() => this.setState({fetchingData: false}))
+          .catch(errorMessage => this.setState({errorMessage, fetchingData: false}))
       });
     }
   }
@@ -45,7 +56,9 @@ export class TeachersMain extends React.Component {
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       this.setState({fetchingData: true}, () => {
-        registerUserFetch(username, password, email);
+        return registerUserFetch(username, password, email)
+          .then( () => this.setState({fetchingData: false}))
+          .catch(errorMessage => this.setState({errorMessage, fetchingData: false}))
       })
     }
   }
