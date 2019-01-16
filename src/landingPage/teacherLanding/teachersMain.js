@@ -20,6 +20,15 @@ export class TeachersMain extends React.Component {
     }
   }
 
+
+  componentWillMount(){
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      /* FETCH USER DATA... */
+      console.log('JUST GOTTA FETCH DATA NOW USING PROTECTED ENDPOINT!');
+    }
+  }
+
   componentWillUpdate(){
     const token = localStorage.getItem('authToken');
     if (token) {
