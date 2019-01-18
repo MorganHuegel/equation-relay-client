@@ -9,6 +9,7 @@ import { RegisterForm } from './registerForm';
 import { validateRegisterSubmission, validateLoginSubmission } from './teachersMainUtils';
 import { registerUserFetch } from '../../fetchFunctions/registerUserFetch';
 import { loginUserFetch } from '../../fetchFunctions/loginUserFetch';
+import { fetchUserData } from '../../fetchFunctions/fetchUserData';
 
 export class TeachersMain extends React.Component {
   constructor(props){
@@ -20,20 +21,28 @@ export class TeachersMain extends React.Component {
     }
   }
 
-
   componentWillMount(){
     const token = localStorage.getItem('authToken');
     if (token) {
-      /* FETCH USER DATA... */
-      console.log('JUST GOTTA FETCH DATA NOW USING PROTECTED ENDPOINT!');
+      this.props.setFetchingDataState(true);
+      return fetchUserData(token)
+        .then(userData => {
+          this.props.updateUserData(userData);
+          this.props.setFetchingDataState(false);
+        })
+        .catch(errorMessage => {
+          this.props.setFetchingDataState(false);
+          this.setState({errorMessage})
+        })
     }
   }
 
   componentWillUpdate(){
     const token = localStorage.getItem('authToken');
     if (token) {
-      /* FETCH USER DATA... */
-      console.log('JUST GOTTA FETCH DATA NOW USING PROTECTED ENDPOINT!');
+      return fetchUserData(token)
+        .then(userData => this.props.updateUserData(userData))
+        .catch(errorMessage => this.setState({errorMessage}));
     }
   }
 
