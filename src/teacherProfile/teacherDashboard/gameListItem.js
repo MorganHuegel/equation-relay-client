@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../../stylesheets/teacherProfile/gameListItem.css';
+import '../../stylesheets/teacherProfile/teacherDashboard/gameListItem.css';
 
 export function GameListItem (props) {
   return (

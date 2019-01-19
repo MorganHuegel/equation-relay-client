@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../stylesheets/teacherProfile/teacherProfileMain.css';
+
 import { Redirect } from 'react-router-dom';
 import { GameList } from './teacherDashboard/gameList';
 import { DashboardMenu } from './teacherDashboard/dashboardMenu';
@@ -28,9 +30,19 @@ export class TeacherProfileMain extends React.Component {
     return (
       <div className='teacher-profile-main'>
         <p>Teacher Profile Main {username}</p>
-        <button type='button' onClick={() => this.logout()}>Logout</button>
-        <DashboardMenu />
-        <GameList games={this.props.userData.games}/>
+
+        <DashboardMenu logout={this.logout}/>
+
+        <div className='teacher-dashboard-games'>
+          <div className='create-new'>
+            <button type='button'>
+              <i className='fas fa-plus-circle'></i>
+              <p>Create New</p>
+            </button>
+          </div>
+          <GameList games={this.props.userData.games}/>
+        </div>
+
       </div>
     )
   }
