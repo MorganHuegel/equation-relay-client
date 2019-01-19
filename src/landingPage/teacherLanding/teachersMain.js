@@ -15,7 +15,7 @@ export class TeachersMain extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      registering: true,
+      registering: false,
       errorMessage: '',
       fetchingData: false
     }

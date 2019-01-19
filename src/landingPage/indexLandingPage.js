@@ -32,7 +32,7 @@ export class IndexLandingPage extends React.Component {
 
     return (
       <Router>
-        <div class='index-landing-page'>
+        <div className='index-landing-page'>
           <Header />
           <Route exact path='/' render={props => teacherToken ? <Redirect to='/teachers'/> : <Redirect to='/join'/>}/>
           <Route path='/join' component={JoinMain}/>
@@ -47,7 +47,12 @@ export class IndexLandingPage extends React.Component {
               return <Redirect to={`/teachers/${this.state.userData.id}`}/>
             }
           }}/>
-          <Route path='/teachers/:id' render={props => <TeacherProfileMain userData={this.state.userData}/>} />
+          <Route path='/teachers/:id' render={props => (
+            <TeacherProfileMain 
+              userData={this.state.userData} 
+              updateUserData={this.updateUserData}
+            /> )
+          } />
           <Route path='/about' component={AboutMain}/>
         </div>
       </Router>

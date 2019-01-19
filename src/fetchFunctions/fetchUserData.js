@@ -8,6 +8,7 @@ export function fetchUserData (token) {
         username,
         games {
           title,
+          description,
           id
         },
         favorites {
