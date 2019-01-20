@@ -10,6 +10,7 @@ import { CreateQuestionsMain } from './teacherGameCreation/createQuestions/creat
 
 import { createNewGame } from '../fetchFunctions/createNewGame';
 import { validateTitle } from './teacherGameCreation/createTitle/validateTitle';
+import { fetchUserData } from '../fetchFunctions/fetchUserData';
 
 export class TeacherProfileMain extends React.Component {
   constructor(props){
@@ -19,6 +20,18 @@ export class TeacherProfileMain extends React.Component {
       creating: false,
       currentGame: null,
       playing: false
+    }
+  }
+
+
+  componentDidUpdate () {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      return fetchUserData(token)
+        .then(userData => {
+          this.props.updateUserData(userData);
+        })
+        .catch(e => console.log('Could not update user data.'))
     }
   }
 
@@ -41,7 +54,7 @@ export class TeacherProfileMain extends React.Component {
 
     if (!validateTitle(title)) return;
 
-    return createNewGame(title, description)
+    return createNewGame (title, description)
       .then(gameData => {
         this.setState({
           currentGame: gameData,
