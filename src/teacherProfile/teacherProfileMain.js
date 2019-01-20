@@ -7,10 +7,12 @@ import { GameList } from './teacherDashboard/gameList';
 import { DashboardMenu } from './teacherDashboard/dashboardMenu';
 import { CreateGame } from './teacherGameCreation/createTitle/createGame';
 import { CreateQuestionsMain } from './teacherGameCreation/createQuestions/createQuestionsMain';
+import { CreateNewButton } from './teacherDashboard/createNewButton';
 
 import { createNewGame } from '../fetchFunctions/createNewGame';
 import { validateTitle } from './teacherGameCreation/createTitle/validateTitle';
 import { fetchUserData } from '../fetchFunctions/fetchUserData';
+import { fetchGameData } from '../fetchFunctions/fetchGameData';
 
 export class TeacherProfileMain extends React.Component {
   constructor(props){
@@ -65,13 +67,26 @@ export class TeacherProfileMain extends React.Component {
   }
 
 
+  onEditClick = gameId => {
+    return fetchGameData(gameId)
+      .then(gameData => {
+        this.setState({currentGame: gameData});
+      })
+  }
+
+
+  setCurrentGame = (gameData) => {
+    return this.setState({currentGame: gameData});
+  }
+
+
   render(){
     if (!this.props.userData) {
       return <Redirect to='/teachers'/>
     }
 
     if (this.state.currentGame) {
-      return <CreateQuestionsMain currentGame={this.state.currentGame}/>
+      return <CreateQuestionsMain currentGame={this.state.currentGame} setCurrentGame={this.setCurrentGame}/>
     }
 
     const createGameLightbox = this.state.creating ?
@@ -86,15 +101,9 @@ export class TeacherProfileMain extends React.Component {
         <DashboardMenu logout={this.logout}/>
 
         <div className='teacher-dashboard-games'>
-          <div className='create-new'>
-            <button type='button' onClick={() => this.setCreatingState(true)}>
-              <i className='fas fa-plus-circle'></i>
-              <p>Create New</p>
-            </button>
-          </div>
-          <GameList games={this.props.userData.games}/>
+          <CreateNewButton setCreatingState={this.setCreatingState}/>
+          <GameList games={this.props.userData.games} onEditClick={this.onEditClick}/>
         </div>
-
       </div>
     )
   }

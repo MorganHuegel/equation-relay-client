@@ -3,32 +3,3 @@
   width: calc(100vw - 350px);
   margin: 0 20px 0 50px;
 }
-
-.create-new {
-  text-align: right;
-  padding-right: 20px;
-}
-
-.create-new button {
-  border-radius: 50px;
-  border: none;
-  background-color: white;
-  color: rgb(40, 150, 100);
-  font-size: 5rem;
-}
-
-.create-new i:hover, .create-new p:hover {
-  cursor: pointer;
-}
-
-.create-new p {
-  color: white;
-  background-color: rgb(40, 150, 100);
-  display: inline;
-  font-size: 1.5rem;
-  border-radius: 5%;
-  padding: 10px 10px 10px 5px;
-  position: relative;
-  bottom: 23px;
-  right: 14px;
-}

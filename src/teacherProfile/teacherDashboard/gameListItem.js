@@ -8,7 +8,7 @@ export function GameListItem (props) {
       <h3>{props.title}</h3>
       <div>
         <button type='button'>Play Live</button>
-        <button type='button'>Edit</button>
+        <button type='button' onClick={() => props.onEditClick(props.id)}>Edit</button>
         <button type='button'>Delete</button>
       </div>
 
