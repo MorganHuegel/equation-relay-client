@@ -1,0 +1,28 @@
+.lightbox-container {
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(100, 100, 100, 0.8);
+}
+
+.create-game-lightbox {
+  overflow: scroll;
+  background-color: white;
+  padding: 20px;
+  display: inline-block;
+  width: 67vw;
+  height: 67vh;
+  margin: calc(16.5vh - 20px) 16.5vw 16.5vh calc(16.5vw - 20px);
+}
+
+.create-game-lightbox h1 {
+  font-size: 3rem;
+}
+
+.create-game-lightbox .create-game-error {
+  margin: 0;
+  color: red;
+  font-style: italic;
+}

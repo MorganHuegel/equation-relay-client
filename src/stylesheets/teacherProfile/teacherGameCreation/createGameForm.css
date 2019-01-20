@@ -1,0 +1,45 @@
+.create-game-lightbox p {
+  margin: 50px 0 50px 0;
+  font-size: 1.5rem;
+}
+
+.create-game-lightbox #title {
+  padding: 5px;
+  width: calc(100% - 100px);
+  margin-left: 20px;
+  font-size: 1.5rem;
+}
+
+.create-game-lightbox #title::placeholder, .create-game-lightbox #description::placeholder {
+  font-style: italic;
+  color: rgb(180, 180, 180);
+}
+
+.create-game-lightbox #description {
+  padding: 5px;
+  width: calc(100% - 165px);
+  margin-left: 20px;
+  font-size: 1.5rem;
+}
+
+.create-game-lightbox label[for="description"] {
+  vertical-align: top;
+}
+
+.create-game-lightbox form button {
+  font-size: 1.5rem;
+  width: 200px;
+  height: 80px;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+}
+
+.create-game-lightbox button[type="submit"] {
+  margin-right: 40px;
+  background-color: rgb(40, 150, 100);
+}
+
+.create-game-lightbox button[type="reset"] {
+  background-color: rgb(150, 100, 40);
+}
