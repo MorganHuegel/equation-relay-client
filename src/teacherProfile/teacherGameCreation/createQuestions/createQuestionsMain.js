@@ -2,6 +2,8 @@ import React from 'react';
 
 import { NewEquationInput } from './newEquationInput';
 
+import { changeQuestionSet } from './createQuestionsMainUtils';
+
 export class CreateQuestionsMain extends React.Component {
   constructor (props) {
     super(props);
@@ -10,12 +12,8 @@ export class CreateQuestionsMain extends React.Component {
       questionIndex: 0,
       errorMessage: ''
     }
-  }
 
-  
-  changeQuestionSet = (questionSetNumber) => {
-    //VALIDATE
-    //UPDATE
+    this.changeQuestionSet = changeQuestionSet.bind(this);
   }
 
 
@@ -27,25 +25,25 @@ export class CreateQuestionsMain extends React.Component {
     if (currentQuestion) {
       equationSet = [1, 2, 3, 4].map(num => {
         const answer = currentQuestion[`equation${num}`].answer;
-        const equation = currentQuestion[`equation${num}`].question;
-        return <NewEquationInput equationNum={num} key={num} equation={equation} answer={answer}/>
+        const equation = currentQuestion[`equation${num}`].equation;
+        return <NewEquationInput equationNum={num} key={num.toString() + this.state.questionIndex.toString()} equation={equation} answer={answer}/>
       })
     } else {
-      equationSet = [1, 2, 3, 4].map(num => <NewEquationInput equationNum={num} key={num}/>);
+      equationSet = [1, 2, 3, 4].map(num => <NewEquationInput equationNum={num} key={num.toString() + this.state.questionIndex.toString()}/>);
     }
 
     const previousButton = this.state.questionIndex === 0 ? null : 
       <button type='button' onClick={() => this.setState({questionIndex: this.state.questionIndex - 1})}>Previous Question</button>;
 
     return (
-      <div className='create-questions-main'>
+      <div className='create-questions-main' data-questionid={currentQuestion ? currentQuestion.id : null}>
         <h2>{this.props.currentGame.title}</h2>
         <p>{this.state.errorMessage}</p>
         <h3>Equation Set {this.state.questionIndex + 1} of {questionSetLength}</h3>
         {equationSet}
-        <button type='button' onClick={() => this.props.setCurrentGame(null)}>Cancel</button>
+        <button type='reset' onClick={() => this.props.setCurrentGame(null)}>Cancel</button>
         {previousButton}
-        <button type='button'>Next Question</button>
+        <button type='button' onClick={() => this.changeQuestionSet(this.state.questionIndex + 1)}>Next Question</button>
         <button type='button'>Finished</button>
       </div>
     )

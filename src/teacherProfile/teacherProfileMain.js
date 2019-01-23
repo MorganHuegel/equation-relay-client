@@ -11,7 +11,6 @@ import { CreateNewButton } from './teacherDashboard/createNewButton';
 
 import { createNewGame } from '../fetchFunctions/createNewGame';
 import { validateTitle } from './teacherGameCreation/createTitle/validateTitle';
-import { fetchUserData } from '../fetchFunctions/fetchUserData';
 import { fetchGameData } from '../fetchFunctions/fetchGameData';
 
 export class TeacherProfileMain extends React.Component {
@@ -22,18 +21,6 @@ export class TeacherProfileMain extends React.Component {
       creating: false,
       currentGame: null,
       playing: false
-    }
-  }
-
-
-  componentDidUpdate () {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      return fetchUserData(token)
-        .then(userData => {
-          this.props.updateUserData(userData);
-        })
-        .catch(e => console.log('Could not update user data.'))
     }
   }
 
@@ -90,7 +77,7 @@ export class TeacherProfileMain extends React.Component {
     }
 
     const createGameLightbox = this.state.creating ?
-      <CreateGame initializeGame={this.initializeGame} setCreatingState={this.setCreatingState}/> :
+      <CreateGame initializeGame={this.initializeGame} setCreatingState={this.setCreatingState} updateUserData={this.props.updateUserData}/> :
       null;
 
     return (

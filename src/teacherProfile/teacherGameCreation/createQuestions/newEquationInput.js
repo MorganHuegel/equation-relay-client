@@ -13,6 +13,7 @@ export function NewEquationInput (props) {
         name={`equation${props.equationNum}`} 
         id={`equation${props.equationNum}`}
         placeholder={'e.g. 2x + 1 = 7'}
+        className='create-equation-input'
         />
 
       <input 
@@ -20,6 +21,7 @@ export function NewEquationInput (props) {
         type='number'
         name={`answer${props.equationNum}`} 
         id={`answer${props.equationNum}`}
+        className='create-answer-input'
         />
     </div>
   )
