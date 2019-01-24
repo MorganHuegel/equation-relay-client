@@ -33,7 +33,7 @@ export class CreateQuestionsMain extends React.Component {
     }
 
     const previousButton = this.state.questionIndex === 0 ? null : 
-      <button type='button' onClick={() => this.setState({questionIndex: this.state.questionIndex - 1})}>Previous Question</button>;
+      <button type='button' onClick={() => this.changeQuestionSet(this.state.questionIndex - 1)}>Previous Question</button>;
 
     return (
       <div className='create-questions-main' data-questionid={currentQuestion ? currentQuestion.id : null}>

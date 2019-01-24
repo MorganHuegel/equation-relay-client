@@ -1,7 +1,6 @@
 import { SERVER_BASE_URL } from '../config';
 
 export function updateQuestionData (questionId, questionObject) {
-  console.log(typeof questionId);
   const token = localStorage.getItem('authToken');
   const query = `
     mutation ($questionObject : QuestionInput, $questionId : String){

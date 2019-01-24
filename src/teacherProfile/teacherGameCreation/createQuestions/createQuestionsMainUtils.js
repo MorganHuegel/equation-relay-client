@@ -9,23 +9,18 @@ export function changeQuestionSet (questionIndex) {
     questionObject.gameId = this.props.currentGame.id;
     questionObject.setNumber = this.state.questionIndex + 1;
     const questionId = document.getElementsByClassName('create-questions-main')[0].dataset.questionid;
-    const fetchFunction = questionId ? updateQuestionData : createQuestionData;
-    return fetchFunction(questionId, questionObject)
+    return (questionId ? updateQuestionData(questionId, questionObject) : createQuestionData(questionObject))
       .then(updatedQuestion => {
-        console.log('SUCCESS ->>>>>',updatedQuestion);
-        if (questionId) {
-          //Replace old question in state
-          
-        } else {
-          //Add question to state
-          const newGameData = Object.assign({}, this.props.currentGame, {
-            questions: [...this.props.currentGame.questions, newGameData]
-          })
-          this.props.setCurrentGame(newGameData)
-        }
+        const copyOfQuestions = [...this.props.currentGame.questions];
+        copyOfQuestions.splice(this.state.questionIndex, 1, updatedQuestion);
+        //Add question to state
+        const newGameData = Object.assign({}, this.props.currentGame, {
+          questions: copyOfQuestions
+        })
+        this.props.setCurrentGame(newGameData)
+        this.setState({questionIndex})
       })
-      .catch(errorMessage => this.setState({errorMessage}));
-    this.setState({questionIndex})
+      //.catch(errorMessage => this.setState({errorMessage}));
   } catch (err) {
     this.setState({errorMessage: err.message});
   }
