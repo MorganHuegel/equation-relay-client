@@ -3,7 +3,7 @@ import { updateQuestionData } from '../../../fetchFunctions/updateQuestionData';
 import { createQuestionData } from '../../../fetchFunctions/createQuestionData';
 
 
-export function changeQuestionSet (questionIndex) {
+export function changeQuestionSetAndSave (questionIndex) {
   try {
     const questionObject = validateCreateQuestions();
     questionObject.gameId = this.props.currentGame.id;
