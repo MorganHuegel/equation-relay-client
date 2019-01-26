@@ -4,7 +4,7 @@ export function createQuestionData (questionObject) {
   const token = localStorage.getItem('authToken');
   const query = `
     mutation ($questionObject : QuestionInput){
-      updateQuestion (questionObject : $questionObject) {
+      createQuestion (questionObject : $questionObject) {
         id,
         gameId,
         setNumber,
@@ -34,7 +34,7 @@ export function createQuestionData (questionObject) {
       if (response.errors) {
         return Promise.reject(response.errors);
       } else {
-        const questionData = response.data.updateQuestion;
+        const questionData = response.data.createQuestion;
         return questionData;
       }
     })

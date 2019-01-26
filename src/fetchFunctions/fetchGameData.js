@@ -10,6 +10,7 @@ export function fetchGameData (gameId) {
         playCount,
         questions {
           id,
+          setNumber,
           equation1 {image, equation, answer},
           equation2 {image, equation, answer},
           equation3 {image, equation, answer},

@@ -63,6 +63,7 @@ export class TeacherProfileMain extends React.Component {
 
 
   setCurrentGame = (gameData) => {
+    console.log("GAME DATA:", gameData);
     return this.setState({currentGame: gameData});
   }
 
