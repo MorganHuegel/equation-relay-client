@@ -2,6 +2,7 @@ import React from 'react';
 
 import { NewEquationInput } from './newEquationInput';
 
+import { fetchUserData } from '../../../fetchFunctions/fetchUserData';
 import { changeQuestionSetAndSave } from './createQuestionsMainUtils';
 import { QuestionNavigatorMain } from './questionNavigatorMain';
 
@@ -15,6 +16,17 @@ export class CreateQuestionsMain extends React.Component {
     }
 
     this.changeQuestionSetAndSave = changeQuestionSetAndSave.bind(this);
+  }
+
+  componentWillUnmount () {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      return fetchUserData(token)
+        .then(userData => {
+          this.props.updateUserData(userData);
+        })
+        .catch(e => console.log('Could not update user data.'))
+    }
   }
 
   changeQuestionsNoSave = (questionIndex) => {
@@ -49,10 +61,9 @@ export class CreateQuestionsMain extends React.Component {
         <p>{this.state.errorMessage}</p>
         <h3>Equation Set {this.state.questionIndex + 1} of {questionSetLength}</h3>
         {equationSet}
-        <button type='reset' onClick={() => this.props.setCurrentGame(null)}>Cancel</button>
+        <button type='reset' onClick={() => this.props.setCurrentGame(null)}>Finish</button>
         {previousButton}
         <button type='button' onClick={() => this.changeQuestionSetAndSave(this.state.questionIndex + 1)}>Next Question</button>
-        <button type='button'>Save and Finish</button>
       </div>
     )
   }

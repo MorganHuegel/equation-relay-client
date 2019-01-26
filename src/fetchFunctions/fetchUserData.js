@@ -9,7 +9,8 @@ export function fetchUserData (token) {
         games {
           title,
           description,
-          id
+          id,
+          numOfQuestions
         },
         favorites {
           title

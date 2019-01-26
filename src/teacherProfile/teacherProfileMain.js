@@ -63,7 +63,6 @@ export class TeacherProfileMain extends React.Component {
 
 
   setCurrentGame = (gameData) => {
-    console.log("GAME DATA:", gameData);
     return this.setState({currentGame: gameData});
   }
 
@@ -74,7 +73,10 @@ export class TeacherProfileMain extends React.Component {
     }
 
     if (this.state.currentGame) {
-      return <CreateQuestionsMain currentGame={this.state.currentGame} setCurrentGame={this.setCurrentGame}/>
+      return <CreateQuestionsMain 
+        currentGame={this.state.currentGame} 
+        setCurrentGame={this.setCurrentGame} 
+        updateUserData={this.props.updateUserData}/>
     }
 
     const createGameLightbox = this.state.creating ?
