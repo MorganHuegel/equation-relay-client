@@ -12,6 +12,7 @@ import { CreateNewButton } from './teacherDashboard/createNewButton';
 import { createNewGame } from '../fetchFunctions/createNewGame';
 import { validateTitle } from './teacherGameCreation/createTitle/validateTitle';
 import { fetchGameData } from '../fetchFunctions/fetchGameData';
+import { deleteGameData } from '../fetchFunctions/deleteGameData';
 
 export class TeacherProfileMain extends React.Component {
   constructor(props){
@@ -67,6 +68,21 @@ export class TeacherProfileMain extends React.Component {
   }
 
 
+  deleteGameClick = gameId => {
+    return deleteGameData(gameId)
+      .then(successMessage => {
+        const updatedUserGames = this.props.userData.games.filter(game => game.id !== gameId);
+        const updatedUserData = Object.assign({}, this.props.userData, {
+          games: updatedUserGames
+        })
+        this.props.updateUserData(updatedUserData);
+      })
+      .catch(errMessage => {
+        console.log('Probably should error handle here...' + errMessage);
+      });
+  }
+
+
   render(){
     if (!this.props.userData) {
       return <Redirect to='/teachers'/>
@@ -92,7 +108,7 @@ export class TeacherProfileMain extends React.Component {
 
         <div className='teacher-dashboard-games'>
           <CreateNewButton setCreatingState={this.setCreatingState}/>
-          <GameList games={this.props.userData.games} onEditClick={this.onEditClick}/>
+          <GameList games={this.props.userData.games} onEditClick={this.onEditClick} deleteGameClick={this.deleteGameClick}/>
         </div>
       </div>
     )

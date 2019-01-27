@@ -11,6 +11,7 @@ export function GameList (props) {
       onEditClick={props.onEditClick} 
       id={game.id} 
       numOfQuestions={game.numOfQuestions}
+      deleteGameClick={props.deleteGameClick}
       />
   });
 
