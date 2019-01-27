@@ -8,6 +8,7 @@ import { DashboardMenu } from './teacherDashboard/dashboardMenu';
 import { CreateGame } from './teacherGameCreation/createTitle/createGame';
 import { CreateQuestionsMain } from './teacherGameCreation/createQuestions/createQuestionsMain';
 import { CreateNewButton } from './teacherDashboard/createNewButton';
+import { DeleteLightBox } from './teacherDashboard/deleteLightBox';
 
 import { createNewGame } from '../fetchFunctions/createNewGame';
 import { validateTitle } from './teacherGameCreation/createTitle/validateTitle';
@@ -21,7 +22,8 @@ export class TeacherProfileMain extends React.Component {
     this.state = {
       creating: false,
       currentGame: null,
-      playing: false
+      playing: false,
+      deleting: false
     }
   }
 
@@ -68,7 +70,14 @@ export class TeacherProfileMain extends React.Component {
   }
 
 
-  deleteGameClick = gameId => {
+  toggleDeletingState = gameId => {
+    let gameObj = this.props.userData.games.find(game => game.id === gameId);
+    if (!gameObj) gameObj = false;
+    this.setState({deleting: gameObj});
+  }
+
+
+  confirmDelete = gameId => {
     return deleteGameData(gameId)
       .then(successMessage => {
         const updatedUserGames = this.props.userData.games.filter(game => game.id !== gameId);
@@ -76,6 +85,7 @@ export class TeacherProfileMain extends React.Component {
           games: updatedUserGames
         })
         this.props.updateUserData(updatedUserData);
+        this.setState({deleting: false});
       })
       .catch(errMessage => {
         console.log('Probably should error handle here...' + errMessage);
@@ -86,6 +96,14 @@ export class TeacherProfileMain extends React.Component {
   render(){
     if (!this.props.userData) {
       return <Redirect to='/teachers'/>
+    }
+
+    if (this.state.deleting) {
+      return <DeleteLightBox 
+        confirmDelete={this.confirmDelete}
+        toggleDeletingState={this.toggleDeletingState}
+        game={this.state.deleting}
+      />
     }
 
     if (this.state.currentGame) {
@@ -108,7 +126,7 @@ export class TeacherProfileMain extends React.Component {
 
         <div className='teacher-dashboard-games'>
           <CreateNewButton setCreatingState={this.setCreatingState}/>
-          <GameList games={this.props.userData.games} onEditClick={this.onEditClick} deleteGameClick={this.deleteGameClick}/>
+          <GameList games={this.props.userData.games} onEditClick={this.onEditClick} deleteGameClick={this.deleteGameClick} toggleDeletingState={this.toggleDeletingState}/>
         </div>
       </div>
     )

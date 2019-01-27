@@ -1,0 +1,52 @@
+
+.delete-game-lightbox {
+  text-align: center;
+  background-color: white;
+  padding: 20px;
+  display: inline-block;
+  width: 67vw;
+  max-height: 67vh;
+  margin: calc(16.5vh - 20px) 16.5vw 16.5vh 16.5vw;
+}
+
+.delete-game-lightbox .title-name {
+  font-style: italic;
+}
+
+.delete-game-lightbox p {
+  font-size: 1.5rem;
+  margin-bottom: 40px;
+}
+
+.delete-game-lightbox button {
+  width: 100px;
+  height: 80px;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  display: block;
+  margin: 40px auto;
+}
+
+.delete-game-lightbox .confirm-delete {
+  background-color: rgb(120, 50, 50);
+}
+
+.delete-game-lightbox .cancel-delete {
+  background-color: purple;
+}
+
+@media only screen and (min-width: 480px) {
+  .delete-game-lightbox button {
+    display: inline-block;
+  }
+
+  .delete-game-lightbox .confirm-delete {
+    margin: 0 40px 0 0;
+  }
+  
+  .delete-game-lightbox .cancel-delete {
+    margin: 0 0 0 40px;
+  }
+}

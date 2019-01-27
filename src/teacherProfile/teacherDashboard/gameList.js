@@ -12,6 +12,7 @@ export function GameList (props) {
       id={game.id} 
       numOfQuestions={game.numOfQuestions}
       deleteGameClick={props.deleteGameClick}
+      toggleDeletingState={props.toggleDeletingState}
       />
   });
 
