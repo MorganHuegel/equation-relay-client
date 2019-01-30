@@ -31,8 +31,8 @@ export class TeachersMain extends React.Component {
           this.props.setFetchingDataState(false);
         })
         .catch(errorMessage => {
+          localStorage.removeItem('authToken');
           this.props.setFetchingDataState(false);
-          this.setState({errorMessage})
         })
     }
   }

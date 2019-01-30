@@ -30,7 +30,7 @@ export class CreateQuestionsMain extends React.Component {
   }
 
   changeQuestionsNoSave = (questionIndex) => {
-    this.setState({questionIndex});
+    this.setState({questionIndex, errorMessage: ''});
   }
 
   render(){
@@ -56,7 +56,7 @@ export class CreateQuestionsMain extends React.Component {
 
     return (
       <div className='create-questions-main' data-questionid={currentQuestion ? currentQuestion.id : null}>
-        <QuestionNavigatorMain currentGame={this.props.currentGame} changeQuestionsNoSave={this.changeQuestionsNoSave}/>
+        <QuestionNavigatorMain currentGame={this.props.currentGame} changeQuestionsNoSave={this.changeQuestionsNoSave} questionIndex={this.state.questionIndex}/>
         <h2>{this.props.currentGame.title}</h2>
         <p>{this.state.errorMessage}</p>
         <h3>Equation Set {this.state.questionIndex + 1} of {questionSetLength}</h3>

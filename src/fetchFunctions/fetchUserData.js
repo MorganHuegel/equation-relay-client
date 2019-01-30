@@ -30,8 +30,8 @@ export function fetchUserData (token) {
   })
     .then(res => res.json())
     .then(response => {
-      if (response.errors) {
-        return Promise.reject(response.errors);
+      if (response.data.errors) {
+        return Promise.reject(response.data.errors);
       } else {
         const userData = response.data.user;
         return userData;

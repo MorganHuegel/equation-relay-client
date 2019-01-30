@@ -21,8 +21,11 @@ export function changeQuestionSetAndSave (questionIndex) {
           questions: copyOfQuestions
         })
         this.props.setCurrentGame(newGameData)
-        this.setState({questionIndex})
+        this.setState({questionIndex, errorMessage: ''})
       })
+      .catch(errorMessage => {
+        this.setState({errorMessage});
+      });
   } catch (err) {
     this.setState({errorMessage: err.message});
   }
