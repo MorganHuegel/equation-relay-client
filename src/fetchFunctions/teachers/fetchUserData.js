@@ -1,21 +1,20 @@
-import { SERVER_BASE_URL } from '../config';
+import { SERVER_BASE_URL } from '../../config';
 
-export function createNewGame (title, description) {
-  if (!description) {
-    description = '- No description';
-  }
-  const token = localStorage.getItem('authToken');
+export function fetchUserData (token) {
   const query = `
-    mutation {
-      createGame (title:"${title}", description:"${description}") {
+    query {
+      user {
         id,
-        userId,
-        title,
-        description,
-        questions {
-          id
+        username,
+        games {
+          title,
+          description,
+          id,
+          numOfQuestions
         },
-        playCount
+        favorites {
+          title
+        }
       }
     }
   `;
@@ -31,11 +30,11 @@ export function createNewGame (title, description) {
   })
     .then(res => res.json())
     .then(response => {
-      if (response.errors) {
-        return Promise.reject(response.errors);
+      if (response.data.errors) {
+        return Promise.reject(response.data.errors);
       } else {
-        const gameData = response.data.createGame;
-        return gameData;
+        const userData = response.data.user;
+        return userData;
       }
     })
     .catch(err => {

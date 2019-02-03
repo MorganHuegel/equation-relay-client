@@ -7,7 +7,8 @@ import '../stylesheets/landingPage/indexLandingPage.css';
 import { Header } from './header';
 import { AboutMain } from './aboutLanding/aboutMain';
 import { TeachersMain } from './teacherLanding/teachersMain';
-import { JoinMain } from './joinLanding/joinMain';
+import { JoinLanding } from './joinLanding/joinLanding';
+import { JoinMain } from '../gameplay/joinMain';
 import { TeacherProfileMain } from '../teacherProfile/teacherProfileMain';
 
 export class IndexLandingPage extends React.Component {
@@ -35,7 +36,8 @@ export class IndexLandingPage extends React.Component {
         <div className='index-landing-page'>
           <Header />
           <Route exact path='/' render={props => teacherToken ? <Redirect to='/teachers'/> : <Redirect to='/join'/>}/>
-          <Route path='/join' component={JoinMain}/>
+          <Route exact path='/join' component={JoinLanding}/>
+          <Route path='/join/:sessionCode' component={JoinMain}/>
           <Route exact path='/teachers' render={props => {
             if (this.state.fetchingData) {
               return <Spinner name='ball-clip-rotate' color='fuchsia' className='loading-spinner' fadeIn='none'/>

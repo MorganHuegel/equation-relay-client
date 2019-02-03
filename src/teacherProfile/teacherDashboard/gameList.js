@@ -13,6 +13,7 @@ export function GameList (props) {
       numOfQuestions={game.numOfQuestions}
       deleteGameClick={props.deleteGameClick}
       toggleDeletingState={props.toggleDeletingState}
+      clickPlayLive={props.clickPlayLive}
       />
   });
 

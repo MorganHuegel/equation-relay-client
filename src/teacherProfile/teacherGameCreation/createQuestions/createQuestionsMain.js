@@ -2,7 +2,7 @@ import React from 'react';
 
 import { NewEquationInput } from './newEquationInput';
 
-import { fetchUserData } from '../../../fetchFunctions/fetchUserData';
+import { fetchUserData } from '../../../fetchFunctions/teachers/fetchUserData';
 import { changeQuestionSetAndSave } from './createQuestionsMainUtils';
 import { QuestionNavigatorMain } from './questionNavigatorMain';
 

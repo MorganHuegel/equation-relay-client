@@ -1,24 +1,12 @@
-import { SERVER_BASE_URL } from '../config';
+import { SERVER_BASE_URL } from '../../config';
 
-export function createQuestionData (questionObject) {
+export function deleteGameData (gameId) {
   const token = localStorage.getItem('authToken');
   const query = `
-    mutation ($questionObject : QuestionInput){
-      createQuestion (questionObject : $questionObject) {
-        id,
-        gameId,
-        setNumber,
-        equation1 {image, equation, answer},
-        equation2 {image, equation, answer},
-        equation3 {image, equation, answer},
-        equation4 {image, equation, answer}
-      }
+    mutation {
+      deleteGame (gameId:"${gameId}")
     }
   `;
-  const variables = `{
-    "questionObject": ${JSON.stringify(questionObject)}
-  }`
-  
 
   return fetch(`${SERVER_BASE_URL}/graphql/protected`, {
     method: 'POST',
@@ -27,15 +15,15 @@ export function createQuestionData (questionObject) {
       'Accept': 'application/json',
       'authorization': token
     },
-    body: JSON.stringify({ query, variables })
+    body: JSON.stringify({ query })
   })
     .then(res => res.json())
     .then(response => {
       if (response.errors) {
         return Promise.reject(response.errors);
       } else {
-        const questionData = response.data.createQuestion;
-        return questionData;
+        const successMessage = response.data.deleteGame;
+        return successMessage;
       }
     })
     .catch(err => {

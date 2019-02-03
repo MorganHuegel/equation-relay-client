@@ -1,4 +1,4 @@
-import { SERVER_BASE_URL } from '../config';
+import { SERVER_BASE_URL } from '../../config';
 
 export function fetchGameData (gameId) {
   const query = `

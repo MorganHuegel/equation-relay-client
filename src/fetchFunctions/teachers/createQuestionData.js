@@ -1,10 +1,10 @@
-import { SERVER_BASE_URL } from '../config';
+import { SERVER_BASE_URL } from '../../config';
 
-export function updateQuestionData (questionId, questionObject) {
+export function createQuestionData (questionObject) {
   const token = localStorage.getItem('authToken');
   const query = `
-    mutation ($questionObject : QuestionInput, $questionId : String){
-      updateQuestion (questionId : $questionId, questionObject : $questionObject) {
+    mutation ($questionObject : QuestionInput){
+      createQuestion (questionObject : $questionObject) {
         id,
         gameId,
         setNumber,
@@ -16,7 +16,6 @@ export function updateQuestionData (questionId, questionObject) {
     }
   `;
   const variables = `{
-    "questionId": "${questionId}",
     "questionObject": ${JSON.stringify(questionObject)}
   }`
   
@@ -35,7 +34,7 @@ export function updateQuestionData (questionId, questionObject) {
       if (response.errors) {
         return Promise.reject(response.errors);
       } else {
-        const questionData = response.data.updateQuestion;
+        const questionData = response.data.createQuestion;
         return questionData;
       }
     })

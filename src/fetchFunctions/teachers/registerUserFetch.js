@@ -1,4 +1,4 @@
-import { SERVER_BASE_URL } from '../config';
+import { SERVER_BASE_URL } from '../../config';
 import { loginUserFetch } from './loginUserFetch';
 
 export function registerUserFetch (username, password, email) {

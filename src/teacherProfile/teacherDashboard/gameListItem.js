@@ -9,7 +9,7 @@ export function GameListItem (props) {
       <h3>{props.title}</h3>
       <p>{numOfQuestionsLabel}</p>
       <div>
-        <button type='button'>Play Live</button>
+        <button type='button' onClick={() => props.clickPlayLive(props.id)}>Play Live</button>
         <button type='button' onClick={() => props.onEditClick(props.id)}>Edit</button>
         <button type='button' onClick={() => props.toggleDeletingState(props.id)}>Delete</button>
       </div>

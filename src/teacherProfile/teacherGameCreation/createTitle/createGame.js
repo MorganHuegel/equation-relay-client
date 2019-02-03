@@ -4,7 +4,7 @@ import '../../../stylesheets/teacherProfile/teacherGameCreation/createGame.css';
 
 import { CreateGameForm } from './createGameForm';
 
-import { fetchUserData } from '../../../fetchFunctions/fetchUserData';
+import { fetchUserData } from '../../../fetchFunctions/teachers/fetchUserData';
 
 export class CreateGame extends React.Component {
   componentWillUnmount () {

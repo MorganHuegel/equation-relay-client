@@ -10,10 +10,12 @@ import { CreateQuestionsMain } from './teacherGameCreation/createQuestions/creat
 import { CreateNewButton } from './teacherDashboard/createNewButton';
 import { DeleteLightBox } from './teacherDashboard/deleteLightBox';
 
-import { createNewGame } from '../fetchFunctions/createNewGame';
+import { createNewGame } from '../fetchFunctions/teachers/createNewGame';
 import { validateTitle } from './teacherGameCreation/createTitle/validateTitle';
-import { fetchGameData } from '../fetchFunctions/fetchGameData';
-import { deleteGameData } from '../fetchFunctions/deleteGameData';
+import { fetchGameData } from '../fetchFunctions/teachers/fetchGameData';
+import { deleteGameData } from '../fetchFunctions/teachers/deleteGameData';
+import { startGameSession } from '../fetchFunctions/teachers/startGameSession';
+import { TeacherGameplayMain } from '../gameplay/teacherView/teacherGameplayMain';
 
 export class TeacherProfileMain extends React.Component {
   constructor(props){
@@ -25,6 +27,27 @@ export class TeacherProfileMain extends React.Component {
       playing: false,
       deleting: false
     }
+  }
+
+  clickPlayLive = (gameId) => {
+    return startGameSession(gameId)
+      .then(sessionCode => {
+        this.setState({
+          creating: false,
+          currentGame: null,
+          playing: sessionCode,
+          deleting: false
+        })
+      })
+  }
+
+  closeLiveGame = () => {
+    this.setState({
+      creating: false,
+      currentGame: null,
+      playing: false,
+      deleting: false
+    })
   }
 
   
@@ -113,6 +136,10 @@ export class TeacherProfileMain extends React.Component {
         updateUserData={this.props.updateUserData}/>
     }
 
+    if (this.state.playing) {
+      return <TeacherGameplayMain sessionCode={this.state.playing} closeLiveGame={this.closeLiveGame}/>
+    }
+
     const createGameLightbox = this.state.creating ?
       <CreateGame initializeGame={this.initializeGame} setCreatingState={this.setCreatingState} updateUserData={this.props.updateUserData}/> :
       null;
@@ -126,7 +153,12 @@ export class TeacherProfileMain extends React.Component {
 
         <div className='teacher-dashboard-games'>
           <CreateNewButton setCreatingState={this.setCreatingState}/>
-          <GameList games={this.props.userData.games} onEditClick={this.onEditClick} deleteGameClick={this.deleteGameClick} toggleDeletingState={this.toggleDeletingState}/>
+          <GameList 
+            games={this.props.userData.games} 
+            onEditClick={this.onEditClick} 
+            deleteGameClick={this.deleteGameClick} 
+            toggleDeletingState={this.toggleDeletingState}
+            clickPlayLive={this.clickPlayLive}/>
         </div>
       </div>
     )

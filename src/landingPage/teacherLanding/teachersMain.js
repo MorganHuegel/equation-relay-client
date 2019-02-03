@@ -7,9 +7,9 @@ import { LoginForm } from './loginForm';
 import { RegisterForm } from './registerForm';
 
 import { validateRegisterSubmission, validateLoginSubmission } from './teachersMainUtils';
-import { registerUserFetch } from '../../fetchFunctions/registerUserFetch';
-import { loginUserFetch } from '../../fetchFunctions/loginUserFetch';
-import { fetchUserData } from '../../fetchFunctions/fetchUserData';
+import { registerUserFetch } from '../../fetchFunctions/teachers/registerUserFetch';
+import { loginUserFetch } from '../../fetchFunctions/teachers/loginUserFetch';
+import { fetchUserData } from '../../fetchFunctions/teachers/fetchUserData';
 
 export class TeachersMain extends React.Component {
   constructor(props){

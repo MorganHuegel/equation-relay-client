@@ -1,6 +1,6 @@
 import { validateCreateQuestions } from './validateCreateQuestions';
-import { updateQuestionData } from '../../../fetchFunctions/updateQuestionData';
-import { createQuestionData } from '../../../fetchFunctions/createQuestionData';
+import { updateQuestionData } from '../../../fetchFunctions/teachers/updateQuestionData';
+import { createQuestionData } from '../../../fetchFunctions/teachers/createQuestionData';
 
 
 export function changeQuestionSetAndSave (questionIndex) {
