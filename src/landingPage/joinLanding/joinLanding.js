@@ -11,6 +11,9 @@ export class JoinLanding extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
     const joinCode = document.getElementById('join-code').value;
+    // Make query request to server to make sure this join code exists
+      //if it does not exist, show error message
+    // If it exists, redirect to the /sessionCode url component joinMain
     return ;
   }
 

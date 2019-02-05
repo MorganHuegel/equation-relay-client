@@ -1,11 +1,30 @@
 import React from 'react';
 
-export function TeacherGameplayMain(props){
-  return (
-    <div>
-      <p>Teacher Gameplay Main {props.sessionCode}</p>
-      <button type='button' onClick={() => props.closeLiveGame()}>Quit</button>
-    </div>
+import { teacherGameplayMainWillMount } from './teacherSocketUtils';
 
-  );
+export class TeacherGameplayMain extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      gameSession: null,
+      socketInstance: null
+    }
+  }
+
+  componentWillMount(){
+    teacherGameplayMainWillMount(this);
+  }
+
+  componentWillUnmount(){
+    this.state.socketInstance.disconnect();
+  }
+
+  render(){
+    return (
+      <div className='teacher-gameplay-main'>
+        <h2>Join Code: {this.props.sessionCode}</h2>
+        <button type='button' onClick={() => this.props.closeLiveGame()}>Quit</button>
+      </div>
+    );
+  }
 }
