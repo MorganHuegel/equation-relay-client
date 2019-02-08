@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 import { sendJoinCode } from '../../fetchFunctions/players/sendJoinCode';
 
@@ -16,18 +17,18 @@ export class JoinLanding extends React.Component {
     const joinCode = document.getElementById('join-code').value;
     return sendJoinCode(joinCode)
       .then(sessionData => {
-
+        this.setState({submitted: joinCode});
       })
       .catch(err => {
-        console.log('ErR',err)
         this.setState({error: err.message})
       })
-    // Make query request to server to make sure this join code exists
-      //if it does not exist, show error message
-    // If it exists, redirect to the /sessionCode url component joinMain
   }
 
   render(){
+    if (this.state.submitted) {
+      return <Redirect to={`/join/${this.state.submitted}`}/>
+    }
+
     return (
       <div>
         <form name='join-code-form' id='join-code-form' onSubmit={e => this.onSubmit(e)}>

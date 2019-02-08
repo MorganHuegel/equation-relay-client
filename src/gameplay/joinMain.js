@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { EnterUsername } from './playerView/enterUsername';
+
 export class JoinMain extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +12,7 @@ export class JoinMain extends React.Component {
 
   render(){
     return (
-      <p>Join MAin Yooooo</p>
+      <EnterUsername sessionCode={this.props.match.params.sessionCode}/>
     );
   }
 }
