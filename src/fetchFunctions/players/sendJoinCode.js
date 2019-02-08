@@ -1,5 +1,4 @@
 import { SERVER_BASE_URL } from '../../config';
-import { io } from 'socket.io-client';
 
 export function sendJoinCode(joinCode) {
   return fetch(`${SERVER_BASE_URL}/checkGameSession/${joinCode}`, {
@@ -18,10 +17,8 @@ export function sendJoinCode(joinCode) {
       if (sessionData.error) {
         return Promise.reject(sessionData);
       }
-      console.log('SESSION DATA:', sessionData)
     })
     .catch(err => {
-      console.log('IN FETCH',err)
       if (err.message) {
         return Promise.reject(err)
       } else {
