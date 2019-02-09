@@ -8,7 +8,7 @@ import { Header } from './header';
 import { AboutMain } from './aboutLanding/aboutMain';
 import { TeachersMain } from './teacherLanding/teachersMain';
 import { JoinLanding } from './joinLanding/joinLanding';
-import { JoinMain } from '../gameplay/joinMain';
+import { JoinMain } from '../gameplay/playerView/joinMain';
 import { TeacherProfileMain } from '../teacherProfile/teacherProfileMain';
 
 export class IndexLandingPage extends React.Component {

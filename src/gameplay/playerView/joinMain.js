@@ -1,14 +1,21 @@
 import React from 'react';
 
-import { EnterUsername } from './playerView/enterUsername';
+import { EnterUsername } from './enterUsername';
 
-import { initialConnect } from './playerView/studentSocketUtils';
+import { initialConnect, player_OnPlayerJoin } from './playerSocketUtils';
 
 export class JoinMain extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       gameSession: null
+    }
+    this.socket = null;
+  }
+
+  componentWillUnmount(){
+    if (this.socket) {
+      this.socket.disconnect();
     }
   }
 
@@ -21,7 +28,9 @@ export class JoinMain extends React.Component {
     }
 
     const socket = initialConnect(this.props.match.params.sessionCode);
+    socket.on('playerJoin', (newPlayerList) => player_OnPlayerJoin(newPlayerList, this));
     socket.emit('playerJoin', username)
+    
   }
 
   render(){

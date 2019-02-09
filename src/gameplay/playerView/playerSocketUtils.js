@@ -8,6 +8,14 @@ export function initialConnect (sessionCode) {
       sessionCode: sessionCode
     }
   });
-
   return socket;
+}
+
+
+export function player_OnPlayerJoin (newPlayerList, component) {
+  const gameSessionData = Object.assign({}, component.state, {
+    playerList: [...newPlayerList]
+  })
+
+  component.setState({gameSession: gameSessionData})
 }
