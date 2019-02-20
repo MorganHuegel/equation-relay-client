@@ -8,6 +8,7 @@ export class JoinMain extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentUser: null,
       gameSession: null
     }
     this.socket = null;
@@ -28,7 +29,7 @@ export class JoinMain extends React.Component {
     }
 
     const socket = initialConnect(this.props.match.params.sessionCode);
-    socket.on('playerJoin', (newPlayerList) => player_OnPlayerJoin(newPlayerList, this));
+    socket.on('playerJoin', (gameSessionData) => player_OnPlayerJoin(gameSessionData, username, this));
     socket.emit('playerJoin', username)
     
   }
@@ -37,6 +38,6 @@ export class JoinMain extends React.Component {
     if (!this.state.gameSession) {
       return <EnterUsername sessionCode={this.props.match.params.sessionCode} onUsernameSubmit={this.onUsernameSubmit}/>
     }
-    return <p>hi:)</p>
+    return <p>Hello {this.state.currentUser.handle}!</p>
   }
 }

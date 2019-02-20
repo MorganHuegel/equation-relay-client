@@ -12,10 +12,13 @@ export function initialConnect (sessionCode) {
 }
 
 
-export function player_OnPlayerJoin (newPlayerList, component) {
-  const gameSessionData = Object.assign({}, component.state, {
-    playerList: [...newPlayerList]
+export function player_OnPlayerJoin (gameSessionData, username, component) {
+  const newCurrentUser = {
+    handle: username,
+    captain: false
+  }
+  component.setState({
+    gameSession: gameSessionData,
+    currentUser: newCurrentUser
   })
-
-  component.setState({gameSession: gameSessionData})
 }

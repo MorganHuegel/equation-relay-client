@@ -11,9 +11,9 @@ export function teacherGameplayMainWillMount (component) {
   });
 
   component.socket = socket;
-  socket.on('playerJoin', (updatedPlayerList) => {
-    const newGameState = Object.assign({}, {}, {
-      playerList: [...updatedPlayerList]
+  socket.on('playerJoin', (updatedGameSession) => {
+    const newGameState = Object.assign({}, updatedGameSession, {
+      playerList: [...updatedGameSession.playerList]
     })
     component.setState({gameSession: newGameState})
   });
