@@ -2,7 +2,7 @@ import React from 'react';
 
 import { EnterUsername } from './enterUsername';
 
-import { initialConnect, player_OnPlayerJoin } from './playerSocketUtils';
+import { initialConnect, player_OnPlayerJoin, player_StartGame } from './playerSocketUtils';
 
 export class JoinMain extends React.Component {
   constructor(props) {
@@ -31,6 +31,7 @@ export class JoinMain extends React.Component {
     const socket = initialConnect(this.props.match.params.sessionCode);
     socket.on('playerJoin', (gameSessionData) => player_OnPlayerJoin(gameSessionData, username, this));
     socket.emit('playerJoin', username)
+    socket.on('startGame', (gameSessionData) => player_StartGame(gameSessionData, this));
     
   }
 

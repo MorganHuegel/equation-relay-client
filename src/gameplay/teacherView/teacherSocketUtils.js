@@ -17,5 +17,13 @@ export function teacherGameplayMainWillMount (component) {
     })
     component.setState({gameSession: newGameState})
   });
+  socket.on('error', (errMessage) => console.log(errMessage))
 }
 
+
+export function teacher_StartGame (socket) {
+  socket.on('startGame', gameSessionData => {
+    console.log(gameSessionData);
+  })
+  socket.emit('startGame');
+}

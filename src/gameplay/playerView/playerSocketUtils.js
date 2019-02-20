@@ -22,3 +22,10 @@ export function player_OnPlayerJoin (gameSessionData, username, component) {
     currentUser: newCurrentUser
   })
 }
+
+
+export function player_StartGame (teamList, component) {
+  const updatedGameSession = Object.assign({}, component.state.gameSession, {
+    teamList: [...teamList]
+  })
+}
