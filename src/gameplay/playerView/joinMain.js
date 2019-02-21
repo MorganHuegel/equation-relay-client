@@ -11,6 +11,7 @@ export class JoinMain extends React.Component {
     super(props);
     this.state = {
       currentUser: null,
+      currentTeam: null,
       gameSession: null,
       errorMessage: null
     }
@@ -22,6 +23,7 @@ export class JoinMain extends React.Component {
       this.socket.disconnect();
     }
   }
+  
 
   onUsernameSubmit = event => {
     event.preventDefault();
@@ -45,6 +47,6 @@ export class JoinMain extends React.Component {
       return <PlayerJoinedAndWaiting handle={this.state.currentUser.handle}/>
     }
 
-    return <LiveGameReadyScreen />
+    return <LiveGameReadyScreen currentTeam={this.state.currentTeam}/>
   }
 }

@@ -13,11 +13,11 @@ export function initialConnect (sessionCode) {
 
 
 export function player_OnPlayerJoin (gameSessionData, username, component) {
-  const newCurrentUser = {
-    handle: username,
-    captain: false
-  }
+  //UPDATE GAMESESSION AND CURRENT USER IN STATE
+  const newCurrentUser = gameSessionData.playerList.find(player => player.handle === username);
+
   component.setState({
+    errorMessage: '',
     gameSession: gameSessionData,
     currentUser: newCurrentUser
   })
@@ -25,7 +25,13 @@ export function player_OnPlayerJoin (gameSessionData, username, component) {
 
 
 export function player_StartGame (gameSessionData, component) {
+  //UPDATE GAMESESSION AND CURRENT TEAM IN STATE
+  const currentTeam = gameSessionData.teamList.find(team => {
+    return team.players.find(player => player.handle === component.state.currentUser.handle);
+  })
+
   component.setState({
+    currentTeam: currentTeam,
     gameSession: gameSessionData
   })
 }
