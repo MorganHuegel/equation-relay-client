@@ -24,7 +24,7 @@ export function player_OnPlayerJoin (gameSessionData, username, component) {
 }
 
 
-export function player_StartGame (gameSessionData, component) {
+export function player_ShuffleTeams (gameSessionData, component) {
   //UPDATE GAMESESSION AND CURRENT TEAM IN STATE
   const currentTeam = gameSessionData.teamList.find(team => {
     return team.players.find(player => player.handle === component.state.currentUser.handle);

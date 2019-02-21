@@ -28,8 +28,8 @@ export class LiveGameReadyScreen extends React.Component {
 
   render(){
     const displayTeams = this.props.teamList.map(team => {
-      const displayMembers = team.players.map(player => <li>{player.handle}</li>)
-      return <li>
+      const displayMembers = team.players.map(player => <li key={player._id}>{player.handle}</li>)
+      return <li key={team._id}>
         <ul>
           <h3>{team.teamName}</h3>
           {displayMembers}
@@ -41,7 +41,7 @@ export class LiveGameReadyScreen extends React.Component {
       <div>
         <h2>{this.state.gameTitle}</h2>
         <button type='button'>Start Game</button>
-        <button type='button'>Shuffle Teams</button>
+        <button type='button' onClick={() => this.props.shuffleTeams()}>Shuffle Teams</button>
         <p>{this.state.numOfQuestions} questions</p>
         <ul>
           {displayTeams}

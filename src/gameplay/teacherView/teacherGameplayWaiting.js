@@ -9,7 +9,7 @@ export function TeacherGameplayWaiting(props){
         <h2>Join Code: {props.gameSession.sessionCode}</h2>
         <p>Player Count: {props.gameSession.playerList.length}</p>
         {playersJoined}
-        <button type='button' onClick={() => props.startGame()}>Start Game</button>
+        <button type='button' onClick={() => props.shuffleTeams()}>Start Game</button>
         <button type='button' onClick={() => props.closeLiveGame()}>Quit</button>
       </div>
   )

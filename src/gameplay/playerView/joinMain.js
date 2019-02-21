@@ -4,7 +4,7 @@ import { EnterUsername } from './enterUsername';
 import { PlayerJoinedAndWaiting } from './playerJoinedAndWaiting';
 import { LiveGameReadyScreen } from './liveGameReadyScreen';
 
-import { initialConnect, player_OnPlayerJoin, player_StartGame } from './playerSocketUtils';
+import { initialConnect, player_OnPlayerJoin, player_ShuffleTeams } from './playerSocketUtils';
 
 export class JoinMain extends React.Component {
   constructor(props) {
@@ -23,7 +23,7 @@ export class JoinMain extends React.Component {
       this.socket.disconnect();
     }
   }
-  
+
 
   onUsernameSubmit = event => {
     event.preventDefault();
@@ -37,7 +37,7 @@ export class JoinMain extends React.Component {
     socket.on('playerJoin', (gameSessionData) => player_OnPlayerJoin(gameSessionData, username, this));
     socket.on('uniqueUsernameError', (errMessage) => this.setState({errorMessage: errMessage}));
     socket.emit('playerJoin', username)
-    socket.on('startGame', (gameSessionData) => player_StartGame(gameSessionData, this));
+    socket.on('shuffleTeams', (gameSessionData) => player_ShuffleTeams(gameSessionData, this));
   }
 
   render(){

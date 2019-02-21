@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { teacherGameplayMainWillMount, teacher_StartGame } from './teacherSocketUtils';
+import { teacherGameplayMainWillMount, teacher_ShuffleTeams } from './teacherSocketUtils';
 import { TeacherGameplayWaiting } from './teacherGameplayWaiting';
 import { LiveGameReadyScreen } from './liveGameReadyScreen';
 
@@ -27,16 +27,16 @@ export class TeacherGameplayMain extends React.Component {
     this.socket.disconnect();
   }
 
-  startGame = () => {
-    teacher_StartGame(this.socket, this);
+  shuffleTeams = () => {
+    teacher_ShuffleTeams(this.socket, this);
   }
 
   render(){
     if (this.state.gameSession.teamList.length <= 0) {
-      return <TeacherGameplayWaiting gameSession={this.state.gameSession} startGame={this.startGame} closeLiveGame={this.props.closeLiveGame} />
+      return <TeacherGameplayWaiting gameSession={this.state.gameSession} shuffleTeams={this.shuffleTeams} closeLiveGame={this.props.closeLiveGame} />
     }
     else {
-      return <LiveGameReadyScreen gameId={this.state.gameSession.gameId} teamList={this.state.gameSession.teamList}/>
+      return <LiveGameReadyScreen gameId={this.state.gameSession.gameId} teamList={this.state.gameSession.teamList} shuffleTeams={this.shuffleTeams}/>
     }
   }
 }
