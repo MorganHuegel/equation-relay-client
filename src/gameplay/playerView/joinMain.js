@@ -32,13 +32,15 @@ export class JoinMain extends React.Component {
     socket.on('playerJoin', (gameSessionData) => player_OnPlayerJoin(gameSessionData, username, this));
     socket.emit('playerJoin', username)
     socket.on('startGame', (gameSessionData) => player_StartGame(gameSessionData, this));
-    
   }
 
   render(){
     if (!this.state.gameSession) {
       return <EnterUsername sessionCode={this.props.match.params.sessionCode} onUsernameSubmit={this.onUsernameSubmit}/>
+    } else if (!this.state.gameSession.teamList || this.state.gameSession.teamList.length === 0) {
+      return <p>Hello {this.state.currentUser.handle}!</p>
     }
-    return <p>Hello {this.state.currentUser.handle}!</p>
+
+    return <p>LIVE GAME HERE</p>
   }
 }

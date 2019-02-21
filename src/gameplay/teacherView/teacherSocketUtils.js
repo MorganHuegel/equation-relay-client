@@ -21,9 +21,11 @@ export function teacherGameplayMainWillMount (component) {
 }
 
 
-export function teacher_StartGame (socket) {
+export function teacher_StartGame (socket, component) {
   socket.on('startGame', gameSessionData => {
-    console.log(gameSessionData);
+    component.setState({
+      gameSession: gameSessionData
+    });
   })
   socket.emit('startGame');
 }

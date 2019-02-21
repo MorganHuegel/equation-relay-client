@@ -27,7 +27,7 @@ export class TeacherGameplayMain extends React.Component {
   }
 
   startGame = () => {
-    teacher_StartGame(this.socket);
+    teacher_StartGame(this.socket, this);
   }
 
   render(){
