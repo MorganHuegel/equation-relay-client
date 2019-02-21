@@ -2,6 +2,7 @@ import React from 'react';
 
 import { teacherGameplayMainWillMount, teacher_StartGame } from './teacherSocketUtils';
 import { TeacherGameplayWaiting } from './teacherGameplayWaiting';
+import { LiveGameReadyScreen } from './liveGameReadyScreen';
 
 export class TeacherGameplayMain extends React.Component {
   constructor(props){
@@ -35,7 +36,7 @@ export class TeacherGameplayMain extends React.Component {
       return <TeacherGameplayWaiting gameSession={this.state.gameSession} startGame={this.startGame} closeLiveGame={this.props.closeLiveGame} />
     }
     else {
-      return <p>Playing Live Screen!</p>
+      return <LiveGameReadyScreen gameId={this.state.gameSession.gameId} teamList={this.state.gameSession.teamList}/>
     }
   }
 }
