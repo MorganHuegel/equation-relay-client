@@ -3,8 +3,9 @@ import React from 'react';
 import { EnterUsername } from './enterUsername';
 import { PlayerJoinedAndWaiting } from './playerJoinedAndWaiting';
 import { LiveGameReadyScreen } from './liveGameReadyScreen';
+import { LiveGamePlaying } from './liveGamePlaying';
 
-import { initialConnect, player_OnPlayerJoin, player_ShuffleTeams } from './playerSocketUtils';
+import { initialConnect, player_OnPlayerJoin, player_ShuffleTeams, player_StartGame } from './playerSocketUtils';
 
 export class JoinMain extends React.Component {
   constructor(props) {
@@ -38,6 +39,7 @@ export class JoinMain extends React.Component {
     socket.on('uniqueUsernameError', (errMessage) => this.setState({errorMessage: errMessage}));
     socket.emit('playerJoin', username)
     socket.on('shuffleTeams', (gameSessionData) => player_ShuffleTeams(gameSessionData, this));
+    socket.on('startGame', (gameSessionData) => player_StartGame(gameSessionData, this));
   }
 
   render(){
@@ -45,8 +47,11 @@ export class JoinMain extends React.Component {
       return <EnterUsername sessionCode={this.props.match.params.sessionCode} onUsernameSubmit={this.onUsernameSubmit} errorMessage={this.state.errorMessage}/>
     } else if (!this.state.gameSession.teamList || this.state.gameSession.teamList.length === 0) {
       return <PlayerJoinedAndWaiting handle={this.state.currentUser.handle}/>
+    } else if (!this.state.gameSession.startedGame) {
+      return <LiveGameReadyScreen currentTeam={this.state.currentTeam}/>
+    } else {
+      return <LiveGamePlaying />
     }
 
-    return <LiveGameReadyScreen currentTeam={this.state.currentTeam}/>
   }
 }

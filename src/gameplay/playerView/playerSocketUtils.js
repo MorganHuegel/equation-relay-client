@@ -35,3 +35,9 @@ export function player_ShuffleTeams (gameSessionData, component) {
     gameSession: gameSessionData
   })
 }
+
+export function player_StartGame (gameSessionData, component) {
+  if (gameSessionData) {
+    component.setState({gameSession: gameSessionData});
+  }
+}

@@ -40,7 +40,7 @@ export class LiveGameReadyScreen extends React.Component {
     return (
       <div>
         <h2>{this.state.gameTitle}</h2>
-        <button type='button'>Start Game</button>
+        <button type='button' onClick={() => this.props.startGame()}>Start Game</button>
         <button type='button' onClick={() => this.props.shuffleTeams()}>Shuffle Teams</button>
         <p>{this.state.numOfQuestions} questions</p>
         <ul>

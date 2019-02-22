@@ -29,3 +29,14 @@ export function teacher_ShuffleTeams (socket, component) {
   })
   socket.emit('shuffleTeams');
 }
+
+export function teacher_startGame (socket, component) {
+  socket.on('startGame', updatedGame => {
+    if (updatedGame) {
+      component.setState({
+        gameSession: updatedGame
+      })
+    }
+  })
+  socket.emit('startGame');
+}
