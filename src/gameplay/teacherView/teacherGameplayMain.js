@@ -48,7 +48,7 @@ export class TeacherGameplayMain extends React.Component {
         shuffleTeams={this.shuffleTeams} 
         startGame={this.startGame}/>
     } else {
-      return <LiveGameScoreboard />
+      return <LiveGameScoreboard socket={this.socket} gameSession={this.state.gameSession}/>
     }
   }
 }
