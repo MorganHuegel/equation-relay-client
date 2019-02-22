@@ -57,7 +57,7 @@ export class TeacherGameplayMain extends React.Component {
     } else if (!this.state.gameSession.endedGame) {
       return <LiveGameScoreboard socket={this.socket} gameSession={this.state.gameSession} endGame={this.endGame}/>
     } else {
-      return <FinalResultsScreen />
+      return <FinalResultsScreen gameSession={this.state.gameSession}/>
     }
   }
 }

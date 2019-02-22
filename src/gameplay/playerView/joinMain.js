@@ -52,7 +52,7 @@ export class JoinMain extends React.Component {
     } else if (!this.state.gameSession.startedGame) {
       return <LiveGameReadyScreen currentTeam={this.state.currentTeam}/>
     } else if (this.state.gameSession.endedGame) {
-      return <FinalResultsScreen gameSession={this.state.gameSession}/>
+      return <FinalResultsScreen gameSession={this.state.gameSession} currentTeam={this.state.currentTeam}/>
     } else {
       return <LiveGamePlaying />
     }
