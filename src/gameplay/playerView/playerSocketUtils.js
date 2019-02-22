@@ -41,3 +41,7 @@ export function player_StartGame (gameSessionData, component) {
     component.setState({gameSession: gameSessionData});
   }
 }
+
+export function player_EndGame (deletedGameSessionData, component) {
+  component.setState({gameSession: deletedGameSessionData});
+}

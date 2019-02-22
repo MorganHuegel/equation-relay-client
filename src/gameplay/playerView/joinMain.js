@@ -4,8 +4,9 @@ import { EnterUsername } from './enterUsername';
 import { PlayerJoinedAndWaiting } from './playerJoinedAndWaiting';
 import { LiveGameReadyScreen } from './liveGameReadyScreen';
 import { LiveGamePlaying } from './liveGamePlaying';
+import { FinalResultsScreen } from './finalResultsScreen';
 
-import { initialConnect, player_OnPlayerJoin, player_ShuffleTeams, player_StartGame } from './playerSocketUtils';
+import { initialConnect, player_OnPlayerJoin, player_ShuffleTeams, player_StartGame, player_EndGame } from './playerSocketUtils';
 
 export class JoinMain extends React.Component {
   constructor(props) {
@@ -40,6 +41,7 @@ export class JoinMain extends React.Component {
     socket.emit('playerJoin', username)
     socket.on('shuffleTeams', (gameSessionData) => player_ShuffleTeams(gameSessionData, this));
     socket.on('startGame', (gameSessionData) => player_StartGame(gameSessionData, this));
+    socket.on('endGame', (deletedGameSessionData) => player_EndGame(deletedGameSessionData, this));
   }
 
   render(){
@@ -49,6 +51,8 @@ export class JoinMain extends React.Component {
       return <PlayerJoinedAndWaiting handle={this.state.currentUser.handle}/>
     } else if (!this.state.gameSession.startedGame) {
       return <LiveGameReadyScreen currentTeam={this.state.currentTeam}/>
+    } else if (this.state.gameSession.endedGame) {
+      return <FinalResultsScreen gameSession={this.state.gameSession}/>
     } else {
       return <LiveGamePlaying />
     }

@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { teacherGameplayMainWillMount, teacher_ShuffleTeams, teacher_startGame } from './teacherSocketUtils';
+import { teacherGameplayMainWillMount, teacher_ShuffleTeams, teacher_startGame, teacher_EndGame } from './teacherSocketUtils';
 import { TeacherGameplayWaiting } from './teacherGameplayWaiting';
 import { LiveGameReadyScreen } from './liveGameReadyScreen';
 import { LiveGameScoreboard } from './liveGameScoreboard';
+import { FinalResultsScreen } from './finalResultsScreen';
 
 export class TeacherGameplayMain extends React.Component {
   constructor(props){
@@ -15,7 +16,8 @@ export class TeacherGameplayMain extends React.Component {
         gameId: null,
         playerList: [],
         teamList: [],
-        startedGame: false
+        startedGame: false,
+        endedGame: false
       },
     }
     this.socket = null
@@ -26,6 +28,7 @@ export class TeacherGameplayMain extends React.Component {
   }
 
   componentWillUnmount(){
+    this.socket.emit('endGame');
     this.socket.disconnect();
   }
 
@@ -35,6 +38,10 @@ export class TeacherGameplayMain extends React.Component {
 
   startGame = () => {
     teacher_startGame(this.socket, this);
+  }
+
+  endGame = () => {
+    teacher_EndGame(this.socket, this);
   }
 
   render(){
@@ -47,8 +54,10 @@ export class TeacherGameplayMain extends React.Component {
         teamList={this.state.gameSession.teamList} 
         shuffleTeams={this.shuffleTeams} 
         startGame={this.startGame}/>
+    } else if (!this.state.gameSession.endedGame) {
+      return <LiveGameScoreboard socket={this.socket} gameSession={this.state.gameSession} endGame={this.endGame}/>
     } else {
-      return <LiveGameScoreboard socket={this.socket} gameSession={this.state.gameSession}/>
+      return <FinalResultsScreen />
     }
   }
 }

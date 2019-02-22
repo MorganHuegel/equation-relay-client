@@ -40,3 +40,12 @@ export function teacher_startGame (socket, component) {
   })
   socket.emit('startGame');
 }
+
+export function teacher_EndGame (socket, component) {
+  socket.on('endGame', deletedGameData => {
+    component.setState({
+      gameSession: deletedGameData
+    })
+  });
+  socket.emit('endGame');
+}
