@@ -55,7 +55,7 @@ export class JoinMain extends React.Component {
     } else if (this.state.gameSession.endedGame) {
       return <FinalResultsScreen gameSession={this.state.gameSession} currentTeam={this.state.currentTeam}/>
     } else {
-      return <LiveGamePlayingMain teamData={this.state.currentTeam} gameSessionData={this.state.gameSession}/>
+      return <LiveGamePlayingMain teamData={this.state.currentTeam} gameSessionData={this.state.gameSession} currentUser={this.state.currentUser}/>
     }
 
   }

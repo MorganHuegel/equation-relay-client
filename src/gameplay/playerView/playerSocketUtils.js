@@ -42,6 +42,11 @@ export function player_StartGame (gameSessionData, component) {
   }
 }
 
+export function player_NextQuestion (component) {
+  
+}
+
 export function player_EndGame (deletedGameSessionData, component) {
   component.setState({gameSession: deletedGameSessionData});
 }
+
