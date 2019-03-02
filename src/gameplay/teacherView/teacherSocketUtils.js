@@ -39,6 +39,8 @@ export function teacher_startGame (socket, component) {
     }
   })
   socket.emit('startGame');
+  //ALSO LISTEN FOR TEAMS SCORING
+  socket.on('teamScored', (gameSessionData) => component.setState({gameSession: gameSessionData}));
 }
 
 export function teacher_EndGame (socket, component) {

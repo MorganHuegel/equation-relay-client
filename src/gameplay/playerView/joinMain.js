@@ -43,6 +43,7 @@ export class JoinMain extends React.Component {
     socket.on('shuffleTeams', (gameSessionData) => player_ShuffleTeams(gameSessionData, this));
     socket.on('startGame', (gameSessionData) => player_StartGame(gameSessionData, this));
     socket.on('nextQuestion', (gameSessionData) => player_NextQuestion(gameSessionData, this));
+    socket.on('teamScored', (gameSessionData) => this.setState({gameSession: gameSessionData}));
     socket.on('endGame', (deletedGameSessionData) => player_EndGame(deletedGameSessionData, this));
     socket.on('error', (errorMessage) => this.setState({errorMessage}))
   }
@@ -59,6 +60,5 @@ export class JoinMain extends React.Component {
     } else {
       return <LiveGamePlayingMain teamData={this.state.currentTeam} gameSessionData={this.state.gameSession} currentUser={this.state.currentUser} socket={this.socket}/>
     }
-
   }
 }
