@@ -2,20 +2,30 @@ import React from 'react';
 import Spinner from 'react-spinkit';
 
 import { HeaderSubmissionList } from './headerSubmissionList';
+import { DisplayQuestion } from './displayQuestion.js';
 
 import { fetchQuestion } from '../../../fetchFunctions/players/fetchQuestion';
+import { checkAnswer } from './checkAnswerUtil';
 
 export class LiveGamePlayingMain extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       currentQuestion: null,
-      guessingForPoints: false, //set to random player's ID
+      guessingForPoints: false,
       alreadyGuessed: false
     }
   }
 
   componentWillMount(){
+    //Will update gameSession data with
+    this.props.socket.emit('nextQuestion', {
+      teamId: this.props.teamData._id, 
+      playerId: this.props.currentUser._id
+    });
+  }
+
+  componentDidMount(){
     // GETS the first question before page load
     const gameId = this.props.gameSessionData.gameId;
     const questionIndex = this.props.teamData.currentQuestion - 1;
@@ -44,31 +54,47 @@ export class LiveGamePlayingMain extends React.Component {
   }
 
 
+  checkAnswer = () => {
+    const submittedAnswer = document.getElementById('group-solution').value;
+    let correctAnswer = checkAnswer(this, submittedAnswer);
+    if (correctAnswer) {
+      this.props.socket.emit('correctAnswer', {
+        teamId: this.props.teamData._id, 
+        playerId: this.props.currentUser._id
+      })
+    } else {
+      this.props.socket.emit('wrongAnswer', {
+        teamId: this.props.teamData._id, 
+        playerId: this.props.currentUser._id
+      })
+    }
+  }
+
+  getEquationToDisplay = () => {
+    switch (this.props.currentUser.assignedEquationIndex) {
+      case(0):
+        return this.state.currentQuestion.equation1;
+      case(1):
+        return this.state.currentQuestion.equation2;
+      case(2):
+        return this.state.currentQuestion.equation3;
+      default:
+        return this.state.currentQuestion.equation4;
+    }
+  }
+
+
   render(){
     if (!this.state.currentQuestion) {
       return <Spinner />
     }
 
-    let equationToDisplay;
-    switch (this.props.currentUser.assignedEquationIndex) {
-      case(0):
-        equationToDisplay = this.state.currentQuestion.equation1;
-        break;
-      case(1):
-        equationToDisplay = this.state.currentQuestion.equation2;
-        break;
-      case(2):
-        equationToDisplay = this.state.currentQuestion.equation3;
-        break;
-      default:
-        equationToDisplay = this.state.currentQuestion.equation4;
-    }
+    let equationToDisplay = this.getEquationToDisplay();
 
     return (
       <div>
         <HeaderSubmissionList teamData={this.props.teamData}/>
-        <p>Equation - {equationToDisplay.equation}</p>
-        <p>Answer - {equationToDisplay.answer}</p>
+        <DisplayQuestion equation={equationToDisplay.equation} numOfTeammates={this.props.teamData.players.length} checkAnswer={this.checkAnswer}/>
       </div>
     )
   }

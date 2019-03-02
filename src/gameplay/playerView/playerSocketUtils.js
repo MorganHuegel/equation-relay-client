@@ -42,8 +42,26 @@ export function player_StartGame (gameSessionData, component) {
   }
 }
 
-export function player_NextQuestion (component) {
-  
+export function player_NextQuestion (gameSessionData, component) {
+  if (!gameSessionData) {
+    return;
+  }
+
+  console.log('GAME SESSION DATA:', gameSessionData);
+  const userTeam = gameSessionData.teamList.find(team => team._id === component.state.currentTeam._id);
+  // If its the player's own team being updated
+  if (userTeam.currentQuestion !== component.state.currentTeam.currentQuestion) {
+    const updatedPlayer = userTeam.players.find(player => player._id === component.state.currentUser._id);
+    component.setState({
+      currentUser: updatedPlayer,
+      currentTeam: userTeam, 
+      gameSession: gameSessionData, 
+      errorMessage: null})
+  }
+  // If its a different team being updated
+  else {
+    component.setState({gameSession: gameSessionData});
+  }
 }
 
 export function player_EndGame (deletedGameSessionData, component) {
