@@ -1,7 +1,11 @@
 import React from 'react';
 
 export function DisplayQuestion (props) {
-  return (
+  return props.currentUser.alreadyGuessed ? (
+    <div>
+      <p>Already Guessed! Did you add the answers of all your teammates?</p>
+    </div>
+  ) : (
     <div>
       <p>Solve your equation:</p>
       <p>{props.equation}</p>

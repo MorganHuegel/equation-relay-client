@@ -47,7 +47,6 @@ export function player_NextQuestion (gameSessionData, component) {
     return;
   }
 
-  console.log('GAME SESSION DATA:', gameSessionData);
   const userTeam = gameSessionData.teamList.find(team => team._id === component.state.currentTeam._id);
   // If its the player's own team being updated
   if (userTeam.currentQuestion !== component.state.currentTeam.currentQuestion) {
@@ -56,7 +55,8 @@ export function player_NextQuestion (gameSessionData, component) {
       currentUser: updatedPlayer,
       currentTeam: userTeam, 
       gameSession: gameSessionData, 
-      errorMessage: null})
+      errorMessage: null
+    })
   }
   // If its a different team being updated
   else {
@@ -68,3 +68,24 @@ export function player_EndGame (deletedGameSessionData, component) {
   component.setState({gameSession: deletedGameSessionData});
 }
 
+
+export function player_wrongAnswer (gameSessionData, component) {
+  const userTeam = gameSessionData.teamList.find(team => team._id === component.state.currentTeam._id);
+  const updatedPlayer = userTeam.players.find(player => player._id === component.state.currentUser._id);
+  // If the user is the one who got updated
+  if (updatedPlayer.alreadyGuessed !== component.state.currentUser.alreadyGuessed) {
+    component.setState({
+      currentUser: updatedPlayer,
+      currentTeam: userTeam,
+      gameSession: gameSessionData,
+      errorMessage: null
+    })
+  } 
+  // If another player was the one who got updated
+  else {
+    component.setState({
+      currentTeam: userTeam,
+      gameSession: gameSessionData
+    });
+  }
+}

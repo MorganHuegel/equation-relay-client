@@ -6,7 +6,10 @@ export function HeaderSubmissionList (props) {
     if (player.alreadyGuessed) {
       return <li key={key}>{player.handle}</li>
     } else {
-      return <li key={key}>{player.handle} <span>(not submitted)</span> <button>{"<--"} Skip them</button></li>
+      return <li key={key}>{player.handle} 
+        <span>(not submitted)</span>
+        <button onClick={() => props.skipPlayer()}>{"<--"} Skip them</button>
+      </li>
     }
   });
 

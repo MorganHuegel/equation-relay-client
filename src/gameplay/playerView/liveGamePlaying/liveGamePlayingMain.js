@@ -53,6 +53,13 @@ export class LiveGamePlayingMain extends React.Component {
     }
   }
 
+  skipPlayer = () => {
+    this.props.socket.emit('wrongAnswer', {
+      teamId: this.props.teamData._id, 
+      playerId: this.props.currentUser._id
+    })
+  }
+
 
   checkAnswer = () => {
     const submittedAnswer = document.getElementById('group-solution').value;
@@ -93,8 +100,13 @@ export class LiveGamePlayingMain extends React.Component {
 
     return (
       <div>
-        <HeaderSubmissionList teamData={this.props.teamData}/>
-        <DisplayQuestion equation={equationToDisplay.equation} numOfTeammates={this.props.teamData.players.length} checkAnswer={this.checkAnswer}/>
+        <HeaderSubmissionList teamData={this.props.teamData} skipPlayer={this.skipPlayer}/>
+        <DisplayQuestion 
+          equation={equationToDisplay.equation} 
+          numOfTeammates={this.props.teamData.players.length} 
+          checkAnswer={this.checkAnswer}
+          currentUser={this.props.currentUser}
+          />
       </div>
     )
   }
