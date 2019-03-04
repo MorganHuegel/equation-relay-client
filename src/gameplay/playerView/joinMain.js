@@ -13,7 +13,9 @@ import {
   player_StartGame, 
   player_EndGame, 
   player_NextQuestion,
-  player_wrongAnswer 
+  player_wrongAnswer,
+  player_TeamScored,
+  player_CorrectAnswer
 } from './playerSocketUtils';
 
 export class JoinMain extends React.Component {
@@ -52,7 +54,8 @@ export class JoinMain extends React.Component {
     socket.on('startGame', (gameSessionData) => player_StartGame(gameSessionData, this));
     socket.on('nextQuestion', (gameSessionData) => player_NextQuestion(gameSessionData, this));
     socket.on('wrongAnswer', (gameSessionData) => player_wrongAnswer(gameSessionData, this));
-    socket.on('teamScored', (gameSessionData) => this.setState({gameSession: gameSessionData}));
+    socket.on('correctAnswer', (gameSessionData) => player_CorrectAnswer(gameSessionData, this));
+    socket.on('teamScored', (gameSessionData) => player_TeamScored(gameSessionData, this));
     socket.on('endGame', (deletedGameSessionData) => player_EndGame(deletedGameSessionData, this));
     socket.on('error', (errorMessage) => this.setState({errorMessage}))
   }

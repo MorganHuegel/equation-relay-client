@@ -89,3 +89,21 @@ export function player_wrongAnswer (gameSessionData, component) {
     });
   }
 }
+
+
+export function player_CorrectAnswer (gameSessionData, component) {
+  const userTeam = gameSessionData.teamList.find(team => team._id === component.state.currentTeam._id);
+  //If the user's team is the one that changed, update the state
+  if (userTeam.guessingForPoints !== component.state.currentTeam.guessingForPoints) {
+    component.setState({
+      currentTeam: userTeam,
+      gameSession: gameSessionData,
+      errorMessage: null
+    })
+  }
+}
+
+
+export function player_TeamScored (gameSessionData, component) {
+  component.setState({gameSession: gameSessionData});
+}
