@@ -3,7 +3,7 @@ import Spinner from 'react-spinkit';
 
 import { HeaderSubmissionList } from './headerSubmissionList';
 import { DisplayQuestion } from './displayQuestion';
-import { GuessingForPoints } from './guessingForPoints';
+import { GuessingForPointsMain } from './guessingForPointsMain';
 
 import { fetchQuestion } from '../../../fetchFunctions/players/fetchQuestion';
 import { checkAnswer } from './checkAnswerUtil';
@@ -64,7 +64,10 @@ export class LiveGamePlayingMain extends React.Component {
     const submittedAnswer = document.getElementById('group-solution').value;
     let correctAnswer = checkAnswer(this, submittedAnswer);
     if (correctAnswer) {
-      this.props.socket.emit('correctAnswer', this.props.teamData._id)
+      this.props.socket.emit('correctAnswer', {
+        teamId: this.props.teamData._id,
+        playerId: this.props.currentUser._id
+      })
     } else {
       this.props.socket.emit('wrongAnswer', {
         teamId: this.props.teamData._id, 
@@ -92,11 +95,12 @@ export class LiveGamePlayingMain extends React.Component {
       return <Spinner />
     }
 
-    if (this.props.teamData.guessingForPoints) {
-      return <GuessingForPoints teamData={this.props.teamData}/>
-    }
-
     let equationToDisplay = this.getEquationToDisplay();
+
+    // Check to see if all the players have answered
+    if (this.props.teamData.players.every(player => player.alreadyGuessed === true)) {
+      return <GuessingForPointsMain teamData={this.props.teamData} equationToDisplay={equationToDisplay} currentQuestion={this.state.currentQuestion}/>
+    }
 
     return (
       <div>
