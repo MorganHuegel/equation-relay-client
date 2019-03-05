@@ -33,7 +33,7 @@ export class LiveGamePlayingMain extends React.Component {
         this.setState({currentQuestion: questionData});
       })
       .catch(errMessage => {
-        console.log('ERROR HANDLE HERE', errMessage);
+        console.log('ERROR HANDLE HERE, COMPONENT DID MOUNT', errMessage);
       });
   }
 
@@ -47,7 +47,7 @@ export class LiveGamePlayingMain extends React.Component {
           this.setState({currentQuestion: questionData});
         })
         .catch(errMessage => {
-          console.log('ERROR HANDLE HERE', errMessage);
+          console.log('ERROR HANDLE HERE, COMPONENT DID UPDATE', errMessage);
         });
     }
   }
@@ -99,7 +99,13 @@ export class LiveGamePlayingMain extends React.Component {
 
     // Check to see if all the players have answered
     if (this.props.teamData.players.every(player => player.alreadyGuessed === true)) {
-      return <GuessingForPointsMain teamData={this.props.teamData} equationToDisplay={equationToDisplay} currentQuestion={this.state.currentQuestion}/>
+      return <GuessingForPointsMain 
+        teamData={this.props.teamData} 
+        equationToDisplay={equationToDisplay} 
+        currentQuestion={this.state.currentQuestion}
+        currentUser={this.props.currentUser}
+        socket={this.props.socket}
+        />
     }
 
     return (

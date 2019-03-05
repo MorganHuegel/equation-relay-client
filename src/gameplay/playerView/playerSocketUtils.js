@@ -96,3 +96,25 @@ export function player_HandleAnswer (gameSessionData, component) {
 export function player_TeamScored (gameSessionData, component) {
   component.setState({gameSession: gameSessionData});
 }
+
+export function player_AssignGuesser (gameSessionData, component) {
+  //if player has changed, then update CurrentUser in state
+  const team = gameSessionData.teamList.find(team => team._id === component.state.currentTeam._id);
+  const player = team.players.find(player => player._id === component.state.currentUser._id);
+  if (player.guessingForPoints) {
+    component.setState({
+      currentUser: player,
+      currentTeam: team,
+      gameSession: gameSessionData
+    })
+  } else if (team.players.some(player => player.guessingForPoints)) {
+    component.setState({
+      currentTeam: team,
+      gameSession: gameSessionData
+    })
+  } else {
+    component.setState({
+      gameSession: gameSessionData
+    })
+  }
+}
