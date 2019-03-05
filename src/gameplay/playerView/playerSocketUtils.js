@@ -1,6 +1,7 @@
 const { SERVER_BASE_URL } = require('../../config');
 const io = require('socket.io-client')
 
+
 export function initialConnect (sessionCode) {
   const socket = io(SERVER_BASE_URL, {
     forceNew: true,
@@ -10,6 +11,7 @@ export function initialConnect (sessionCode) {
   });
   return socket;
 }
+
 
 
 export function player_OnPlayerJoin (gameSessionData, username, component) {
@@ -24,6 +26,7 @@ export function player_OnPlayerJoin (gameSessionData, username, component) {
 }
 
 
+
 export function player_ShuffleTeams (gameSessionData, component) {
   //UPDATE GAMESESSION AND CURRENT TEAM IN STATE
   const currentTeam = gameSessionData.teamList.find(team => {
@@ -36,11 +39,14 @@ export function player_ShuffleTeams (gameSessionData, component) {
   })
 }
 
+
 export function player_StartGame (gameSessionData, component) {
   if (gameSessionData) {
     component.setState({gameSession: gameSessionData});
   }
 }
+
+
 
 export function player_NextQuestion (gameSessionData, component) {
   if (!gameSessionData) {
@@ -63,6 +69,8 @@ export function player_NextQuestion (gameSessionData, component) {
     component.setState({gameSession: gameSessionData});
   }
 }
+
+
 
 export function player_EndGame (deletedGameSessionData, component) {
   component.setState({gameSession: deletedGameSessionData});
@@ -94,8 +102,20 @@ export function player_HandleAnswer (gameSessionData, component) {
 
 
 export function player_TeamScored (gameSessionData, component) {
-  component.setState({gameSession: gameSessionData});
+  const team = gameSessionData.teamList.find(team => team._id === component.state.currentTeam._id);
+  // If points were updated, their own team must have scored
+  if (team.points !== component.state.currentTeam.points) {
+    component.setState({
+      currentTeam: team,
+      gameSession: gameSessionData
+    })
+  } 
+  // Otherwise, must have been a different team who scored
+  else {
+    component.setState({gameSession: gameSessionData});
+  }
 }
+
 
 export function player_AssignGuesser (gameSessionData, component) {
   //if player has changed, then update CurrentUser in state

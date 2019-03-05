@@ -14,8 +14,6 @@ export class GuessingForPointsGuess extends React.Component {
 
 
   handleClick = (target) => {
-    console.log('THIS: ',this);
-    console.log('THIS.PROPS: ',this.props);
     const pointValue = Number(target.dataset.pointvalue);
     this.props.socket.emit('teamScored', {pointValue, teamId: this.props.teamData._id});
     this.setState({submitted: pointValue});

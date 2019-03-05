@@ -12,7 +12,8 @@ export class LiveGamePlayingMain extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      currentQuestion: null
+      currentQuestion: null,
+      pointDifference: null
     }
   }
 
@@ -49,6 +50,11 @@ export class LiveGamePlayingMain extends React.Component {
         .catch(errMessage => {
           console.log('ERROR HANDLE HERE, COMPONENT DID UPDATE', errMessage);
         });
+    }
+    if (prevProps.teamData.points !== this.props.teamData.points) {
+      this.setState({
+        pointDifference: this.props.teamData.points - prevProps.teamData.points
+      });
     }
   }
 
@@ -105,6 +111,7 @@ export class LiveGamePlayingMain extends React.Component {
         currentQuestion={this.state.currentQuestion}
         currentUser={this.props.currentUser}
         socket={this.props.socket}
+        pointDifference={this.state.pointDifference}
         />
     }
 
