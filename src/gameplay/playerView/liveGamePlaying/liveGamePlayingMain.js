@@ -4,6 +4,7 @@ import Spinner from 'react-spinkit';
 import { HeaderSubmissionList } from './headerSubmissionList';
 import { DisplayQuestion } from './displayQuestion';
 import { GuessingForPointsMain } from './guessingForPointsMain';
+import { TeamFinishedScreen } from './teamFinishedScreen';
 
 import { fetchQuestion } from '../../../fetchFunctions/players/fetchQuestion';
 import { checkAnswer } from './checkAnswerUtil';
@@ -13,7 +14,8 @@ export class LiveGamePlayingMain extends React.Component {
     super(props);
     this.state = {
       currentQuestion: null,
-      pointDifference: null
+      pointDifference: null,
+      finished: false
     }
   }
 
@@ -51,7 +53,10 @@ export class LiveGamePlayingMain extends React.Component {
               pointDifference: null
             });
           } else {
-            console.log('OUT OF QUESTIONS!');
+            console.log('Out of questions!')
+            this.setState({
+              finished: true
+            })
           }
         })
         .catch(errMessage => {
@@ -72,10 +77,10 @@ export class LiveGamePlayingMain extends React.Component {
   }
 
 
-  skipPlayer = () => {
+  skipPlayer = (playerId) => {
     this.props.socket.emit('wrongAnswer', {
       teamId: this.props.teamData._id, 
-      playerId: this.props.currentUser._id
+      playerId
     })
   }
 
@@ -111,6 +116,10 @@ export class LiveGamePlayingMain extends React.Component {
 
 
   render(){
+    if (this.state.finished) {
+      return <TeamFinishedScreen teamData={this.props.teamData}/>
+    }
+    
     if (!this.state.currentQuestion) {
       return <Spinner />
     }
