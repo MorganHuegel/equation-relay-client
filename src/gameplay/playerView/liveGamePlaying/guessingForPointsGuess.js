@@ -56,7 +56,7 @@ export class GuessingForPointsGuess extends React.Component {
         type='image' 
         id={`box${index}`} 
         key={index} 
-        alt={`treasure box number ${index + 1}`} 
+        alt={`treasure box number ${index + 1}`}
         src={treasureBox} 
         data-pointvalue={pointValue}
         onClick={e => this.handleClick(e.target)}

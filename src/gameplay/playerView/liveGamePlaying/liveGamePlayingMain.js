@@ -45,10 +45,14 @@ export class LiveGamePlayingMain extends React.Component {
       const questionNumber = this.props.teamData.currentQuestion - 1;
       return fetchQuestion(gameId, questionNumber)
         .then(questionData => {
-          this.setState({
-            currentQuestion: questionData,
-            pointDifference: null
-          });
+          if (questionData) {
+            this.setState({
+              currentQuestion: questionData,
+              pointDifference: null
+            });
+          } else {
+            console.log('OUT OF QUESTIONS!');
+          }
         })
         .catch(errMessage => {
           console.log('ERROR HANDLE HERE, COMPONENT DID UPDATE', errMessage);
@@ -61,6 +65,12 @@ export class LiveGamePlayingMain extends React.Component {
       });
     }
   }
+
+
+  setToLoading = () => {
+    this.setState({currentQuestion: null});
+  }
+
 
   skipPlayer = () => {
     this.props.socket.emit('wrongAnswer', {
@@ -116,6 +126,7 @@ export class LiveGamePlayingMain extends React.Component {
         currentUser={this.props.currentUser}
         socket={this.props.socket}
         pointDifference={this.state.pointDifference}
+        setToLoading={this.setToLoading}
         />
     }
 
