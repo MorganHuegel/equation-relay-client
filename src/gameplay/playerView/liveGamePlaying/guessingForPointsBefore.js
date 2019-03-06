@@ -29,7 +29,7 @@ export function GuessingForPointsBefore (props) {
       {guessHeader}
       <p>Your individual answer was: {props.equationToDisplay.answer}</p>
       <p>The team answer was: {groupAnswer}</p>
-      <p>You had {correctGuessCount} correct guesses!</p>
+      <p>You had {correctGuessCount} correct {correctGuessCount === 1 ? 'guess' : 'guesses'}!</p>
       <p>There will be {correctGuessCount} treasure {correctGuessCount === 1 ? 'box' : 'boxes'} with positive points, 
       and {props.teamData.players.length - correctGuessCount} with negative points.</p>
       <button onClick={() => props.socket.emit('assignGuesser', props.teamData._id)}>Guess for points!</button>

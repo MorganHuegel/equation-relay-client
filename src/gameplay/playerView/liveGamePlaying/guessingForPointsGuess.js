@@ -39,13 +39,17 @@ export class GuessingForPointsGuess extends React.Component {
 
     let treasureValues = [];
     for (let i = 0; i < this.props.teamData.players.length; i++) {
-      if (i < correctGuessCount) {
-        treasureValues.push(Math.floor(Math.random()*10) * 10);
-      } else {
-        treasureValues.push(-1 * Math.floor(Math.random()*10) * 10);
+      let value = i < correctGuessCount ?
+        Math.floor(Math.random()*10) * 10 :
+        -1 * Math.floor(Math.random()*10) * 10;
+
+      if (value === 0) {
+        value = 10;
       }
+      treasureValues.push(value);
     }
 
+    console.log('TREASURE VALUES: ', treasureValues);
 
     let treasureImages = treasureValues.map( (pointValue, index) => {
       return <input 

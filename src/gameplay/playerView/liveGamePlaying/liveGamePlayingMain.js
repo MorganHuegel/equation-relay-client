@@ -39,18 +39,22 @@ export class LiveGamePlayingMain extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState){
+    // If team has moved on to next question
     if (prevProps.teamData.currentQuestion !== this.props.teamData.currentQuestion) {
-      //FETCH NEW QUESTION AND UPDATE STATE
       const gameId = this.props.gameSessionData.gameId;
       const questionNumber = this.props.teamData.currentQuestion - 1;
       return fetchQuestion(gameId, questionNumber)
         .then(questionData => {
-          this.setState({currentQuestion: questionData});
+          this.setState({
+            currentQuestion: questionData,
+            pointDifference: null
+          });
         })
         .catch(errMessage => {
           console.log('ERROR HANDLE HERE, COMPONENT DID UPDATE', errMessage);
         });
     }
+    // If team has earned points
     if (prevProps.teamData.points !== this.props.teamData.points) {
       this.setState({
         pointDifference: this.props.teamData.points - prevProps.teamData.points

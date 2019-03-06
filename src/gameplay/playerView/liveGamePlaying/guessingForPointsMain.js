@@ -3,15 +3,11 @@ import React from 'react';
 import { GuessingForPointsBefore } from './guessingForPointsBefore';
 import { GuessingForPointsGuess } from './guessingForPointsGuess';
 import { GuessingForPointsWatch } from './guessingForPointsWatch';
+import { GuessingForPointsAfter } from './guessingForPointsAfter';
 
 export function GuessingForPointsMain (props) {
   if (props.pointDifference) {
-    return (
-      <div>
-        <h3>{props.pointDifference} points!</h3>
-        <button onClick={() => console.log('CONTINUE')}>Continue</button>
-      </div>
-    )
+    return <GuessingForPointsAfter {...props}/>
   }
 
   if (props.teamData.players.some(player => player.guessingForPoints) && props.currentUser.guessingForPoints) {
