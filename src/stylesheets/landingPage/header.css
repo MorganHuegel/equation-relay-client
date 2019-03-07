@@ -58,3 +58,19 @@
   -ms-transition: border-bottom 250ms linear, background-color 250ms linear;
   transition: border-bottom 250ms linear, background-color 250ms linear;
 }
+
+
+@media only screen and (min-width: 600px) {
+  .landing-page-header ul {
+    text-align: right;
+  }
+  .landing-page-header li {
+    width: initial;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .landing-page-header ul {
+    padding-right: calc((100vw - 1000px) / 2);
+  }
+}
