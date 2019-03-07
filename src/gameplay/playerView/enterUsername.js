@@ -11,7 +11,7 @@ export function EnterUsername(props){
           <input type='text' id='enter-name' name='enter-name' placeholder='e.g. Chris P.'/>
           <button type='submit'>Enter</button>
         </form>
-        <p>{props.errorMessage}</p>
+        <p className='error-message'>{props.errorMessage}</p>
       </div>
   )
 }

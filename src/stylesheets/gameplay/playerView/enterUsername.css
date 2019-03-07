@@ -40,3 +40,7 @@
   -ms-transition: background-color 500ms linear;
   transition: background-color 500ms linear;
 }
+
+.enter-username .error-message {
+  color: rgb(255, 200, 200);
+}

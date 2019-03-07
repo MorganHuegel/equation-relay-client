@@ -1,0 +1,12 @@
+.player-joined-and-waiting {
+  color: white;
+}
+
+.player-joined-and-waiting h2 {
+  font-size: 3rem;
+  margin: 100px 0 20px 0;
+}
+
+.player-joined-and-waiting p {
+  font-style: italic;
+}
