@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../../stylesheets/gameplay/playerView/liveGameReadyScreen.css';
+
 export function LiveGameReadyScreen (props) { 
   const teamList = props.currentTeam.players.map( (player, index) => {
     return (
@@ -9,10 +11,10 @@ export function LiveGameReadyScreen (props) {
     )
   })
   return (
-    <div>
+    <div className='live-game-ready-screen'>
       {teamList}
       <p>Current Score: {props.currentTeam.points}</p>
-      <p>{props.currentTeam.teamName}, ready your pencils!</p>
+      <p className='ready-message'>{props.currentTeam.teamName}, ready your pencils!</p>
     </div>
   )
 }
