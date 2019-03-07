@@ -38,10 +38,23 @@
   padding: 8px;
   width: 100%;
   color: white;
+  border-bottom: 1px solid rgb(40, 110, 120);
+  -webkit-transition: border-bottom 250ms linear, background-color 250ms linear;
+  -ms-transition: border-bottom 250ms linear, background-color 250ms linear;
+  transition: border-bottom 250ms linear, background-color 250ms linear;
 }
 
 .landing-page-header .selected-route {
   color: rgb(234, 150, 146);
   text-decoration: overline;
   font-weight: bold;
+}
+
+.landing-page-header li a:hover, .landing-page-header li a:focus {
+  cursor: pointer;
+  background-color: rgb(50, 120, 130);
+  border-bottom: 1px solid white;
+  -webkit-transition: border-bottom 250ms linear, background-color 250ms linear;
+  -ms-transition: border-bottom 250ms linear, background-color 250ms linear;
+  transition: border-bottom 250ms linear, background-color 250ms linear;
 }
