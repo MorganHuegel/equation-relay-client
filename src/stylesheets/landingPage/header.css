@@ -1,3 +1,42 @@
-.selected-route {
-  font-size: 1.2rem;
+.landing-page-header h1 span:nth-child(1) {
+  background-color: rgb(234, 150, 146);
+  color: rgb(50, 120, 130);
+  font-style: italic;
+  padding: 8px 5px 8px 8px;
+  text-decoration: underline;
+}
+
+.landing-page-header h1 span:nth-child(2) {
+  background-color: rgb(50, 120, 130);
+  color: rgb(234, 150, 146);
+  font-style: italic;
+  padding: 8px 8px 8px 0;
+  border: 1px solid rgb(234, 150, 146);
+  text-decoration: underline;
+}
+
+
+.landing-page-header ul {
+  width: 100vw;
+  margin: 30px 0 30px -20px;
+  background-color: rgb(40, 110, 120);
+}
+
+
+.landing-page-header li {
+  display: inline-block;
+  width: 33%;
+}
+
+.landing-page-header li a {
+  display: inline-block;
+  padding: 8px;
+  width: 100%;
+  color: white;
+}
+
+.landing-page-header .selected-route {
+  color: rgb(234, 150, 146);
+  text-decoration: overline;
+  font-weight: bold;
 }

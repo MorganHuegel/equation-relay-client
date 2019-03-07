@@ -27,6 +27,7 @@ export function GuessingForPointsBefore (props) {
   return (
     <div>
       {guessHeader}
+      <p>Your equation was: {props.equationToDisplay.equation}</p>
       <p>Your individual answer was: {props.equationToDisplay.answer}</p>
       <p>The team answer was: {groupAnswer}</p>
       <p>You had {correctGuessCount} correct {correctGuessCount === 1 ? 'guess' : 'guesses'}!</p>

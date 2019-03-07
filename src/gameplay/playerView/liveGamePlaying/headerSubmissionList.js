@@ -15,6 +15,7 @@ export function HeaderSubmissionList (props) {
 
   return (
     <div>
+      <h3>{props.teamData.teamName}</h3>
       <ul>
         {playersList}
       </ul>
