@@ -37,7 +37,7 @@ export class JoinLanding extends React.Component {
           <label htmlFor='join-code'>Enter join code:</label>
           <input type='text' name='join-code' id='join-code'/>
 
-          <button type='submit'>JOIN</button>
+          <button type='submit'>Join</button>
         </form>
         <p>
           {this.state.error}
