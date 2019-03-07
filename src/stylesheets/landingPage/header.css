@@ -1,9 +1,14 @@
+.landing-page-header h1 {
+  font-family: 'Indie Flower', cursive;
+}
+
 .landing-page-header h1 span:nth-child(1) {
   background-color: rgb(234, 150, 146);
   color: rgb(50, 120, 130);
   font-style: italic;
   padding: 8px 5px 8px 8px;
   text-decoration: underline;
+  border: 1px solid rgb(234, 150, 146);
 }
 
 .landing-page-header h1 span:nth-child(2) {
