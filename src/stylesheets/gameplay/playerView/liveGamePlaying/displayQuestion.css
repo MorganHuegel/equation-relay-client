@@ -1,27 +1,36 @@
-.enter-username {
+.display-question {
   color: white;
 }
 
-
-.enter-username label {
-  display: block;
+.display-question .display-equation {
   font-size: 3rem;
-  color: white;
+  margin-bottom: 40px;
 }
 
-.enter-username input {
-  height: 50px;
-  padding: 8px;
+.display-question .instructions {
+  margin: 10px 0;
+}
+
+.display-question label {
+  display: block;
+}
+
+.display-question input {
+  display: block;
+  margin: 10px auto;
+  font-size: 1.5rem;
   width: 80%;
   max-width: 300px;
-  display: block;
-  margin: 20px auto;
-  font-size: 2rem;
+  padding: 8px;
   text-align: center;
-  border: 2px solid rgb(234, 150, 146);
 }
 
-.enter-username button {
+.display-question span {
+  font-style: italic;
+  font-size: 1.4rem;
+}
+
+.display-question button {
   font-size: 2rem;
   padding: 8px;
   border-radius: 5px;
@@ -32,15 +41,11 @@
   transition: background-color 400ms linear;
 }
 
-.enter-username button:hover, .enter-username button:focus {
+.display-question button:hover, .display-question button:focus {
   cursor: pointer;
   color: rgb(80, 164, 176);
   background-color: white;
   -webkit-transition: background-color 500ms linear;
   -ms-transition: background-color 500ms linear;
   transition: background-color 500ms linear;
-}
-
-.enter-username .error-message {
-  color: rgb(255, 200, 200);
 }

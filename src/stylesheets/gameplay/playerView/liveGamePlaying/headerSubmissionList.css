@@ -1,0 +1,39 @@
+.header-submission-list {
+  color: white;
+  text-align: left;
+  margin-bottom: 60px;
+}
+
+.header-submission-list ul {
+  list-style: circle inside;
+}
+
+.header-submission-list li {
+  margin: 10px 0;
+}
+
+.header-submission-list li.already-guessed {
+  color: rgb(230, 230, 230);
+  font-style: italic;
+}
+
+.header-submission-list li.correct {
+  color: rgb(200, 255, 200);
+}
+
+.header-submission-list li.wrong {
+  color: rgb(255, 200, 200);
+  text-decoration: line-through;
+}
+
+.header-submission-list .skip-button {
+  background: transparent;
+  border: none;
+  margin-left: 8px;
+  color: rgb(255, 220, 200);
+  text-decoration: underline;
+}
+
+.header-submission-list .skip-button:hover, .header-submission-list .skip-button:focus {
+  cursor: pointer;
+}
