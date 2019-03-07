@@ -9,7 +9,7 @@ export function DisplayQuestion (props) {
         <p className='instructions'>Solve your equation:</p>
         <p className='display-equation'>{props.equation}</p>
         <p className='instructions'>Then <span>add the solutions</span> of all {props.numOfTeammates} group members:</p>
-        <p>Correct submission! Tell yo' friends!</p>
+        <p className='feedback correct'>Correct submission! Tell yo' friends!</p>
       </div>
     );
   } 
@@ -20,7 +20,7 @@ export function DisplayQuestion (props) {
         <p className='instructions'>Solve your equation:</p>
         <p className='display-equation'>{props.equation}</p>
         <p className='instructions'>Then <span>add the solutions</span> of all {props.numOfTeammates} group members:</p>
-        <p>Nope, sorry! Did you add the answers of all your teammates?</p>
+        <p className='feedback wrong'>Nope, sorry! Did you add the answers of all your teammates?</p>
       </div>
     )
   }

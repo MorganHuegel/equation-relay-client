@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../../../stylesheets/gameplay/playerView/liveGamePlaying/guessingForPointsBefore.css';
+
 export function GuessingForPointsBefore (props) {
   let correctGuessCount = 0;
   const guessHeader = props.teamData.players.map(player => {
@@ -25,7 +27,7 @@ export function GuessingForPointsBefore (props) {
   
 
   return (
-    <div>
+    <div className='guessing-for-points-before'>
       {guessHeader}
       <p>Your equation was: {props.equationToDisplay.equation}</p>
       <p>Your individual answer was: {props.equationToDisplay.answer}</p>

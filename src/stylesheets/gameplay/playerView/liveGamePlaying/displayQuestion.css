@@ -49,3 +49,12 @@
   -ms-transition: background-color 500ms linear;
   transition: background-color 500ms linear;
 }
+
+.display-question .feedback.correct {
+  font-style: italic;
+  color: rgb(200, 255, 200);
+}
+.display-question .feedback.wrong {
+  font-style: italic;
+  color: rgb(255, 200, 200);
+}
