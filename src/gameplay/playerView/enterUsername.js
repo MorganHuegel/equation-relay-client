@@ -1,8 +1,10 @@
 import React from 'react';
 
+import '../../stylesheets/gameplay/playerView/enterUsername.css';
+
 export function EnterUsername(props){
   return (
-    <div>
+    <div className='enter-username'>
         <p>Game Session: {props.sessionCode}</p>
         <form name='enter-username-form' onSubmit={e => props.onUsernameSubmit(e)}>
           <label htmlFor='enter-name'>Enter your name:</label>

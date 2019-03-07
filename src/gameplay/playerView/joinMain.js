@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../../stylesheets/gameplay/playerView/joinMain.css';
+
 import { EnterUsername } from './enterUsername';
 import { PlayerJoinedAndWaiting } from './playerJoinedAndWaiting';
 import { LiveGameReadyScreen } from './liveGameReadyScreen';
