@@ -5,7 +5,7 @@ export function startGameSession(gameId){
 
   const query = `
     mutation {
-      startGameSession (gameId: "111111111111111111111110")
+      startGameSession (gameId: "${gameId}")
     }
   `
 
