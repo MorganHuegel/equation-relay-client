@@ -16,10 +16,11 @@ body * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  line-height: 1.5;
 }
 
 .error-message {
-  color: red;
+  color: rgb(255, 200, 200);
   margin: 10px 0;
 }
 

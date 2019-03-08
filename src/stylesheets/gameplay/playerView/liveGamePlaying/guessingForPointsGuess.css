@@ -1,3 +1,75 @@
-.treasure-box {
-  max-width: 200px;
+.guessing-for-points-guess {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.guessing-for-points-guess h2 {
+  color: white;
+  margin-bottom: 13vh;
+}
+
+
+.guessing-for-points-guess .treasure-box {
+  max-width: 100px;
+}
+
+.guessing-for-points-guess .treasure-box:hover {
+  max-width: 110px;
+  position: absolute;
+  bottom: -40px;
+  left: calc(50% - 55px);
+}
+
+.guessing-for-points-guess .treasure-box-container {
+  display: inline-block;
+  width: 49%;
+  max-width: 100%;
+  margin-bottom: 40px;
+}
+
+
+.guessing-for-points-guess .treasure-box-container:hover {
+  position: relative;
+}
+
+
+@media only screen and (min-width: 640px) {
+  .guessing-for-points-guess h2 {
+    margin-bottom: 6vh;
+  }
+
+  .guessing-for-points-guess .treasure-box {
+    max-width: 200px;
+  }
+  
+  .guessing-for-points-guess .treasure-box:hover {
+    max-width: 220px;
+    left: calc(50% - 110px);
+  }
+  
+  .guessing-for-points-guess .treasure-box-container {
+    display: inline-block;
+  }
+
+  /* ff --------------------------*/
+  .guessing-for-points-guess {
+    margin: 60px auto;
+  }  
+  
+  .guessing-for-points-guess .treasure-box-container {
+    /* width: 49%; */
+    /* text-align: center; */
+    /* margin-bottom: 40px; */
+  }
+
+ .guessing-for-points-guess .treasure-box:hover {
+    /* max-width: 220px; */
+    /* position: absolute; */
+    /* bottom: -40px; */
+    /* left: calc(50% - 110px); */
+  } 
+
+  .guessing-for-points-guess .treasure-box-container:hover {
+    position: relative;
+  }
 }

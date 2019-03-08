@@ -1,3 +1,7 @@
+.guessing-for-points-after .sk-fade-in.sk-spinner.sk-circle {
+  margin: 0 auto;
+}
+
 .guessing-for-points-after h3 {
   font-size: 3rem;
   margin: 50px 0;

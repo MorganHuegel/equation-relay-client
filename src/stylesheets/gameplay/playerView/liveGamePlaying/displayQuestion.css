@@ -12,12 +12,13 @@
 }
 
 .display-question label {
+  margin-top: 20px;
   display: block;
 }
 
 .display-question input {
   display: block;
-  margin: 10px auto;
+  margin: 10px auto 20px auto;
   font-size: 1.5rem;
   width: 80%;
   max-width: 300px;
