@@ -5,7 +5,8 @@ import '../stylesheets/landingPage/header.css';
 
 export function Header(){
   return (
-    <header>
+    <header className='landing-page-header'>
+      <h1><span>Equation</span><span>Relay</span></h1>
       <ul>
         <li>
           <NavLink to="/join" activeClassName='selected-route'>Join</NavLink>

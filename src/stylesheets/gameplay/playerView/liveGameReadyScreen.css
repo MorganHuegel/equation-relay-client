@@ -1,0 +1,22 @@
+.live-game-ready-screen {
+  color: white;
+}
+
+.live-game-ready-screen ol {
+  text-align: left;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1.5rem;
+}
+
+.live-game-ready-screen p {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.live-game-ready-screen .ready-message {
+  font-size: 3rem;
+  margin: 50px 0 0 0;
+  text-align: center;
+}

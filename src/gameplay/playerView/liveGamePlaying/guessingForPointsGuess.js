@@ -1,4 +1,5 @@
 import React from 'react';
+import Spinner from 'react-spinkit';
 
 import treasureBox from '../../../images/treasure-box.jpg';
 
@@ -23,9 +24,8 @@ export class GuessingForPointsGuess extends React.Component {
   render(){
     if (this.state.submitted) {
       return (
-        <div>
-          <h3>{this.state.submitted} points!</h3>
-          <button>Continue</button>
+        <div className='guessing-for-points-after'>
+          <Spinner name="circle" color="rgb(234, 150, 146)"/>
         </div>
       )
     }
@@ -49,23 +49,26 @@ export class GuessingForPointsGuess extends React.Component {
       treasureValues.push(value);
     }
 
-    console.log('TREASURE VALUES: ', treasureValues);
-
     let treasureImages = treasureValues.map( (pointValue, index) => {
-      return <input 
-        type='image' 
-        id={`box${index}`} 
-        key={index} 
-        alt={`treasure box number ${index + 1}`}
-        src={treasureBox} 
-        data-pointvalue={pointValue}
-        onClick={e => this.handleClick(e.target)}
-        className='treasure-box'
-        />
+      return (
+        <div className='treasure-box-container'>
+        <input 
+          type='image' 
+          id={`box${index}`} 
+          key={index} 
+          alt={`treasure box number ${index + 1}`}
+          src={treasureBox} 
+          data-pointvalue={pointValue}
+          onClick={e => this.handleClick(e.target)}
+          className='treasure-box'
+          />
+        </div>
+      )
     })
     
     return (
-      <div>
+      <div className='guessing-for-points-guess'>
+        <h2>Choose wisely...</h2>
         {treasureImages}
       </div>
     )

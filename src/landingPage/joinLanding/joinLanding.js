@@ -1,6 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
+import '../../stylesheets/landingPage/joinLanding/joinLanding.css';
+
 import { sendJoinCode } from '../../fetchFunctions/players/sendJoinCode';
 
 export class JoinLanding extends React.Component {
@@ -30,12 +32,12 @@ export class JoinLanding extends React.Component {
     }
 
     return (
-      <div>
+      <div className='join-landing'>
         <form name='join-code-form' id='join-code-form' onSubmit={e => this.onSubmit(e)}>
           <label htmlFor='join-code'>Enter join code:</label>
           <input type='text' name='join-code' id='join-code'/>
 
-          <button type='submit'>JOIN</button>
+          <button type='submit'>Join</button>
         </form>
         <p>
           {this.state.error}

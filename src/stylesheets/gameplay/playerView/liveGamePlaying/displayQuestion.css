@@ -1,0 +1,61 @@
+.display-question {
+  color: white;
+}
+
+.display-question .display-equation {
+  font-size: 3rem;
+  margin-bottom: 40px;
+}
+
+.display-question .instructions {
+  margin: 10px 0;
+}
+
+.display-question label {
+  margin-top: 20px;
+  display: block;
+}
+
+.display-question input {
+  display: block;
+  margin: 10px auto 20px auto;
+  font-size: 1.5rem;
+  width: 80%;
+  max-width: 300px;
+  padding: 8px;
+  text-align: center;
+}
+
+.display-question span {
+  font-style: italic;
+  font-size: 1.4rem;
+}
+
+.display-question button {
+  font-size: 2rem;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: rgb(80, 164, 176);
+  color: white;
+  -webkit-transition: background-color 400ms linear;
+  -ms-transition: background-color 400ms linear;
+  transition: background-color 400ms linear;
+}
+
+.display-question button:hover, .display-question button:focus {
+  cursor: pointer;
+  color: rgb(80, 164, 176);
+  background-color: white;
+  -webkit-transition: background-color 500ms linear;
+  -ms-transition: background-color 500ms linear;
+  transition: background-color 500ms linear;
+}
+
+.display-question .feedback.correct {
+  font-style: italic;
+  color: rgb(200, 255, 200);
+}
+.display-question .feedback.wrong {
+  font-style: italic;
+  color: rgb(255, 200, 200);
+}

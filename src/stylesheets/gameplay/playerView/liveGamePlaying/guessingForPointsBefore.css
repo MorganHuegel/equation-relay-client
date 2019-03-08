@@ -1,0 +1,46 @@
+.guessing-for-points-before {
+  color: white;
+}
+
+.guessing-for-points-before ul {
+  text-align: left;
+  list-style: none;
+  margin-bottom: 30px;
+}
+
+.guessing-for-points-before li.correct {
+  color: rgb(200, 255, 200);
+}
+
+.guessing-for-points-before li.incorrect {
+  color: rgb(255, 200, 200);
+}
+
+.guessing-for-points-before p {
+  margin: 20px 0;
+}
+
+.guessing-for-points-before .answer {
+  font-size: 1.5rem;
+}
+
+.guessing-for-points-before button {
+  margin-top: 30px;
+  font-size: 2rem;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: rgb(80, 194, 176);
+  color: white;
+  -webkit-transition: background-color 400ms linear;
+  -ms-transition: background-color 400ms linear;
+  transition: background-color 400ms linear;
+}
+
+.guessing-for-points-before button:hover, .guessing-for-points-before button:focus {
+  cursor: pointer;
+  color: rgb(80, 194, 176);
+  background-color: white;
+  -webkit-transition: background-color 500ms linear;
+  -ms-transition: background-color 500ms linear;
+  transition: background-color 500ms linear;
+}

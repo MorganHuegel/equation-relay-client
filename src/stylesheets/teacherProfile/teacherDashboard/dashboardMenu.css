@@ -1,11 +1,21 @@
 .dashboard-buttons {
-  border: 1px solid black;
-  display: inline-block;
-  width: 250px;
-  margin-left: 20px;
+  width: 100%;
+  max-width: 250px;
   list-style: none;
+  margin: 20px auto;
+  box-shadow: 4px 4px rgb(80, 150, 180);
+  vertical-align: top;
 }
 
-.profile-pic img {
+.profile-pic {
+  height: 250px;
   width: 100%;
+  background-image: url("../../../../src/images/profile-pic-placeholder.png");
+  background-position: top center;
+}
+
+@media only screen and (min-width: 1000px) {
+  .dashboard-buttons {
+    display: inline-block;
+  }
 }

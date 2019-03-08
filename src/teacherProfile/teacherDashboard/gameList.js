@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../../stylesheets/teacherProfile/teacherDashboard/gameList.css';
+
 import { GameListItem } from './gameListItem';
 
 export function GameList (props) {
@@ -18,8 +20,8 @@ export function GameList (props) {
   });
 
   return (
-    <div className='game-list'>
+    <ul className='game-list'>
       {gameList}
-    </div>
+    </ul>
   )
 }
