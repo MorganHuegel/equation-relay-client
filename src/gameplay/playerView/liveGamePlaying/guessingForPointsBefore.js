@@ -7,9 +7,9 @@ export function GuessingForPointsBefore (props) {
   const guessHeader = props.teamData.players.map(player => {
     if (player.correctGuess) {
       correctGuessCount++;
-      return <p key={player._id}>{player.handle} - Correct</p>
+      return <li key={player._id} className='correct'>{player.handle} - Correct</li>
     } else {
-      return <p key={player._id}>{player.handle} - Incorrect</p>
+      return <li key={player._id} className='incorrect'>{player.handle} - Incorrect</li>
     }
   });
   
@@ -28,11 +28,12 @@ export function GuessingForPointsBefore (props) {
 
   return (
     <div className='guessing-for-points-before'>
-      {guessHeader}
-      <p>Your equation was: {props.equationToDisplay.equation}</p>
-      <p>Your individual answer was: {props.equationToDisplay.answer}</p>
-      <p>The team answer was: {groupAnswer}</p>
-      <p>You had {correctGuessCount} correct {correctGuessCount === 1 ? 'guess' : 'guesses'}!</p>
+      <ul>
+        {guessHeader}
+      </ul>
+      <p>Your equation was: <span className='answer'>{props.equationToDisplay.equation}</span></p>
+      <p>Your individual answer was: <span className='answer'>{props.equationToDisplay.answer}</span></p>
+      <p>The team answer was: <span className='answer'>{groupAnswer}</span></p>
       <p>There will be {correctGuessCount} treasure {correctGuessCount === 1 ? 'box' : 'boxes'} with positive points, 
       and {props.teamData.players.length - correctGuessCount} with negative points.</p>
       <button onClick={() => props.socket.emit('assignGuesser', props.teamData._id)}>Guess for points!</button>

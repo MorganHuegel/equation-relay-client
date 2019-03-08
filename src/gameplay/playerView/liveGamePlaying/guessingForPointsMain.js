@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../../../stylesheets/gameplay/playerView/liveGamePlaying/guessingForPointsAfter.css';
+
 import { GuessingForPointsBefore } from './guessingForPointsBefore';
 import { GuessingForPointsGuess } from './guessingForPointsGuess';
 import { GuessingForPointsWatch } from './guessingForPointsWatch';

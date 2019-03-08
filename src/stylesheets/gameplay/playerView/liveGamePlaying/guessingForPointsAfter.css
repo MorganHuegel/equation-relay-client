@@ -1,0 +1,43 @@
+.guessing-for-points-after h3 {
+  font-size: 3rem;
+  margin: 50px 0;
+}
+
+.guessing-for-points-after p {
+  font-style: italic;
+}
+
+.guessing-for-points-after.positive {
+  color: rgb(200, 255, 200);
+}
+
+.guessing-for-points-after.negative {
+  color: rgb(255, 200, 200);
+}
+
+
+.guessing-for-points-after button {
+  padding: 8px;
+  font-size: 1.5rem;
+  border-radius: 5px;
+}
+
+.guessing-for-points-after button {
+  font-size: 2rem;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: rgb(80, 164, 176);
+  color: white;
+  -webkit-transition: background-color 400ms linear;
+  -ms-transition: background-color 400ms linear;
+  transition: background-color 400ms linear;
+}
+
+.guessing-for-points-after button:hover, .guessing-for-points-after button:focus {
+  cursor: pointer;
+  color: rgb(80, 164, 176);
+  background-color: white;
+  -webkit-transition: background-color 500ms linear;
+  -ms-transition: background-color 500ms linear;
+  transition: background-color 500ms linear;
+}
