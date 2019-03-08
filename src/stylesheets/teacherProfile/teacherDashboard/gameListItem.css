@@ -1,5 +1,66 @@
 .game-list-item {
   border: 1px solid black;
-  margin: 20px 20px 20px auto;
+  margin: 20px 0;
   max-width: 800px;
+  padding: 8px;
+}
+
+.game-list-item h3 {
+  display: inline-block;
+  margin: 0 20px 10px 0;
+  padding: 5px;
+}
+
+.game-list-item .game-list-buttons {
+  /* display: inline-block; */
+  margin-bottom: 20px;
+}
+
+.game-list-item .game-list-buttons button {
+  margin-right: 10px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.game-list-item .game-list-buttons button:hover {
+  cursor: pointer;
+}
+
+/* PLAY LIVE BUTTON */
+.game-list-item .game-list-buttons button:nth-child(1) {
+  background-color: rgb(110, 10, 43);
+  color: white;
+  font-size: 1.3rem;
+}
+
+.game-list-item .game-list-buttons button:nth-child(1):hover {
+  background-color: rgb(90, 10, 53);
+}
+
+/* EDIT BUTTON */
+.game-list-item .game-list-buttons button:nth-child(2) {
+  background: none;
+  border: none;
+  text-decoration: underline;
+}
+
+/* DELETE BUTTON */
+.game-list-item .game-list-buttons button:nth-child(3) {
+  background: none;
+  border: none;
+  text-decoration: underline;
+}
+
+.game-list-item .description {
+  font-style: italic;
+  max-width: 100%;
+  height: 3rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media only screen and (min-width: 500px) {
+  .game-list-item .game-list-buttons {
+    float: right;
+  }
 }

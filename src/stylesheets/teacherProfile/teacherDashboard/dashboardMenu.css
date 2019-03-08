@@ -4,6 +4,7 @@
   list-style: none;
   margin: 20px auto;
   box-shadow: 4px 4px rgb(80, 150, 180);
+  vertical-align: top;
 }
 
 .profile-pic {
@@ -11,4 +12,10 @@
   width: 100%;
   background-image: url("../../../../src/images/profile-pic-placeholder.png");
   background-position: top center;
+}
+
+@media only screen and (min-width: 1000px) {
+  .dashboard-buttons {
+    display: inline-block;
+  }
 }
