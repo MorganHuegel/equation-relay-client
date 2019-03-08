@@ -1,3 +1,9 @@
+.teacher-profile-main {
+  background-color: rgb(233, 233, 255);
+  text-align: left;
+  padding: 20px
+}
+
 .teacher-dashboard-games {
   display: inline-block;
   width: calc(100vw - 350px);

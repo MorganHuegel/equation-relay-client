@@ -1,7 +1,6 @@
 import React from 'react';
 
 import '../../stylesheets/teacherProfile/teacherDashboard/dashboardMenu.css';
-import profilePic from '../../images/profile-pic-placeholder.png';
 
 import { DashboardMenuItem } from './dashboardMenuItem';
 
@@ -10,12 +9,12 @@ let propsScope;
 export function DashboardMenu (props) {
   propsScope = props;
   const menuButtons = dashboardButtons.map(button => {
-    return <DashboardMenuItem buttonText={button.buttonText} onClick={button.clickFunction} key={button.buttonText}/>
+    const selected = button.buttonText === 'Created Games' ? 'selected' : '';
+    return <DashboardMenuItem buttonText={button.buttonText} onClick={button.clickFunction} key={button.buttonText} selected={selected}/>
   })
   return (
     <ul className='dashboard-buttons'>
       <li className='profile-pic'>
-        <img src={profilePic} alt='Profile Pic'/>
       </li>
       {menuButtons}
     </ul>

@@ -1,4 +1,24 @@
 .dashboard-button button {
   width: 100%;
   padding: 8px;
+  background-color: none;
+  border: 3px solid white;
+  -webkit-transition: border-bottom 250ms linear, background-color 250ms linear;
+  -ms-transition: border-bottom 250ms linear, background-color 250ms linear;
+  transition: border-bottom 250ms linear, background-color 250ms linear;
+}
+
+.dashboard-button button:hover {
+  cursor: pointer;
+  border-bottom: 3px solid rgb(224, 190, 176);
+  background-color: rgb(240, 240, 240);
+  -webkit-transition: border-bottom 250ms linear, background-color 250ms linear;
+  -ms-transition: border-bottom 250ms linear, background-color 250ms linear;
+  transition: border-bottom 250ms linear, background-color 250ms linear;
+}
+
+.dashboard-button .selected {
+  text-decoration: overline;
+  color: rgb(134, 50, 46);
+  background-color: rgb(254, 210, 196);
 }
