@@ -1,5 +1,10 @@
 .teacher-main {
   text-align: center;
+  color: white;
+}
+
+.teacher-main h2 {
+  margin-bottom: 30px;
 }
 
 .teacher-main label {
@@ -11,6 +16,9 @@
 .teacher-main input {
   margin-bottom: 20px;
   text-align: center;
+  width: 250px;
+  padding: 5px;
+  font-size: 1.2rem;
 }
 
 .teacher-main button {
@@ -32,10 +40,44 @@
   height: 10vw;
 }
 
+.teacher-main button[type='submit'] {
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  padding: 5px;
+  border-radius: 5px;
+  -webkit-transition: background-color 250ms linear, color 250ms linear;
+  -ms-transition: background-color 250ms linear, color 250ms linear;
+  transition: background-color 250ms linear, color 250ms linear;
+}
+
+.teacher-main button[type='submit']:hover {
+  cursor: pointer;
+  background-color: rgb(234, 150, 146);
+  color: rgb(40, 110, 120);
+  -webkit-transition: background-color 250ms linear, color 250ms linear;
+  -ms-transition: background-color 250ms linear, color 250ms linear;
+  transition: background-color 250ms linear, color 250ms linear;
+}
+
+.teacher-main button.demo-account-button, 
+.teacher-main button.toggle-login-register-button {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  color: rgb(230, 230, 230);
+}
+
+.teacher-main button.demo-account-button:hover, 
+.teacher-main button.toggle-login-register-button:hover {
+  cursor: pointer;
+}
+
+
+
 
 /* ------- Animation for Loading Paragraph ----------- */
 .teacher-main .spinner-text {
-  color: blue;
+  color: white;
   margin-top: 20px;
 
   -webkit-animation: fadein 1.5s; /* Safari, Chrome and Opera > 12.1 */
