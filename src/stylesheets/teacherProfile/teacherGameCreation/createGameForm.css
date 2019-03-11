@@ -1,13 +1,15 @@
-.create-game-lightbox p {
-  margin: 50px 0 50px 0;
-  font-size: 1.5rem;
+.create-game-lightbox label {
+  display: block;
+  font-size: 1.2rem;
 }
 
-.create-game-lightbox #title {
+.create-game-lightbox input {
+  margin: 15px 0;
   padding: 5px;
-  width: calc(100% - 100px);
-  margin-left: 20px;
-  font-size: 1.5rem;
+  width: 100%;
+  font-size: 1.1rem;
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 5px;
 }
 
 .create-game-lightbox #title::placeholder, .create-game-lightbox #description::placeholder {
@@ -17,29 +19,72 @@
 
 .create-game-lightbox #description {
   padding: 5px;
-  width: calc(100% - 165px);
-  margin-left: 20px;
-  font-size: 1.5rem;
+  width: 100%;
+  margin: 15px 0;
+  font-size: 1.1rem;
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 5px;
 }
 
-.create-game-lightbox label[for="description"] {
-  vertical-align: top;
-}
 
-.create-game-lightbox form button {
-  font-size: 1.5rem;
+.create-game-lightbox button[type="submit"] {
+  background-color: rgb(40, 150, 100);
+  font-size: 1.2rem;
   width: 200px;
   height: 80px;
   padding: 20px;
   border-radius: 10px;
   color: white;
+  margin: 10px calc(100% - 200px) 15px 0;
+  transition: background-color 250ms linear, color 250ms linear;
 }
 
-.create-game-lightbox button[type="submit"] {
-  margin-right: 40px;
-  background-color: rgb(40, 150, 100);
+.create-game-lightbox button[type="submit"]:hover {
+  cursor: pointer;
+  background-color: white;
+  color: rgb(40, 150, 100);
+  border: 4px double rgb(40, 150, 100);
+  transition: background-color 250ms linear, color 250ms linear;
 }
 
 .create-game-lightbox button[type="reset"] {
-  background-color: rgb(150, 100, 40);
+  font-size: 1rem;
+  padding: 0;
+  color: rgb(180, 180, 180);
+  background: none;
+  text-decoration: underline;
+  border: none;
 }
+
+.create-game-lightbox button[type="reset"]:hover {
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 800px) {
+  .create-game-lightbox label {
+    display: inline-block;
+  }
+
+  .create-game-lightbox #title {
+    margin: 0 0 25px 20px;
+    font-size: 1.3rem;
+    width: calc(100% - 65px);
+  }
+
+  .create-game-lightbox #description {
+    padding: 5px;
+    width: calc(100% - 130px);
+    margin: 0 0 0 20px;
+    font-size: 1.3rem;
+  }
+
+  .create-game-lightbox label[for="description"] {
+    vertical-align: top;
+  }
+
+  .create-game-lightbox button[type="submit"] {
+    margin-top: 25px;
+  }
+}
+
+
