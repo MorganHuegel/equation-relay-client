@@ -1,12 +1,16 @@
 import React from 'react';
 
+import '../../../stylesheets/teacherProfile/teacherGameCreation/newEquationInput.css';
+
 export function NewEquationInput (props) {
   const equationValue = props.equation || '';
   const answerValue = props.answer || '';
   
   return (
-    <div className='new-equation-input'>
-      <label>Equation {props.equationNum}</label>
+    <fieldset className='new-equation-input'>
+      <legend>Question {props.equationNum}</legend>
+
+      <label htmlFor={`equation${props.equationNum}`}>Equation:</label>
       <input 
         defaultValue={equationValue}
         type='text' 
@@ -16,6 +20,7 @@ export function NewEquationInput (props) {
         className='create-equation-input'
         />
 
+      <label htmlFor={`answer${props.equationNum}`}>Answer:</label>
       <input 
         defaultValue={answerValue}
         type='number'
@@ -23,6 +28,6 @@ export function NewEquationInput (props) {
         id={`answer${props.equationNum}`}
         className='create-answer-input'
         />
-    </div>
+    </fieldset>
   )
 }

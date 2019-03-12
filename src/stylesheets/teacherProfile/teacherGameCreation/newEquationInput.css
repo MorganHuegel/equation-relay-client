@@ -1,0 +1,56 @@
+.new-equation-input {
+  margin: 30px 0;
+  padding: 5px;
+}
+
+.new-equation-input legend {
+  font-size: 1.2rem;
+}
+
+.new-equation-input label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.new-equation-input input {
+  width: calc(100% - 40px);
+  font-size: 1.1rem;
+  padding: 3px;
+  margin: 0 10px 10px 10px;
+}
+
+.new-equation-input input::placeholder {
+  color: rgb(170, 170, 170);
+  font-style: italic;
+}
+
+.new-equation-input .create-equation-input {
+  margin-right: 20px;
+}
+
+@media only screen and (min-width: 500px) {
+  .new-equation-input label {
+    display: initial;
+    margin-left: 10px;
+  }
+
+  .new-equation-input input {
+    width: calc(100% - 115px);
+  }
+
+  .new-equation-input .create-answer-input {
+    margin: 10px 10px 10px 22px;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .new-equation-input input {
+    font-size: 1.3rem;
+  }
+  .new-equation-input .create-equation-input {
+    width: 60%;
+  }
+  .new-equation-input .create-answer-input {
+    width: 15%;
+  }
+}

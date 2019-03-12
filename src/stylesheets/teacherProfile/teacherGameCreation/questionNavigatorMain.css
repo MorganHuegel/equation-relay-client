@@ -1,5 +1,6 @@
 .question-navigator-list {
   list-style: none;
+  margin-bottom: 20px;
 }
 
 .question-navigator-item {
@@ -8,7 +9,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  margin: 20px;
+  margin: 8px 20px 0 20px;
 }
 
 .question-navigator-item button {
