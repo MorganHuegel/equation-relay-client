@@ -1,0 +1,107 @@
+.create-questions-main {
+  background-color: rgb(220, 220, 220);
+  text-align: left;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.create-questions-main .error-message {
+  color: rgb(100, 0, 0);
+  font-style: italic;
+}
+
+.create-questions-main #delete-button {
+  background: none;
+  border: none;
+  width: initial;
+  display: initial;
+  margin-left: 10px;
+}
+
+.create-questions-main #delete-button:hover, .create-questions-main #delete-button:focus {
+  cursor: pointer;
+  color: rgb(80, 80, 80);
+}
+
+.create-questions-main button {
+  width: 166px;
+  display: block;
+  margin-bottom: 10px;
+  padding: 5px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+}
+
+.create-questions-main button[type='reset'] {
+  margin-right: 40px;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  -webkit-transition: border 250ms linear, background-color 200ms linear, color 200ms linear;
+  -ms-transition: border 200ms linear, background-color 200ms linear, color 200ms linear;
+  transition: border 200ms linear, background-color 200ms linear, color 200ms linear;
+}
+
+.create-questions-main button[type='reset']:hover, .create-questions-main button[type='reset']:focus {
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  -webkit-transition: border 200ms linear, background-color 200ms linear, color 200ms linear;
+  -ms-transition: border 200ms linear, background-color 200ms linear, color 200ms linear;
+  transition: border 200ms linear, background-color 200ms linear, color 200ms linear;
+}
+
+.create-questions-main button.next-question {
+  background-color: purple;
+  color: white;
+  border: 1px solid purple;  
+  -webkit-transition: border 200ms linear, background-color 200ms linear, color 200ms linear;
+  -ms-transition: border 200ms linear, background-color 200ms linear, color 200ms linear;
+  transition: border 200ms linear, background-color 200ms linear, color 200ms linear;
+}
+
+.create-questions-main button.next-question:hover, .create-questions-main button.next-question:focus {
+  cursor: pointer;
+  background-color: white;
+  color: purple;
+  border: 1px solid purple;
+  -webkit-transition: border 200ms linear, background-color 200ms linear, color 200ms linear;
+  -ms-transition: border 200ms linear, background-color 200ms linear, color 200ms linear;
+  transition: border 200ms linear, background-color 200ms linear, color 200ms linear;
+}
+
+.create-questions-main button.previous-question {
+  background-color: rgb(197, 109, 0);
+  color: white;
+  border: 1px solid white;  
+  -webkit-transition: border 200ms linear, background-color 200ms linear, color 200ms linear;
+  -ms-transition: border 200ms linear, background-color 200ms linear, color 200ms linear;
+  transition: border 200ms linear, background-color 200ms linear, color 200ms linear;
+}
+
+.create-questions-main button.previous-question:hover, .create-questions-main button.previous-question:focus {
+  cursor: pointer;
+  background-color: white;
+  color: rgb(197, 109, 0);
+  border: 1px solid rgb(197, 109, 0);
+  -webkit-transition: border 200ms linear, background-color 200ms linear, color 200ms linear;
+  -ms-transition: border 200ms linear, background-color 200ms linear, color 200ms linear;
+  transition: border 200ms linear, background-color 200ms linear, color 200ms linear;
+}
+
+@media only screen and (min-width: 500px) {
+  .create-questions-main button {
+    display: initial;
+    width: initial;
+  }
+
+  .create-questions-main button.previous-question {
+    margin-right: 20px;
+  }
+
+  .create-questions-main .float-right-container {
+    float: right;
+  }
+}

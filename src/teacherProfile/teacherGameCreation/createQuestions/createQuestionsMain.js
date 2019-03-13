@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../../../stylesheets/teacherProfile/teacherGameCreation/createQuestionsMain.css';
+
 import { NewEquationInput } from './newEquationInput';
 
 import { fetchUserData } from '../../../fetchFunctions/teachers/fetchUserData';
@@ -52,18 +54,27 @@ export class CreateQuestionsMain extends React.Component {
     }
 
     const previousButton = this.state.questionIndex === 0 ? null : 
-      <button type='button' onClick={() => this.changeQuestionSetAndSave(this.state.questionIndex - 1)}>Previous Question</button>;
+      <button type='button' className='previous-question' onClick={() => this.changeQuestionSetAndSave(this.state.questionIndex - 1)}>Previous Question</button>;
 
     return (
       <div className='create-questions-main' data-questionid={currentQuestion ? currentQuestion.id : null}>
         <QuestionNavigatorMain currentGame={this.props.currentGame} changeQuestionsNoSave={this.changeQuestionsNoSave} questionIndex={this.state.questionIndex}/>
         <h2>{this.props.currentGame.title}</h2>
-        <p>{this.state.errorMessage}</p>
-        <h3>Equation Set {this.state.questionIndex + 1} of {questionSetLength}</h3>
+        <p className='error-message'>{this.state.errorMessage}</p>
+        <h3>
+          Equation Set {this.state.questionIndex + 1} of {questionSetLength}
+          <button type='button' id='delete-button' onClick={() => console.log('Deleted')}>
+            <i className="fas fa-trash-alt"></i>
+          </button>
+        </h3>
         {equationSet}
         <button type='reset' onClick={() => this.props.setCurrentGame(null)}>Finish</button>
-        {previousButton}
-        <button type='button' onClick={() => this.changeQuestionSetAndSave(this.state.questionIndex + 1)}>Next Question</button>
+        <span className='float-right-container'>
+          {previousButton}
+          <button type='button' className='next-question' onClick={() => this.changeQuestionSetAndSave(this.state.questionIndex + 1)}>
+            {this.state.questionIndex === this.props.currentGame.questions.length - 1 ? 'Add' : 'Next'} Question
+          </button>
+        </span>
       </div>
     )
   }

@@ -1,6 +1,7 @@
 .lightbox-container {
-  position: absolute;
+  position: fixed;
   bottom: 0;
+  left: 0;
   z-index: 2;
   width: 100vw;
   height: 100vh;
@@ -12,17 +13,31 @@
   background-color: white;
   padding: 20px;
   display: inline-block;
-  width: 67vw;
-  height: 67vh;
-  margin: calc(16.5vh - 20px) 16.5vw 16.5vh calc(16.5vw - 20px);
+  width: 90vw;
+  height: 90vh;
+  margin: 5vh 5vw;
 }
 
 .create-game-lightbox h1 {
-  font-size: 3rem;
+  font-size: 1.6rem;
+  margin-bottom: 30px;
 }
+
 
 .create-game-lightbox .create-game-error {
   margin: 0;
   color: red;
   font-style: italic;
+}
+
+@media only screen and (min-width: 800px) {
+  .create-game-lightbox {
+    width: 67vw;
+    height: 67vh;
+    margin: 16.5vh 16.5vw;
+  }
+
+  .create-game-lightbox h1 {
+    font-size: 3rem;
+  }
 }

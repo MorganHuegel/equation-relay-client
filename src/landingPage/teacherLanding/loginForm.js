@@ -9,10 +9,10 @@ export function LoginForm(props){
       <label htmlFor='password'>Password: </label>
       <input type='password' name='password' id='password' onChange={e => e.target.classList.remove('error-input')}/>
 
-      <button type='submit'>Login</button>
-      <button type='button'>See demo account</button>
+      <button type='submit' id='login-button'>Login</button>
+      <button type='button' className='demo-account-button' onClick={() => props.seeDemoAccount()}>See demo account</button>
       <p className='toggle-login-register'>New user? 
-        <button type='button' onClick={e => props.toggleLoginRegister()}>Sign up!</button>
+        <button type='button' className='toggle-login-register-button' onClick={e => props.toggleLoginRegister()}>Sign up!</button>
       </p>
     </form>
   )

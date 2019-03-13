@@ -81,6 +81,19 @@ export class TeachersMain extends React.Component {
     }
   }
 
+
+  seeDemoAccount = () => {
+    if (this.state.registering) {
+      this.setState({registering: false}, this.seeDemoAccount);
+    } else {
+      document.getElementById('username').value = 'bobuser';
+      document.getElementById('password').value = 'baseball';
+      document.getElementById('login-button').click();
+    }
+
+  }
+
+
   render(){
     const errorDisplay = this.state.errorMessage ? (
       <div className='error-message'>
@@ -89,8 +102,8 @@ export class TeachersMain extends React.Component {
     ) : null;
 
     const form = this.state.registering ? 
-      <RegisterForm onSubmitRegister={this.onSubmitRegister}  toggleLoginRegister={this.toggleLoginRegister}/> : 
-      <LoginForm onSubmitLogin={this.onSubmitLogin} toggleLoginRegister={this.toggleLoginRegister}/>;
+      <RegisterForm onSubmitRegister={this.onSubmitRegister}  toggleLoginRegister={this.toggleLoginRegister} seeDemoAccount={this.seeDemoAccount}/> : 
+      <LoginForm onSubmitLogin={this.onSubmitLogin} toggleLoginRegister={this.toggleLoginRegister} seeDemoAccount={this.seeDemoAccount}/>;
 
     const loadingSpinner = this.state.fetchingData ? (
       <div>

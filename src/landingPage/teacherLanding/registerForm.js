@@ -16,9 +16,9 @@ export function RegisterForm(props){
       <input type='password' name='confirm-password' id='confirm-password' onChange={e => e.target.classList.remove('error-input')}/>
 
       <button type='submit'>Register</button>
-      <button type='button'>See demo account</button>
+      <button type='button' className='demo-account-button' onClick={() => props.seeDemoAccount()}>See demo account</button>
       <p className='toggle-login-register'>Already a user? 
-        <button type='button' onClick={e => props.toggleLoginRegister()}>Login</button>
+        <button type='button' className='toggle-login-register-button' onClick={e => props.toggleLoginRegister()}>Login</button>
       </p>
     </form>
   )
