@@ -31,10 +31,36 @@
 
 .delete-game-lightbox .confirm-delete {
   background-color: rgb(120, 50, 50);
+  -webkit-transition: color 250ms linear, background-color 250ms linear;
+  -ms-transition: color 250ms linear, background-color 250ms linear;
+  transition: color 250ms linear, background-color 250ms linear;
+}
+
+.delete-game-lightbox .confirm-delete:hover, .delete-game-lightbox .confirm-delete:focus {
+  cursor: pointer;
+  background-color: white;
+  color: rgb(120, 50, 50);
+  border: 1px solid rgb(120, 50, 50);
+  -webkit-transition: color 250ms linear, background-color 250ms linear;
+  -ms-transition: color 250ms linear, background-color 250ms linear;
+  transition: color 250ms linear, background-color 250ms linear;
 }
 
 .delete-game-lightbox .cancel-delete {
   background-color: purple;
+  -webkit-transition: color 250ms linear, background-color 250ms linear;
+  -ms-transition: color 250ms linear, background-color 250ms linear;
+  transition: color 250ms linear, background-color 250ms linear;
+}
+
+.delete-game-lightbox .cancel-delete:hover, .delete-game-lightbox .cancel-delete:focus {
+  cursor: pointer;
+  background-color: white;
+  color: purple;
+  border: 1px solid purple;
+  -webkit-transition: color 250ms linear, background-color 250ms linear;
+  -ms-transition: color 250ms linear, background-color 250ms linear;
+  transition: color 250ms linear, background-color 250ms linear;
 }
 
 @media only screen and (min-width: 480px) {
