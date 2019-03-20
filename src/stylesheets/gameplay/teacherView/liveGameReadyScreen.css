@@ -49,6 +49,7 @@
   display: inline-block;
   width: 100%;
   margin: 20px 0;
+  vertical-align: top;
 }
 
 .live-game-ready-screen .player-list {

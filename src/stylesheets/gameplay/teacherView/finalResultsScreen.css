@@ -1,0 +1,85 @@
+.final-results-screen {
+  color: white;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.final-results-screen h2 {
+  display: inline-block;
+}
+
+.final-results-screen button {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  color: rgb(220, 220, 255);
+  margin-left: 20px;
+}
+
+.final-results-screen .podium-team-list {
+  list-style: none;
+  border-top: 1px solid gray;
+  margin-top: 20px;
+  text-align: left;
+  padding-top: 20px;
+}
+
+.final-results-screen .podium-team {
+  margin-bottom: 20px;
+}
+
+
+.final-results-screen li:nth-child(1) {
+  color: rgb(255, 215, 0);
+}
+.final-results-screen li:nth-child(1) .team-place {
+  font-size: 3rem;
+}
+.final-results-screen li:nth-child(1) .team-name {
+  font-size: 2.8rem;
+  max-height: 3.8rem;
+}
+
+.final-results-screen li:nth-child(2) {
+ color: rgb(210, 210, 210);
+}
+.final-results-screen li:nth-child(2) .team-place {
+  font-size: 2.7rem;
+}
+.final-results-screen li:nth-child(2) .team-name {
+  font-size: 2.5rem;
+  max-height: 3.5rem;
+}
+
+.final-results-screen li:nth-child(3) {
+  color: rgb(190, 178.8, 57.6);
+}
+.final-results-screen li:nth-child(3) .team-place {
+  font-size: 2.5rem;
+}
+.final-results-screen li:nth-child(3) .team-name {
+  font-size: 2.3rem;
+  max-height: 3.3rem;
+}
+
+.final-results-screen .team-place {
+  float: left;
+  width: 40px;
+}
+
+.final-results-screen .team-name {
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+@media only screen and (min-width: 600px) {
+  .final-results-screen .team-name {
+    display: inline-block;
+    width: calc(100% - 285px);
+    padding-right: 20px;
+  }
+  .final-results-screen .team-points {
+    display: inline-block;
+    font-size: 2.5rem;
+  }
+}

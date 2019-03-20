@@ -1,0 +1,23 @@
+.player-final-results-screen {
+  color: white;
+}
+
+.player-final-results-screen .team-score {
+  font-size: 2.5rem;
+}
+
+.player-final-results-screen .team-place {
+  font-size: 2.5rem;
+}
+
+.player-final-results-screen.first {
+  color: rgb(255, 215, 0);
+}
+
+.player-final-results-screen.second {
+  color: rgb(210, 210, 210);
+}
+
+.player-final-results-screen.third {
+  color: rgb(190, 178.8, 57.6);
+}
