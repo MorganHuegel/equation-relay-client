@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../../stylesheets/gameplay/teacherView/liveGameScoreboard.css';
+
 import { TeamScoreItem } from './teamScoreItem';
 
 export function LiveGameScoreboard(props){
@@ -8,10 +10,10 @@ export function LiveGameScoreboard(props){
     return <TeamScoreItem team={team} index={index} gameId={props.gameSession.gameId} key={team._id}/>
   })
   return (
-    <div>
+    <div className='live-game-scoreboard'>
       <h2>Leaderboard</h2>
       <button onClick={() => props.endGame()}>End Game</button>
-      <ul>
+      <ul className='team-score-list'>
         {teamScoreList}
       </ul>
     </div>

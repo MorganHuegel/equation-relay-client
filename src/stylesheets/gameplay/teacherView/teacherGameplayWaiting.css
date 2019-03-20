@@ -1,0 +1,66 @@
+.teacher-gameplay-waiting {
+  color: white;
+}
+
+.teacher-gameplay-waiting h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.teacher-gameplay-waiting .player-list {
+  list-style: none;
+  text-align: left;
+}
+
+.teacher-gameplay-waiting .player-list .player-name {
+  font-size: 1.3rem;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.teacher-gameplay-waiting .start-button {
+  padding: 5px;
+  border-radius: 5px;
+  margin: 20px 20px 0 0;
+  font-size: 1.5rem;
+  background-color: rgb(85, 170, 88);
+  color: rgb(240, 240, 240);
+}
+
+.teacher-gameplay-waiting .start-button:hover {
+  cursor: pointer;
+  background-color: rgb(65, 150, 68);
+  color: rgb(240, 240, 240);
+}
+
+.teacher-gameplay-waiting .quit-button {
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+}
+
+.teacher-gameplay-waiting .quit-button:hover, .teacher-gameplay-waiting .quit-button:focus {
+  cursor: pointer;
+  background-color: rgb(230, 230, 230);
+}
+
+@media only screen and (min-width: 500px) {
+  .teacher-gameplay-waiting .player-list .player-name {
+    width: 50%;
+    margin: 20px 0;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  .teacher-gameplay-waiting .player-list .player-name {
+    width: 33%;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .teacher-gameplay-waiting .player-list .player-name {
+    width: 25%;
+  }
+}
