@@ -1,6 +1,8 @@
 import React from 'react';
 import Spinner from 'react-spinkit';
 
+import '../../../stylesheets/gameplay/playerView/liveGamePlaying/liveGamePlayingMain.css';
+
 import { HeaderSubmissionList } from './headerSubmissionList';
 import { DisplayQuestion } from './displayQuestion';
 import { GuessingForPointsMain } from './guessingForPointsMain';
@@ -140,7 +142,7 @@ export class LiveGamePlayingMain extends React.Component {
     }
 
     return (
-      <div>
+      <div className='live-game-playing-main'>
         <HeaderSubmissionList teamData={this.props.teamData} skipPlayer={this.skipPlayer}/>
         <DisplayQuestion 
           equation={equationToDisplay.equation} 
