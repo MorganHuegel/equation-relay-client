@@ -1,0 +1,65 @@
+.about-main {
+  text-align: left;
+  color: white;
+  max-width: calc(100vw - 100px);
+  margin: 0 auto;
+}
+
+.about-main h2 {
+  font-size: 3rem;
+  text-shadow: 1px 1px 1px black;
+  margin-bottom: 20px;
+}
+
+.about-main ol, .about-main ul {
+  list-style: none;
+}
+
+.about-main .about-step {
+  margin-bottom: 40px;
+  padding: 10px;
+  background-color: rgb(40, 110, 120);
+}
+
+.about-main .about-step h3 {
+  text-shadow: 1px 1px 1px black;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+}
+
+.about-main .screenshot-container {
+  text-align: center;
+}
+
+.about-main .screenshot {
+  width: 100%;
+  margin: 20px 0 20px 0;
+  max-width: 700px;
+  box-shadow: 2px 2px 2px rgb(200, 200, 200);
+  border: 1px solid rgb(200, 200, 200);
+}
+
+.about-main .screenshot.bottom {
+  margin-bottom: 0;
+}
+
+@media only screen and (min-width: 600px) {
+  .about-main .about-step ul {
+    padding-left: 20px;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .about-main .substep {
+    display: inline-block;
+    width: calc(49% - 5px);
+    vertical-align: top;
+  }
+  .about-main .substep.one {
+    padding-right: 30px;
+    border-right: 1px solid rgb(100, 150, 150);
+  }  
+  .about-main .substep.two {
+    padding-left: 30px;
+  }
+}
