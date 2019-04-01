@@ -50,17 +50,20 @@ export class GuessingForPointsGuess extends React.Component {
     }
 
     let treasureImages = treasureValues.map( (pointValue, index) => {
+      const contClass = (this.props.teamData.players.length === 3 && index === 2) ? 'treasure-box-container three' : 'treasure-box-container';
+      const imgClass = (this.props.teamData.players.length === 3 && index === 2) ? 'treasure-box three' : 'treasure-box';
+      console.log('IMGCLASS', imgClass, '  CONTCLASS', contClass, '   INDEX: ', index);
       return (
-        <div className='treasure-box-container'>
+        <div className={contClass} key={index} >
         <input 
           type='image' 
           id={`box${index}`} 
-          key={index} 
+          //key={index} 
           alt={`treasure box number ${index + 1}`}
           src={treasureBox} 
           data-pointvalue={pointValue}
           onClick={e => this.handleClick(e.target)}
-          className='treasure-box'
+          className={imgClass}
           />
         </div>
       )

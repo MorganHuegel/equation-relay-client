@@ -19,6 +19,9 @@
   bottom: -40px;
   left: calc(50% - 55px);
 }
+.guessing-for-points-guess .treasure-box.three:hover {
+  top: -5px;
+}
 
 .guessing-for-points-guess .treasure-box-container {
   display: inline-block;
@@ -26,7 +29,6 @@
   max-width: 100%;
   margin-bottom: 40px;
 }
-
 
 .guessing-for-points-guess .treasure-box-container:hover {
   position: relative;
@@ -51,25 +53,7 @@
     display: inline-block;
   }
 
-  /* ff --------------------------*/
   .guessing-for-points-guess {
     margin: 60px auto;
   }  
-  
-  .guessing-for-points-guess .treasure-box-container {
-    /* width: 49%; */
-    /* text-align: center; */
-    /* margin-bottom: 40px; */
-  }
-
- .guessing-for-points-guess .treasure-box:hover {
-    /* max-width: 220px; */
-    /* position: absolute; */
-    /* bottom: -40px; */
-    /* left: calc(50% - 110px); */
-  } 
-
-  .guessing-for-points-guess .treasure-box-container:hover {
-    position: relative;
-  }
 }

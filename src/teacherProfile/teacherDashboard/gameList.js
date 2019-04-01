@@ -19,6 +19,10 @@ export function GameList (props) {
       />
   });
 
+  if (gameList.length === 0) {
+    return <p style={{fontStyle: 'italic'}}>Click "Create New" to add your  first game!</p>
+  }
+
   return (
     <ul className='game-list'>
       {gameList}
