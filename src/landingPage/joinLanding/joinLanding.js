@@ -41,7 +41,6 @@ export class JoinLanding extends React.Component {
         <div id='sparkles-container'>
           <Sparkle
             color={'random'} 
-            //color={'white'} 
             count={numOfSparkles} 
             minSize={10}
             maxSize={15}
@@ -59,7 +58,7 @@ export class JoinLanding extends React.Component {
 
           <button type='submit'>Join</button>
         </form>
-        <p>
+        <p className='error-message'>
           {this.state.error}
         </p>
       </div>
