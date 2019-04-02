@@ -34,7 +34,7 @@ export class IndexLandingPage extends React.Component {
     return (
       <Router>
         <div className='index-landing-page'>
-          <Header />
+          <Header showSparkles={this.state.showSparkles}/>
           <Route exact path='/' render={props => teacherToken ? <Redirect to='/teachers'/> : <Redirect to='/join'/>}/>
           <Route exact path='/join' component={JoinLanding}/>
           <Route path='/join/:sessionCode' component={JoinMain}/>
