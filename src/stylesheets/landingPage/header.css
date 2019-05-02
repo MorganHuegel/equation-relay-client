@@ -59,6 +59,25 @@
   transition: border-bottom 250ms linear, background-color 250ms linear;
 }
 
+/* ----- Styling for slide-up and slide-down of header nav-list ----- */
+.landing-page-header .nav-list li.slideup, 
+.landing-page-header .nav-list li,
+.landing-page-header .nav-list.slideup,
+.landing-page-header .nav-list {
+  max-height: 0;
+  overflow-y: hidden;
+  -webkit-transition: max-height 1.5s ease-in-out;
+  -moz-transition: max-height 1.5s ease-in-out;
+  -o-transition: max-height 1.5s ease-in-out;
+  transition: max-height 1.5s ease-in-out;
+}
+.landing-page-header .nav-list li,
+.landing-page-header .nav-list {
+  overflow-y: initial;
+  max-height: 100px;
+}
+
+
 
 @media only screen and (min-width: 600px) {
   .landing-page-header ul {

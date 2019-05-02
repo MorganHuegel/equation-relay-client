@@ -7,6 +7,7 @@ import { PlayerJoinedAndWaiting } from './playerJoinedAndWaiting';
 import { LiveGameReadyScreen } from './liveGameReadyScreen';
 import { LiveGamePlayingMain } from './liveGamePlaying/liveGamePlayingMain';
 import { FinalResultsScreen } from './finalResultsScreen';
+import { revealHeader } from '../../landingPage/header';
 
 import { 
   initialConnect, 
@@ -36,6 +37,17 @@ export class JoinMain extends React.Component {
     if (this.socket) {
       this.socket.disconnect();
     }
+  }
+
+  clearGameSession = () => {
+    revealHeader();
+
+    this.setState({
+      currentUser: null,
+      currentTeam: null,
+      gameSession: null,
+      errorMessage: null
+    });
   }
 
 
@@ -71,7 +83,7 @@ export class JoinMain extends React.Component {
     } else if (!this.state.gameSession.startedGame) {
       return <LiveGameReadyScreen currentTeam={this.state.currentTeam}/>
     } else if (this.state.gameSession.endedGame) {
-      return <FinalResultsScreen gameSession={this.state.gameSession} currentTeam={this.state.currentTeam}/>
+      return <FinalResultsScreen gameSession={this.state.gameSession} currentTeam={this.state.currentTeam} clearGameSession={this.clearGameSession}/>
     } else {
       return <LiveGamePlayingMain teamData={this.state.currentTeam} gameSessionData={this.state.gameSession} currentUser={this.state.currentUser} socket={this.socket}/>
     }

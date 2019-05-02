@@ -21,3 +21,17 @@
 .player-final-results-screen.third {
   color: rgb(190, 178.8, 57.6);
 }
+
+.player-final-results-screen .new-game-button {
+  font-size: 1rem;
+  margin-top: 20px;
+  border: none;
+  background: none;
+  color: rgb(167, 235, 250);
+  text-decoration: underline double;
+}
+
+.player-final-results-screen .new-game-button:hover, .player-final-results-screen .new-game-button:focus {
+  cursor: pointer;
+  color: rgb(197, 255, 255);
+}

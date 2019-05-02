@@ -28,6 +28,7 @@ export function FinalResultsScreen (props) {
       <h3 className='team-name'>{currentTeam.teamName}</h3>
       <p className='team-score'>Final Score: {currentTeam.points}</p>
       <p className='team-place'>Final Place: {finalPlace + 1}</p>
+      <button className='new-game-button' onClick={() => props.clearGameSession()}>New Game</button>
     </div>
   )
 }
