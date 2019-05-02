@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 import '../../stylesheets/gameplay/playerView/joinMain.css';
 
@@ -28,7 +29,8 @@ export class JoinMain extends React.Component {
       currentUser: null,
       currentTeam: null,
       gameSession: null,
-      errorMessage: null
+      errorMessage: null,
+      newGame: false
     }
     this.socket = null;
   }
@@ -46,7 +48,8 @@ export class JoinMain extends React.Component {
       currentUser: null,
       currentTeam: null,
       gameSession: null,
-      errorMessage: null
+      errorMessage: null,
+      newGame: true
     });
   }
 
@@ -76,7 +79,9 @@ export class JoinMain extends React.Component {
   }
 
   render(){
-    if (!this.state.gameSession) {
+    if (this.state.newGame) {
+      return <Redirect to='/join'/>
+    } else if (!this.state.gameSession) {
       return <EnterUsername sessionCode={this.props.match.params.sessionCode} onUsernameSubmit={this.onUsernameSubmit} errorMessage={this.state.errorMessage}/>
     } else if (!this.state.gameSession.teamList || this.state.gameSession.teamList.length === 0) {
       return <PlayerJoinedAndWaiting handle={this.state.currentUser.handle}/>
