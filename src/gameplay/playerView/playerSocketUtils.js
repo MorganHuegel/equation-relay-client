@@ -28,6 +28,7 @@ export function player_OnPlayerJoin (gameSessionData, username, component) {
 
 
 export function player_ShuffleTeams (gameSessionData, component) {
+  if (!component.state.currentUser) return component.setState({errorMessage: 'Gotta be quicker than that!  You didn\'t join in time.'})
   //UPDATE GAMESESSION AND CURRENT TEAM IN STATE
   const currentTeam = gameSessionData.teamList.find(team => {
     return team.players.find(player => player.handle === component.state.currentUser.handle);
