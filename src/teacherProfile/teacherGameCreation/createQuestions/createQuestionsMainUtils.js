@@ -6,6 +6,7 @@ import { createQuestionData } from '../../../fetchFunctions/teachers/createQuest
 export function changeQuestionSetAndSave (questionIndex) {
   try {
     const questionObject = validateCreateQuestions();
+    console.log('QUESTION OBJECT: ',questionObject)
     questionObject.gameId = this.props.currentGame.id;
     questionObject.setNumber = this.state.questionIndex + 1;
     const questionId = document.getElementsByClassName('create-questions-main')[0].dataset.questionid;
