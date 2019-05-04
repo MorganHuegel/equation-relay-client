@@ -24,7 +24,6 @@ export function NewEquationInput (props) {
       <input 
         defaultValue={answerValue}
         type='number'
-        min='-10'
         name={`answer${props.equationNum}`} 
         id={`answer${props.equationNum}`}
         className='create-answer-input'
