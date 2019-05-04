@@ -5,7 +5,8 @@
 .guessing-for-points-before ul {
   text-align: left;
   list-style: none;
-  margin-bottom: 30px;
+  margin: 0 auto 30px auto;
+  max-width: 1000px;
 }
 
 .guessing-for-points-before li.correct {

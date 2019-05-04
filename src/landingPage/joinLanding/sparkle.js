@@ -305,13 +305,3 @@ Sparkle.defaultProps = {
   flickerSpeed: 'normal'
 }
 
-// Features that would be good to add:
-// - Option to fade in new sparkles
-// - Sparkle movement
-//    - "Wandering" movement, as in https://github.com/simeydotme/jQuery-canvas-sparkles
-//    - Function-based movement likelihood (e.g. gravity-esque behavior)
-//    - Recreate sparkles when they leave the canvas
-// - Larger-sized sparkles that still look good (the existing
-//   sprites get blurry); possibly use drawn canvas images
-//   instead of sprites
-//export default Sparkle

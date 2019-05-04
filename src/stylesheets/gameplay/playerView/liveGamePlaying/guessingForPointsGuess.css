@@ -20,7 +20,9 @@
   left: calc(50% - 55px);
 }
 .guessing-for-points-guess .treasure-box.three:hover {
-  top: -5px;
+  position: relative;
+  left: 0;
+  top: 0;
 }
 
 .guessing-for-points-guess .treasure-box-container {

@@ -2,7 +2,13 @@ import React from 'react';
 
 import '../../stylesheets/gameplay/playerView/playerJoinedAndWaiting.css';
 
+import { hideHeader } from '../../landingPage/header';
+
 export class PlayerJoinedAndWaiting extends React.Component {
+  componentWillMount(){
+    hideHeader();
+  }
+
   componentWillUnmount () {
     //Get rid of sparkles
     document.getElementById('sparkles-container').style.display = 'none';

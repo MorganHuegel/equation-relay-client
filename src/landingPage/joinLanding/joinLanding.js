@@ -14,6 +14,10 @@ export class JoinLanding extends React.Component {
     }
   }
 
+  componentDidMount(){
+    document.getElementById('sparkles-container').style.display = 'initial';
+  }
+
   onSubmit = (e) => {
     e.preventDefault();
     const joinCode = document.getElementById('join-code').value;

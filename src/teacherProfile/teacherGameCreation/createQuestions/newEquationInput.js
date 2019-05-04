@@ -3,8 +3,8 @@ import React from 'react';
 import '../../../stylesheets/teacherProfile/teacherGameCreation/newEquationInput.css';
 
 export function NewEquationInput (props) {
-  const equationValue = props.equation || '';
-  const answerValue = props.answer || '';
+  const equationValue = (props.equation || props.equation === 0) ? props.equation : '';
+  const answerValue = (props.answer || props.answer === 0) ? props.answer : '';
   
   return (
     <fieldset className='new-equation-input'>

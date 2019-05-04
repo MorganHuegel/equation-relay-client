@@ -17,7 +17,7 @@ export function validateCreateQuestions () {
       throw new Error('Must have an answer for each equation. Check answer for equation number ' + (index + 1));
     }
 
-    if (value.match(/\D/)) {
+    if (value.match(/[^\d-]/)) {
       throw new Error('Answers must be integers only. Check answer for equation number ' + (index + 1));
     }
   })

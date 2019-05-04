@@ -28,7 +28,7 @@ export function GuessingForPointsBefore (props) {
 
   return (
     <div className='guessing-for-points-before'>
-      <ul>
+      <ul className='team-member-correctness'>
         {guessHeader}
       </ul>
       <p>Your equation was: <span className='answer'>{props.equationToDisplay.equation}</span></p>

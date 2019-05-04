@@ -29,7 +29,7 @@ export function Header(){
     <header className='landing-page-header'>
       <h1><span>Equation</span><span>Relay</span></h1>
 
-      <ul>
+      <ul className='nav-list'>
         <li>
           <NavLink to="/join" activeClassName='selected-route'>Join</NavLink>
         </li>
@@ -45,4 +45,26 @@ export function Header(){
 
     </header>
   )
+}
+
+export function hideHeader () {
+    //disable header links
+    let navList = document.getElementsByClassName('nav-list')[0];
+    [...navList.children].forEach(li => {
+      let link = li.firstElementChild;
+      li.classList.add('slideup');
+      setTimeout(() => link.style.display = 'none', 1500)
+    })
+    navList.classList.add('slideup');
+}
+
+export function revealHeader () {
+  //RE-INSTATE NAV BAR
+  let navList = document.getElementsByClassName('nav-list')[0];
+  [...navList.children].forEach(li => {
+    let link = li.firstElementChild;
+    li.classList.remove('slideup');
+    setTimeout(() => link.style.display = 'inherit', 500)
+  })
+  navList.classList.remove('slideup');
 }

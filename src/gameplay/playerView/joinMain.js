@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 import '../../stylesheets/gameplay/playerView/joinMain.css';
 
@@ -7,6 +8,7 @@ import { PlayerJoinedAndWaiting } from './playerJoinedAndWaiting';
 import { LiveGameReadyScreen } from './liveGameReadyScreen';
 import { LiveGamePlayingMain } from './liveGamePlaying/liveGamePlayingMain';
 import { FinalResultsScreen } from './finalResultsScreen';
+import { revealHeader } from '../../landingPage/header';
 
 import { 
   initialConnect, 
@@ -27,7 +29,8 @@ export class JoinMain extends React.Component {
       currentUser: null,
       currentTeam: null,
       gameSession: null,
-      errorMessage: null
+      errorMessage: null,
+      newGame: false
     }
     this.socket = null;
   }
@@ -38,20 +41,42 @@ export class JoinMain extends React.Component {
     }
   }
 
+  clearGameSession = () => {
+    revealHeader();
+
+    this.setState({
+      currentUser: null,
+      currentTeam: null,
+      gameSession: null,
+      errorMessage: null,
+      newGame: true
+    });
+  }
+
 
   onUsernameSubmit = event => {
     event.preventDefault();
     const username = document.getElementById('enter-name').value;
-    if (!username || (username.trim() !== username)){
-      console.log('USERNAME ERROR HANDLING GOES HERE');
-      return;
-    }
+    if (!username) return this.setState({errorMessage: 'Enter a username to join.'})
+    else if (username.trim() !== username) return this.setState({errorMessage: 'Make sure there are no whitespaces in your name.'})
+    else if (username.length > 20) return this.setState({errorMessage: 'Whoa! Be reasonable!  Enter a username that is shorter than 20 letters.'})
 
     const socket = initialConnect(this.props.match.params.sessionCode);
     this.socket = socket;
     socket.on('playerJoin', (gameSessionData) => player_OnPlayerJoin(gameSessionData, username, this));
-    socket.on('uniqueUsernameError', (errMessage) => this.setState({errorMessage: errMessage}));
     socket.emit('playerJoin', username)
+    socket.on('uniqueUsernameError', (errorMessage) => {
+      this.socket.disconnect();
+      this.setState({errorMessage})
+    })
+    socket.on('alreadyBegunError', (errorMessage) => {
+      this.socket.disconnect();
+      this.setState({errorMessage});
+    })
+    socket.on('noSessionExists', (errorMessage) => {
+      this.socket.disconnect();
+      this.setState({errorMessage});
+    })
     socket.on('shuffleTeams', (gameSessionData) => player_ShuffleTeams(gameSessionData, this));
     socket.on('startGame', (gameSessionData) => player_StartGame(gameSessionData, this));
     socket.on('nextQuestion', (gameSessionData) => player_NextQuestion(gameSessionData, this));
@@ -64,14 +89,16 @@ export class JoinMain extends React.Component {
   }
 
   render(){
-    if (!this.state.gameSession) {
+    if (this.state.newGame) {
+      return <Redirect to='/join'/>
+    } else if (!this.state.gameSession) {
       return <EnterUsername sessionCode={this.props.match.params.sessionCode} onUsernameSubmit={this.onUsernameSubmit} errorMessage={this.state.errorMessage}/>
     } else if (!this.state.gameSession.teamList || this.state.gameSession.teamList.length === 0) {
       return <PlayerJoinedAndWaiting handle={this.state.currentUser.handle}/>
     } else if (!this.state.gameSession.startedGame) {
       return <LiveGameReadyScreen currentTeam={this.state.currentTeam}/>
     } else if (this.state.gameSession.endedGame) {
-      return <FinalResultsScreen gameSession={this.state.gameSession} currentTeam={this.state.currentTeam}/>
+      return <FinalResultsScreen gameSession={this.state.gameSession} currentTeam={this.state.currentTeam} clearGameSession={this.clearGameSession}/>
     } else {
       return <LiveGamePlayingMain teamData={this.state.currentTeam} gameSessionData={this.state.gameSession} currentUser={this.state.currentUser} socket={this.socket}/>
     }
