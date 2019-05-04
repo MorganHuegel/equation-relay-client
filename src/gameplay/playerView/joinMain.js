@@ -35,11 +35,24 @@ export class JoinMain extends React.Component {
     this.socket = null;
   }
 
+  componentDidMount(){
+    window.addEventListener('popstate', this.disableBackButtonEvent)
+  }
+
   componentWillUnmount(){
+    window.removeEventListener('popstate', this.disableBackButtonEvent);
     if (this.socket) {
       this.socket.disconnect();
     }
   }
+
+
+  disableBackButtonEvent = (e) => {
+    e.preventDefault();
+    window.history.pushState(null, null, '/');
+    alert(`${this.state.currentUser.handle}, don't hit the Back Button. It would remove you from the game.`);
+  }
+
 
   clearGameSession = () => {
     revealHeader();
