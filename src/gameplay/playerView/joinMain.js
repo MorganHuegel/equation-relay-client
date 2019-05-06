@@ -36,34 +36,63 @@ export class JoinMain extends React.Component {
   }
 
   componentDidMount(){
+    if (sessionStorage.getItem('redirectToJoin')) {
+      return this.redirectToJoinLanding();
+    }
+    if (!window.location.href.endsWith('#')) {
+      window.history.pushState(null, null, window.location.href + '#')
+    }
     window.addEventListener('popstate', this.disableBackButtonEvent)
+    window.addEventListener('beforeunload', this.windowRefreshWarning)
+    window.addEventListener('unload', this.windowUnloadEvent)
   }
 
   componentWillUnmount(){
     window.removeEventListener('popstate', this.disableBackButtonEvent);
+    window.removeEventListener('beforeunload', this.windowRefreshWarning);
+    window.removeEventListener('unload', this.windowUnloadEvent);
+
+    // PULL PLAYER FROM GAME HERE, THEN DISCONNECT AFTER SUCCESSFULLY REMOVED
     if (this.socket) {
       this.socket.disconnect();
     }
   }
 
+  windowUnloadEvent = (event) => {
+    event.preventDefault();
+    sessionStorage.setItem('redirectToJoin', true)
+  }
 
-  disableBackButtonEvent = (e) => {
-    e.preventDefault();
-    window.history.pushState(null, null, '/');
-    alert(`${this.state.currentUser.handle}, don't hit the Back Button. It would remove you from the game.`);
+  windowRefreshWarning = (event) => {
+    event.preventDefault();
+    event.returnValue = 'This will exit you from the game. Continue?'
+    return event.returnValue;
   }
 
 
-  clearGameSession = () => {
-    revealHeader();
+  disableBackButtonEvent = (event) => {
+    let confirmBackButton = window.confirm(`This will remove you from the game.  Continue anyway?`);
+    if (confirmBackButton) {
+      this.redirectToJoinLanding();
+    } else {
+      window.history.pushState(null, null, window.location.href + '#')
+    }
+  }
 
+  redirectToJoinLanding = () => {
     this.setState({
       currentUser: null,
       currentTeam: null,
       gameSession: null,
       errorMessage: null,
       newGame: true
-    });
+    }, () => sessionStorage.getItem('redirectToJoin') ? sessionStorage.clear() : null)
+  }
+
+
+  clearGameSession = () => {
+    revealHeader();
+    this.redirectToJoinLanding();
   }
 
 

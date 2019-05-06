@@ -30,7 +30,6 @@ export class IndexLandingPage extends React.Component {
 
   render(){
     const teacherToken = localStorage.getItem('authToken');
-
     return (
       <Router>
         <div className='index-landing-page'>
