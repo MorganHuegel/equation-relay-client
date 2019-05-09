@@ -17,7 +17,8 @@ export class LiveGamePlayingMain extends React.Component {
     this.state = {
       currentQuestion: null,
       pointDifference: null,
-      finished: false
+      finished: false,
+      errorMessage: null
     }
   }
 
@@ -35,7 +36,7 @@ export class LiveGamePlayingMain extends React.Component {
     const questionIndex = this.props.teamData.currentQuestion - 1;
     return fetchQuestion(gameId, questionIndex)
       .then(questionData => {
-        this.setState({currentQuestion: questionData});
+        this.setState({currentQuestion: questionData, errorMessage: null});
       })
       .catch(errMessage => {
         console.log('ERROR HANDLE HERE, COMPONENT DID MOUNT', errMessage);
@@ -52,12 +53,14 @@ export class LiveGamePlayingMain extends React.Component {
           if (questionData) {
             this.setState({
               currentQuestion: questionData,
-              pointDifference: null
+              pointDifference: null,
+              errorMessage: null
             });
           } else {
             console.log('Out of questions!')
             this.setState({
-              finished: true
+              finished: true,
+              errorMessage: null
             })
           }
         })
@@ -89,16 +92,21 @@ export class LiveGamePlayingMain extends React.Component {
 
   checkAnswer = () => {
     const submittedAnswer = document.getElementById('group-solution').value;
+    if (!submittedAnswer || isNaN(Number(submittedAnswer))) {
+      return this.setState({errorMessage: 'Your answer must be a number.'})
+    }
     let correctAnswer = checkAnswer(this, submittedAnswer);
     if (correctAnswer) {
       this.props.socket.emit('correctAnswer', {
         teamId: this.props.teamData._id,
-        playerId: this.props.currentUser._id
+        playerId: this.props.currentUser._id,
+        errorMessage: null
       })
     } else {
       this.props.socket.emit('wrongAnswer', {
         teamId: this.props.teamData._id, 
-        playerId: this.props.currentUser._id
+        playerId: this.props.currentUser._id,
+        errorMessage: null
       })
     }
   }
@@ -149,6 +157,7 @@ export class LiveGamePlayingMain extends React.Component {
           numOfTeammates={this.props.teamData.players.length} 
           checkAnswer={this.checkAnswer}
           currentUser={this.props.currentUser}
+          errorMessage={this.state.errorMessage}
           />
       </div>
     )
