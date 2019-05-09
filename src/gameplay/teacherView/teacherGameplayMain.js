@@ -27,10 +27,40 @@ export class TeacherGameplayMain extends React.Component {
     teacherGameplayMainWillMount(this);
   }
 
-  componentWillUnmount(){
-    this.socket.emit('endGame');
-    this.socket.disconnect();
+  componentDidMount(){
+    if (!window.location.href.endsWith('#')) {
+      window.history.pushState(null, null, window.location.href + '#')
+    }
+    window.addEventListener('popstate', this.disableBackButtonEvent)
+    window.addEventListener('beforeunload', this.windowRefreshWarning)
   }
+
+  componentWillUnmount(){
+    window.removeEventListener('popstate', this.disableBackButtonEvent);
+    window.removeEventListener('beforeunload', this.windowRefreshWarning);
+    if (this.socket && this.socket.connected) {
+      this.socket.emit('endGame');
+      this.socket.disconnect();
+    }
+  }
+
+  disableBackButtonEvent = (event) => {
+    let confirmBackButton = window.confirm(`This will close the game.  Continue anyway?`);
+    if (confirmBackButton) {
+      this.props.closeLiveGame()
+    } else {
+      window.history.pushState(null, null, window.location.href + '#')
+    }
+  }
+
+  windowRefreshWarning = (event) => {
+    event.preventDefault();
+    event.returnValue = 'This will exit you from the game. Continue?'
+    return event.returnValue;
+  }
+
+
+
 
   shuffleTeams = () => {
     teacher_ShuffleTeams(this.socket, this);
