@@ -19,7 +19,8 @@ import {
   player_NextQuestion,
   player_TeamScored,
   player_HandleAnswer,
-  player_AssignGuesser
+  player_AssignGuesser,
+  player_Removed
 } from './playerSocketUtils';
 
 export class JoinMain extends React.Component {
@@ -51,9 +52,7 @@ export class JoinMain extends React.Component {
     window.removeEventListener('popstate', this.disableBackButtonEvent);
     window.removeEventListener('beforeunload', this.windowRefreshWarning);
     window.removeEventListener('unload', this.windowUnloadEvent);
-
-    // PULL PLAYER FROM GAME HERE, THEN DISCONNECT AFTER SUCCESSFULLY REMOVED
-    if (this.socket) {
+    if (this.socket && this.socket.connected) {
       this.socket.disconnect();
     }
   }
@@ -61,6 +60,7 @@ export class JoinMain extends React.Component {
   windowUnloadEvent = (event) => {
     event.preventDefault();
     sessionStorage.setItem('redirectToJoin', true)
+    this.socket.emit('removePlayer', this.state.currentUser._id);
   }
 
   windowRefreshWarning = (event) => {
@@ -73,20 +73,27 @@ export class JoinMain extends React.Component {
   disableBackButtonEvent = (event) => {
     let confirmBackButton = window.confirm(`This will remove you from the game.  Continue anyway?`);
     if (confirmBackButton) {
-      this.redirectToJoinLanding();
+      if (this.socket) {
+        this.socket.emit('removePlayer', this.state.currentUser._id);
+      } else {
+        this.redirectToJoinLanding();
+      }
     } else {
       window.history.pushState(null, null, window.location.href + '#')
     }
   }
 
-  redirectToJoinLanding = () => {
+  redirectToJoinLanding = (closeSocket = false) => {
     this.setState({
       currentUser: null,
       currentTeam: null,
       gameSession: null,
       errorMessage: null,
       newGame: true
-    }, () => sessionStorage.getItem('redirectToJoin') ? sessionStorage.clear() : null)
+    }, () => {
+      if (closeSocket) this.socket.disconnect();
+      return sessionStorage.getItem('redirectToJoin') ? sessionStorage.clear() : null
+    })
   }
 
 
@@ -109,14 +116,17 @@ export class JoinMain extends React.Component {
     socket.emit('playerJoin', username)
     socket.on('uniqueUsernameError', (errorMessage) => {
       this.socket.disconnect();
+      this.socket = null;
       this.setState({errorMessage})
     })
     socket.on('alreadyBegunError', (errorMessage) => {
       this.socket.disconnect();
+      this.socket = null;
       this.setState({errorMessage});
     })
     socket.on('noSessionExists', (errorMessage) => {
       this.socket.disconnect();
+      this.socket = null;
       this.setState({errorMessage});
     })
     socket.on('shuffleTeams', (gameSessionData) => player_ShuffleTeams(gameSessionData, this));
@@ -127,7 +137,8 @@ export class JoinMain extends React.Component {
     socket.on('assignGuesser', (gameSessionData) => player_AssignGuesser(gameSessionData, this));
     socket.on('teamScored', (gameSessionData) => player_TeamScored(gameSessionData, this));
     socket.on('endGame', (deletedGameSessionData) => player_EndGame(deletedGameSessionData, this));
-    socket.on('error', (errorMessage) => this.setState({errorMessage}))
+    socket.on('error', (errorMessage) => this.setState({errorMessage}));
+    socket.on('playerRemoved', (gameSessionData) => player_Removed(gameSessionData, this));
   }
 
   render(){

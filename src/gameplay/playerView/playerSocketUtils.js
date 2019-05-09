@@ -139,3 +139,16 @@ export function player_AssignGuesser (gameSessionData, component) {
     })
   }
 }
+
+
+export function player_Removed (gameSessionData, component) {
+  if (!gameSessionData.playerList.find(player => {
+    return player._id.toString() === component.state.currentUser._id
+  })) {
+    component.redirectToJoinLanding(true);
+  } else {
+    component.setState({
+      gameSession: gameSessionData
+    })
+  }
+}

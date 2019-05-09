@@ -17,6 +17,12 @@ export function teacherGameplayMainWillMount (component) {
     })
     component.setState({gameSession: newGameState})
   });
+  socket.on('playerRemoved', (updatedGameSession) => {
+    const newGameState = Object.assign({}, updatedGameSession, {
+      playerList: [...updatedGameSession.playerList]
+    })
+    component.setState({gameSession: newGameState})
+  })
   socket.on('error', (errMessage) => console.log(errMessage))
 }
 
