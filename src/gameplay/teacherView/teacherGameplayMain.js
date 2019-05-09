@@ -59,8 +59,10 @@ export class TeacherGameplayMain extends React.Component {
     return event.returnValue;
   }
 
-
-
+  deletePlayer = (event) => {
+    let playerId = event.target.dataset.playerid;
+    this.socket.emit('removePlayer', playerId);
+  }
 
   shuffleTeams = () => {
     teacher_ShuffleTeams(this.socket, this);
@@ -76,7 +78,7 @@ export class TeacherGameplayMain extends React.Component {
 
   render(){
     if (this.state.gameSession.teamList.length <= 0) {
-      return <TeacherGameplayWaiting gameSession={this.state.gameSession} shuffleTeams={this.shuffleTeams} closeLiveGame={this.props.closeLiveGame} />
+      return <TeacherGameplayWaiting gameSession={this.state.gameSession} shuffleTeams={this.shuffleTeams} closeLiveGame={this.props.closeLiveGame} deletePlayer={this.deletePlayer}/>
     }
     else if (!this.state.gameSession.startedGame) {
       return <LiveGameReadyScreen 

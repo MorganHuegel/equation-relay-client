@@ -4,7 +4,13 @@ import '../../stylesheets/gameplay/teacherView/teacherGameplayWaiting.css';
 
 export function TeacherGameplayWaiting(props){
   const playersJoined = props.gameSession.playerList.map(player => {
-    return <li key={player._id} className='player-name'>{player.handle}</li>
+    return <li 
+      key={player._id} 
+      className='player-name'>
+        <p className='player-name-text' onClick={event => props.deletePlayer(event)} data-playerid={player._id}>
+          {player.handle}
+        </p>
+      </li>
   })
   return (
     <div className='teacher-gameplay-waiting'>

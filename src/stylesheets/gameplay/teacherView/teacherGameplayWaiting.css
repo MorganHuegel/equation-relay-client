@@ -27,6 +27,14 @@
   text-align: center;
   margin: 10px 0;
 }
+.teacher-gameplay-waiting .player-list .player-name .player-name-text {
+  display: inline;
+}
+.teacher-gameplay-waiting .player-list .player-name .player-name-text:hover {
+  cursor: not-allowed;
+  text-decoration: line-through;
+  font-style: italic;
+}
 
 .teacher-gameplay-waiting .start-button {
   padding: 5px;
