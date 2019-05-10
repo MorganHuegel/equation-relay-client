@@ -1,14 +1,54 @@
 # Equation Relay
 
-## Sai, to run this app locally you'll need to do these things (probably)
 
-1. Clone the [Server-side repo](https://github.com/MorganHuegel/equation-relay-server)
-2. `CD` into the repo
-3. Run the command `npm install` If you don't have Node/npm installed, go [here](https://www.npmjs.com/get-npm)
-4. Run the command `node server.js`
+### Deployment
 
-5. `CD` into new location and clone this repo
-6. `CD` into this repo
-7. Install [yarn](https://yarnpkg.com/lang/en/docs/install/#mac-stable) (it's basically the same as npm, but cooler)
-8. Run `yarn install`
-9. Run `yarn start`
+[Live App: https://www.equationrelay.com/](https://www.equationrelay.com/)
+
+[Backend Repo/API](https://github.com/MorganHuegel/equation-relay-server)
+
+
+### Summary
+
+#### *Make Math collaborative!*
+
+Teachers and students alike are tired of boring old worksheets.  Equation Relay is the solution to this problem!  Equation Relay is a web app used for practicing Math skills in a classroom setting.  Teachers create games based on their current curriculum (*browsing premade Public games is a feature coming soon*).  Then, to play the game, the teacher displays a Join Code to their students.  Using the simple interface, the classroom of students is randomly split into teams of 3-4, and the teams solve math problems to earn points.  Each individual team member is given a different problem to solve, and team-members must add all 4 of their answers together in order to be correct.  If they are wrong, they must collaborate to figure out which group member is incorrect.  Live results are scoreboarded on the teacher's screen for quick monitoring and fun competition.
+
+### Tech-Stack
+
+* Front-end
+    * React
+    * Web Sockets (socket.io)
+    * react-router-dom, react-spinkit, react-sparkles
+    * CSS Transitions
+    * Mobile-First, Responsive Design
+
+* Back-end
+    * Node/Express
+    * GraphQL
+    * Web Sockets (socket.io)
+    * MongoDB
+    * password encryption (BCrypt.js)
+    * JSON Web Tokens
+    
+### Screenshots
+##### Join Code...
+![Join Code](./src/images/screenshots/screenshot-two-screens-join.png)
+***
+##### As Students Join...
+![As Students Join](./src/images/screenshots/screenshot-two-screens-waiting.png)
+***
+##### Randomized Teams...
+![Randomized Teams](./src/images/screenshots/screenshot-two-screens-teams.png)
+***
+##### Gameplay...
+![Gameplay Screen](./src/images/screenshots/screenshot-two-screens-games.png)
+***
+##### Final Results...
+![Final Results Screen](./src/images/screenshots/screenshot-two-screens-final.png)
+***
+##### Teacher Dashboard...
+![Teacher Dashboard](./src/images/screenshots/screenshot-teacher-dashboard.png)
+***
+##### Create Question Interface...
+![Create Question Interface](./src/images/screenshots/screenshot-create-questions.png)
