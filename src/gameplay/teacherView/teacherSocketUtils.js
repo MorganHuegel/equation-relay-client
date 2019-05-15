@@ -2,7 +2,7 @@ import { SERVER_BASE_URL } from '../../config';
 import io from 'socket.io-client';
 
 
-export function teacherGameplayMainWillMount (component) {
+export function teacherSetupSocket (component) {
   const socket = io(SERVER_BASE_URL, {
     forceNew: true,
     query: {

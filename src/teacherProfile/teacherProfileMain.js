@@ -137,7 +137,7 @@ export class TeacherProfileMain extends React.Component {
     }
 
     if (this.state.playing) {
-      return <TeacherGameplayMain sessionCode={this.state.playing} closeLiveGame={this.closeLiveGame}/>
+      return <TeacherGameplayMain sessionCode={this.state.playing} closeLiveGame={this.closeLiveGame} clickPlayLive={this.clickPlayLive}/>
     }
 
     const createGameLightbox = this.state.creating ?

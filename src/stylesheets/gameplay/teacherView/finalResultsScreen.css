@@ -16,6 +16,11 @@
   margin-left: 20px;
 }
 
+.final-results-screen .restart-button:hover, .final-results-screen .restart-button:focus {
+  cursor: pointer;
+  color: rgb(240, 240, 255);
+}
+
 .final-results-screen .podium-team-list {
   list-style: none;
   border-top: 1px solid gray;

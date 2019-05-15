@@ -18,7 +18,7 @@ export function FinalResultsScreen (props) {
   return (
     <div className='final-results-screen'>
       <h2>Congratulations!</h2>
-      <button type='button' onClick={() => console.log('Restart clicked')}>Restart Game</button>
+      <button type='button' onClick={() => props.clickPlayLive(props.gameSession.gameId)} className='restart-button'>Restart Game</button>
       <ul className='podium-team-list'>
         {podium}
       </ul>

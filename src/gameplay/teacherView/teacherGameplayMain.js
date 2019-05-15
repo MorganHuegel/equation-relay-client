@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { teacherGameplayMainWillMount, teacher_ShuffleTeams, teacher_startGame, teacher_EndGame } from './teacherSocketUtils';
+import { teacherSetupSocket, teacher_ShuffleTeams, teacher_startGame, teacher_EndGame } from './teacherSocketUtils';
 import { TeacherGameplayWaiting } from './teacherGameplayWaiting';
 import { LiveGameReadyScreen } from './liveGameReadyScreen';
 import { LiveGameScoreboard } from './liveGameScoreboard';
@@ -24,7 +24,23 @@ export class TeacherGameplayMain extends React.Component {
   }
 
   componentWillMount(){
-    teacherGameplayMainWillMount(this);
+    teacherSetupSocket(this);
+  }
+
+  componentDidUpdate(prevProps){
+    if (prevProps.sessionCode !== this.props.sessionCode) {
+      this.setState({
+        gameSession: {
+          leader: null,
+          sessionCode: this.props.sessionCode,
+          gameId: null,
+          playerList: [],
+          teamList: [],
+          startedGame: false,
+          endedGame: false
+        }
+      }, teacherSetupSocket(this));
+    }
   }
 
   componentDidMount(){
@@ -89,7 +105,7 @@ export class TeacherGameplayMain extends React.Component {
     } else if (!this.state.gameSession.endedGame) {
       return <LiveGameScoreboard socket={this.socket} gameSession={this.state.gameSession} endGame={this.endGame}/>
     } else {
-      return <FinalResultsScreen gameSession={this.state.gameSession}/>
+      return <FinalResultsScreen gameSession={this.state.gameSession} clickPlayLive={this.props.clickPlayLive}/>
     }
   }
 }
