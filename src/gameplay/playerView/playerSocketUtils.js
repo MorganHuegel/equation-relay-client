@@ -142,13 +142,44 @@ export function player_AssignGuesser (gameSessionData, component) {
 
 
 export function player_Removed (gameSessionData, component) {
+  // If it was the current player that was removed
   if (!gameSessionData.playerList.find(player => {
     return player._id.toString() === component.state.currentUser._id
   })) {
-    component.redirectToJoinLanding(true);
-  } else {
-    component.setState({
-      gameSession: gameSessionData
+    return component.redirectToJoinLanding(true);
+  }
+
+  // If it was the current player's teammate that was removed
+  const playerTeam = gameSessionData.teamList.find(team => team._id.toString() === component.state.currentTeam._id);
+  if (playerTeam.players.length !== component.state.currentTeam.length) {
+    return component.setState({
+      gameSession: gameSessionData,
+      currentTeam: playerTeam
     })
   }
+  // const playerTeam = gameSessionData.teamList.find(team => team._id.toString() === component.state.currentTeam._id);
+  // console.log('PLAYER TEAM: ', playerTeam)
+  // console.log('PLAYER TEAM LENGTH: ', playerTeam.players.length, 'STATE TEAM LENGTH: ', component.state.currentTeam.players.length)
+  // let currentTeamChanged = false;
+  // if (playerTeam) {
+  //   playerTeam.players.forEach(teammate => {
+  //     console.log('FOR EACH: ', teammate._id, teammate._id.toString())
+  //     console.log('FIND PLAYER:', gameSessionData.playerList.find(player => player._id.toString() === teammate._id.toString()))
+  //     if (!gameSessionData.playerList.find(player => player._id.toString() === teammate._id.toString())) {
+  //       currentTeamChanged = true;
+  //     }
+  //   })
+  //   console.log('CURRENT TEAM CHANGED: ', currentTeamChanged)
+  //   if (currentTeamChanged) {
+  //     return component.setState({
+  //       gameSession: gameSessionData,
+  //       currentTeam: playerTeam
+  //     })
+  //   } 
+  // }
+
+  // If it was a non-teammate that was removed
+  return component.setState({
+    gameSession: gameSessionData
+  })
 }
