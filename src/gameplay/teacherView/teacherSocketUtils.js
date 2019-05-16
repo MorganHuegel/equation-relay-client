@@ -2,7 +2,7 @@ import { SERVER_BASE_URL } from '../../config';
 import io from 'socket.io-client';
 
 
-export function teacherGameplayMainWillMount (component) {
+export function teacherSetupSocket (component) {
   const socket = io(SERVER_BASE_URL, {
     forceNew: true,
     query: {
@@ -17,6 +17,12 @@ export function teacherGameplayMainWillMount (component) {
     })
     component.setState({gameSession: newGameState})
   });
+  socket.on('playerRemoved', (updatedGameSession) => {
+    const newGameState = Object.assign({}, updatedGameSession, {
+      playerList: [...updatedGameSession.playerList]
+    })
+    component.setState({gameSession: newGameState})
+  })
   socket.on('error', (errMessage) => console.log(errMessage))
 }
 

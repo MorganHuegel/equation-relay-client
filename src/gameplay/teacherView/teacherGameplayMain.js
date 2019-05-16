@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { teacherGameplayMainWillMount, teacher_ShuffleTeams, teacher_startGame, teacher_EndGame } from './teacherSocketUtils';
+import { teacherSetupSocket, teacher_ShuffleTeams, teacher_startGame, teacher_EndGame } from './teacherSocketUtils';
 import { TeacherGameplayWaiting } from './teacherGameplayWaiting';
 import { LiveGameReadyScreen } from './liveGameReadyScreen';
 import { LiveGameScoreboard } from './liveGameScoreboard';
@@ -24,12 +24,60 @@ export class TeacherGameplayMain extends React.Component {
   }
 
   componentWillMount(){
-    teacherGameplayMainWillMount(this);
+    teacherSetupSocket(this);
+  }
+
+  componentDidUpdate(prevProps){
+    if (prevProps.sessionCode !== this.props.sessionCode) {
+      this.setState({
+        gameSession: {
+          leader: null,
+          sessionCode: this.props.sessionCode,
+          gameId: null,
+          playerList: [],
+          teamList: [],
+          startedGame: false,
+          endedGame: false
+        }
+      }, teacherSetupSocket(this));
+    }
+  }
+
+  componentDidMount(){
+    if (!window.location.href.endsWith('#')) {
+      window.history.pushState(null, null, window.location.href + '#')
+    }
+    window.addEventListener('popstate', this.disableBackButtonEvent)
+    window.addEventListener('beforeunload', this.windowRefreshWarning)
   }
 
   componentWillUnmount(){
-    this.socket.emit('endGame');
-    this.socket.disconnect();
+    window.removeEventListener('popstate', this.disableBackButtonEvent);
+    window.removeEventListener('beforeunload', this.windowRefreshWarning);
+    if (this.socket && this.socket.connected) {
+      this.socket.emit('endGame');
+      this.socket.disconnect();
+    }
+  }
+
+  disableBackButtonEvent = (event) => {
+    let confirmBackButton = window.confirm(`This will close the game.  Continue anyway?`);
+    if (confirmBackButton) {
+      this.props.closeLiveGame()
+    } else {
+      window.history.pushState(null, null, window.location.href + '#')
+    }
+  }
+
+  windowRefreshWarning = (event) => {
+    event.preventDefault();
+    event.returnValue = 'This will exit you from the game. Continue?'
+    return event.returnValue;
+  }
+
+  deletePlayer = (event) => {
+    let playerId = event.target.dataset.playerid;
+    this.socket.emit('removePlayer', playerId);
   }
 
   shuffleTeams = () => {
@@ -46,7 +94,7 @@ export class TeacherGameplayMain extends React.Component {
 
   render(){
     if (this.state.gameSession.teamList.length <= 0) {
-      return <TeacherGameplayWaiting gameSession={this.state.gameSession} shuffleTeams={this.shuffleTeams} closeLiveGame={this.props.closeLiveGame} />
+      return <TeacherGameplayWaiting gameSession={this.state.gameSession} shuffleTeams={this.shuffleTeams} closeLiveGame={this.props.closeLiveGame} deletePlayer={this.deletePlayer}/>
     }
     else if (!this.state.gameSession.startedGame) {
       return <LiveGameReadyScreen 
@@ -57,7 +105,7 @@ export class TeacherGameplayMain extends React.Component {
     } else if (!this.state.gameSession.endedGame) {
       return <LiveGameScoreboard socket={this.socket} gameSession={this.state.gameSession} endGame={this.endGame}/>
     } else {
-      return <FinalResultsScreen gameSession={this.state.gameSession}/>
+      return <FinalResultsScreen gameSession={this.state.gameSession} clickPlayLive={this.props.clickPlayLive}/>
     }
   }
 }

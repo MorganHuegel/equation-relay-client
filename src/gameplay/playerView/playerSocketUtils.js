@@ -139,3 +139,27 @@ export function player_AssignGuesser (gameSessionData, component) {
     })
   }
 }
+
+
+export function player_Removed (gameSessionData, component) {
+  // If it was the current player that was removed
+  if (!gameSessionData.playerList.find(player => {
+    return player._id.toString() === component.state.currentUser._id
+  })) {
+    return component.redirectToJoinLanding(true);
+  }
+
+  // If it was the current player's teammate that was removed
+  const playerTeam = gameSessionData.teamList.find(team => team._id.toString() === component.state.currentTeam._id);
+  if (playerTeam.players.length !== component.state.currentTeam.length) {
+    return component.setState({
+      gameSession: gameSessionData,
+      currentTeam: playerTeam
+    })
+  }
+
+  // If it was a non-teammate that was removed
+  return component.setState({
+    gameSession: gameSessionData
+  })
+}

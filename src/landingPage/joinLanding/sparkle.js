@@ -34,8 +34,12 @@ export class Sparkle extends React.Component {
 
   componentDidMount () {
     setTimeout(() => {
-      document.getElementsByTagName('canvas')[0].style.opacity = '1'
-      document.getElementsByTagName('canvas')[0].style.visibility = 'visible'
+      const canvas = document.getElementsByTagName('canvas')[0];
+      if (canvas) {
+        canvas.style.opacity = '1'
+        canvas.style.visibility = 'visible'        
+      }
+
     }, 1000);
     this.init()
   }

@@ -33,6 +33,7 @@ export function DisplayQuestion (props) {
         <p className='instructions'>Then <span>add the solutions</span> of all {props.numOfTeammates} group members:</p>
         <label htmlFor='group-solution'>Total is...</label>
         <input type='text' name='group-solution' id='group-solution'/>
+        <p className='error-message'>{props.errorMessage}</p>
         <button type='button' onClick={props.checkAnswer}>Submit</button>
       </div>
     );
