@@ -157,26 +157,6 @@ export function player_Removed (gameSessionData, component) {
       currentTeam: playerTeam
     })
   }
-  // const playerTeam = gameSessionData.teamList.find(team => team._id.toString() === component.state.currentTeam._id);
-  // console.log('PLAYER TEAM: ', playerTeam)
-  // console.log('PLAYER TEAM LENGTH: ', playerTeam.players.length, 'STATE TEAM LENGTH: ', component.state.currentTeam.players.length)
-  // let currentTeamChanged = false;
-  // if (playerTeam) {
-  //   playerTeam.players.forEach(teammate => {
-  //     console.log('FOR EACH: ', teammate._id, teammate._id.toString())
-  //     console.log('FIND PLAYER:', gameSessionData.playerList.find(player => player._id.toString() === teammate._id.toString()))
-  //     if (!gameSessionData.playerList.find(player => player._id.toString() === teammate._id.toString())) {
-  //       currentTeamChanged = true;
-  //     }
-  //   })
-  //   console.log('CURRENT TEAM CHANGED: ', currentTeamChanged)
-  //   if (currentTeamChanged) {
-  //     return component.setState({
-  //       gameSession: gameSessionData,
-  //       currentTeam: playerTeam
-  //     })
-  //   } 
-  // }
 
   // If it was a non-teammate that was removed
   return component.setState({
