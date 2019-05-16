@@ -92,13 +92,14 @@ export class JoinMain extends React.Component {
       newGame: true
     }, () => {
       if (closeSocket) this.socket.disconnect();
+      revealHeader();
       return sessionStorage.getItem('redirectToJoin') ? sessionStorage.clear() : null
     })
   }
 
 
   clearGameSession = () => {
-    revealHeader();
+    //revealHeader();
     this.redirectToJoinLanding();
   }
 
