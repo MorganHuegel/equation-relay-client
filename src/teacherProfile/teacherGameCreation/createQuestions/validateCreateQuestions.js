@@ -74,6 +74,8 @@ export function valdiateAnswerOnBlur (event, component) {
   }, () => {
     return validateCorrectAnswer({question, answer})
       .then(response => {
+        if (!component._isMounted) return;
+        
         if (response.correct && !response.incorrect) {
           component.setState({
             validating: false,
@@ -82,8 +84,6 @@ export function valdiateAnswerOnBlur (event, component) {
             couldNotVerify: false,
             message: ''
           })
-          //parent.classList.add('correct');
-          //parent.classList.remove('incorrect', 'couldNotVerify')
         } else if (response.incorrect) {
           component.setState({
             validating: false,
@@ -92,8 +92,6 @@ export function valdiateAnswerOnBlur (event, component) {
             couldNotVerify: false,
             message: response.message
           })
-          //parent.classList.add('incorrect');
-          //parent.classList.remove('correct', 'couldNotVerify');
         } else {
           component.setState({
             validating: false,
@@ -102,8 +100,6 @@ export function valdiateAnswerOnBlur (event, component) {
             couldNotVerify: true,
             message: response.message
           })
-          //parent.classList.add('couldNotVerify');
-          //parent.classList.remove('correct', 'incorrect');
         }
       })
   })

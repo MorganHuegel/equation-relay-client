@@ -1,4 +1,5 @@
 import React from 'react';
+import Spinner from 'react-spinkit';
 
 import '../../../stylesheets/teacherProfile/teacherGameCreation/newEquationInput.css';
 
@@ -7,6 +8,7 @@ import { valdiateAnswerOnBlur } from './validateCreateQuestions';
 export class NewEquationInput extends React.Component {
   constructor (props) {
     super(props);
+    this._isMounted = false;
     this.state = {
       validating: false,
       correct: false,
@@ -14,6 +16,14 @@ export class NewEquationInput extends React.Component {
       couldNotVerify: false,
       message: ''
     }
+  }
+
+  componentDidMount(){
+    this._isMounted = true;
+  }
+
+  componentWillUnmount(){
+    this._isMounted = false;
   }
 
   render () {
@@ -24,23 +34,23 @@ export class NewEquationInput extends React.Component {
     switch(true){
       case(this.state.validating):
         classToApply = '';
-        verifyIcon = '...validating...';
+        verifyIcon = <Spinner name='circle' fadeIn='none'/>;
         break;
       case (this.state.correct):
         classToApply = 'correct';
-        verifyIcon = '...correct...';
+        verifyIcon = <i className="fas fa-check"></i>;
         break;
       case (this.state.incorrect):
         classToApply = 'incorrect';
-        verifyIcon = '...incorrect...';
+        verifyIcon = <i className="far fa-times-circle"></i>;
         break;
       case (this.state.couldNotVerify):
         classToApply = 'couldNotVerify';
-        verifyIcon = '...couldNotVerify...';
+        verifyIcon = <i className="fas fa-exclamation"></i>;
         break;
       default:
         classToApply = '';
-        verifyIcon = '';
+        verifyIcon = <span className='placeholder-span'></span>;
     }
 
     return (
@@ -49,6 +59,13 @@ export class NewEquationInput extends React.Component {
 
         <label htmlFor={`equation${this.props.equationNum}`}>Equation:</label>
         <input 
+          onChange={event => this.setState({
+            validating: false,
+            correct: false,
+            incorrect: false,
+            couldNotVerify: false,
+            message: ''
+          })}
           onBlur={event => valdiateAnswerOnBlur(event, this)}
           defaultValue={equationValue}
           type='text' 
@@ -60,6 +77,13 @@ export class NewEquationInput extends React.Component {
 
         <label htmlFor={`answer${this.props.equationNum}`}>Answer:</label>
         <input 
+          onChange={event => this.setState({
+            validating: false,
+            correct: false,
+            incorrect: false,
+            couldNotVerify: false,
+            message: ''
+          })}
           onBlur={event => valdiateAnswerOnBlur(event, this)}
           defaultValue={answerValue}
           type='number'

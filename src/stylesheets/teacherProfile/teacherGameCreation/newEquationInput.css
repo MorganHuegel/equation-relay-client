@@ -17,6 +17,30 @@
   font-size: 1.2rem;
 }
 
+.new-equation-input .verify-icon .placeholder-span {
+  width: 32px;
+  height: 18px;
+  display: inline-block;
+}
+.new-equation-input .verify-icon .sk-spinner {
+  color: rgb(135, 135, 135);
+  display: inline-block;
+  height: 18px;
+  margin: 0 5px;
+}
+.new-equation-input .verify-icon .fa-check {
+  margin: 0 6.5px;
+  color: rgb(20, 100, 20);
+}
+.new-equation-input .verify-icon .fa-times-circle {
+  margin: 0 6.5px;
+  color: rgb(100, 20, 20);
+}
+.new-equation-input .verify-icon .fa-exclamation {
+  color: rgb(120, 120, 20);
+  margin: 0 12px;
+}
+
 .new-equation-input label {
   display: block;
   margin-bottom: 10px;
