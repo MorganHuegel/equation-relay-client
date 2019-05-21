@@ -20,6 +20,9 @@ export class NewEquationInput extends React.Component {
 
   componentDidMount(){
     this._isMounted = true;
+    const inputBox = document.getElementById(`answer${this.props.equationNum}`);
+    let eventMock = {target: inputBox};
+    valdiateAnswerOnBlur(eventMock, this);
   }
 
   componentWillUnmount(){
