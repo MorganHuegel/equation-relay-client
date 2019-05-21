@@ -10,7 +10,7 @@ export function QuestionNavigatorMain (props) {
     }
 
     return (
-      <li className={itemClass} key={"set" + question.setNumber}>
+      <li className={itemClass} key={question.id}>
         <button type='button' onClick={() => props.changeQuestionsNoSave(index)}>{index + 1}</button>
       </li>
     )

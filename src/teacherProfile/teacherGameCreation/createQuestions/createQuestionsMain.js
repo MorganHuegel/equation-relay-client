@@ -5,6 +5,7 @@ import '../../../stylesheets/teacherProfile/teacherGameCreation/createQuestionsM
 import { NewEquationInput } from './newEquationInput';
 
 import { fetchUserData } from '../../../fetchFunctions/teachers/fetchUserData';
+import { deleteQuestion } from '../../../fetchFunctions/teachers/deleteQuestion';
 import { changeQuestionSetAndSave } from './createQuestionsMainUtils';
 import { QuestionNavigatorMain } from './questionNavigatorMain';
 
@@ -31,6 +32,19 @@ export class CreateQuestionsMain extends React.Component {
     }
   }
 
+  deleteQuestion = () => {
+    const gameId = this.props.currentGame.id;
+    const questionId = this.props.currentGame.questions[this.state.questionIndex].id;
+    return deleteQuestion(gameId, questionId)
+      .then(updatedGameData => {
+        this.props.setCurrentGame(updatedGameData);
+      })
+      .catch(errorMessage => {
+        console.log('ERROR HANDLE HERE: ', errorMessage)
+        this.setState({ errorMessage })
+      })
+  }
+
   changeQuestionsNoSave = (questionIndex) => {
     this.setState({questionIndex, errorMessage: ''});
   }
@@ -47,7 +61,7 @@ export class CreateQuestionsMain extends React.Component {
       equationSet = [1, 2, 3, 4].map(num => {
         const answer = currentQuestion[`equation${num}`].answer;
         const equation = currentQuestion[`equation${num}`].equation;
-        return <NewEquationInput equationNum={num} key={num.toString() + this.state.questionIndex.toString()} equation={equation} answer={answer}/>
+        return <NewEquationInput equationNum={num} key={num.toString() + this.state.questionIndex.toString() + currentQuestion.id} equation={equation} answer={answer}/>
       })
     } else {
       equationSet = [1, 2, 3, 4].map(num => <NewEquationInput equationNum={num} key={num.toString() + this.state.questionIndex.toString()}/>);
@@ -63,7 +77,7 @@ export class CreateQuestionsMain extends React.Component {
         <p className='error-message'>{this.state.errorMessage}</p>
         <h3>
           Equation Set {this.state.questionIndex + 1} of {questionSetLength}
-          <button type='button' id='delete-button' onClick={() => console.log('Deleted')}>
+          <button type='button' id='delete-button' onClick={() => this.deleteQuestion()}>
             <i className="fas fa-trash-alt"></i>
           </button>
         </h3>
