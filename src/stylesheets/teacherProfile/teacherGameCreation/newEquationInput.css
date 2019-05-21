@@ -3,8 +3,42 @@
   padding: 5px;
 }
 
+.new-equation-input.correct {
+  background-color: rgb(230, 255, 230);
+}
+.new-equation-input.incorrect {
+  background-color: rgb(255, 230, 230);
+}
+.new-equation-input.couldNotVerify {
+  background-color: rgb(255, 255, 230);
+}
+
 .new-equation-input legend {
   font-size: 1.2rem;
+}
+
+.new-equation-input .verify-icon .placeholder-span {
+  width: 32px;
+  height: 18px;
+  display: inline-block;
+}
+.new-equation-input .verify-icon .sk-spinner {
+  color: rgb(135, 135, 135);
+  display: inline-block;
+  height: 18px;
+  margin: 0 5px;
+}
+.new-equation-input .verify-icon .fa-check {
+  margin: 0 6.5px;
+  color: rgb(20, 100, 20);
+}
+.new-equation-input .verify-icon .fa-times-circle {
+  margin: 0 6.5px;
+  color: rgb(100, 20, 20);
+}
+.new-equation-input .verify-icon .fa-exclamation {
+  color: rgb(120, 120, 20);
+  margin: 0 12px;
 }
 
 .new-equation-input label {
@@ -28,6 +62,10 @@
   margin-right: 20px;
 }
 
+.new-equation-input .error-message {
+  margin: 0 0 0 0;
+}
+
 @media only screen and (min-width: 500px) {
   .new-equation-input label {
     display: initial;
@@ -40,6 +78,10 @@
 
   .new-equation-input .create-answer-input {
     margin: 10px 10px 10px 22px;
+  }
+
+  .new-equation-input .error-message {
+    margin: 0 0 0 10px;
   }
 }
 
