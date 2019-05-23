@@ -34,13 +34,12 @@
 
 .teacher-main .loading-spinner {
   margin: 20px auto 0 auto;
-  min-width: 50px;
-  min-height: 50px;
-  width: 10vw;
-  height: 10vw;
+  width: 5px;
+  height: 50px;
 }
 
 .teacher-main button[type='submit'] {
+  color: rgb(30, 100, 110);
   font-size: 1.1rem;
   margin-bottom: 40px;
   padding: 5px;
@@ -52,8 +51,8 @@
 
 .teacher-main button[type='submit']:hover {
   cursor: pointer;
-  background-color: rgb(234, 150, 146);
-  color: rgb(40, 110, 120);
+  color: white;
+  background-color: rgb(40, 110, 120);
   -webkit-transition: background-color 250ms linear, color 250ms linear;
   -ms-transition: background-color 250ms linear, color 250ms linear;
   transition: background-color 250ms linear, color 250ms linear;

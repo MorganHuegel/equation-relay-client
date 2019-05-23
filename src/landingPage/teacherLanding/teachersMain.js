@@ -107,7 +107,7 @@ export class TeachersMain extends React.Component {
 
     const loadingSpinner = this.state.fetchingData ? (
       <div>
-        <Spinner name='circle' color='blue' className='loading-spinner' fadeIn='half'/> 
+        <Spinner name='circle' color='rgb(220, 220, 220)' className='loading-spinner' fadeIn='half'/> 
         <p className='spinner-text'>Loading...</p>
       </div>
     ) : null;
