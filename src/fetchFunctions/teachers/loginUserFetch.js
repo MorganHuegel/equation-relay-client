@@ -30,9 +30,9 @@ export function loginUserFetch (username, password) {
     .catch(err => {
       if (err instanceof Array) { // <-- Graphql error list
         const errorMessage = err[0].message;
-        return errorMessage;
+        return Promise.reject(errorMessage);
       } else {
-        return "Somehow not a graphql error??";
+        return Promise.reject("Somehow not a graphql error??");
       }
     })
 }
