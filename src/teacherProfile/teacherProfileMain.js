@@ -25,7 +25,8 @@ export class TeacherProfileMain extends React.Component {
       creating: false,
       currentGame: null,
       playing: false,
-      deleting: false
+      deleting: false,
+      userMessage: ''
     }
   }
 
@@ -36,7 +37,17 @@ export class TeacherProfileMain extends React.Component {
           creating: false,
           currentGame: null,
           playing: sessionCode,
-          deleting: false
+          deleting: false,
+          userMessage: ''
+        })
+      })
+      .catch(errorMessage => {
+        this.setState({
+          creating: false,
+          currentGame: null,
+          playing: false,
+          deleting: false,
+          userMessage: errorMessage
         })
       })
   }
@@ -46,7 +57,8 @@ export class TeacherProfileMain extends React.Component {
       creating: false,
       currentGame: null,
       playing: false,
-      deleting: false
+      deleting: false,
+      userMessage: ''
     })
   }
 
@@ -73,17 +85,26 @@ export class TeacherProfileMain extends React.Component {
       .then(gameData => {
         this.setState({
           currentGame: gameData,
-          creating: false
+          creating: false,
+          userMessage: ''
         });
       })
-      .catch(errMessage => console.log(errMessage))
+      .catch(errMessage => {
+        this.setState({
+          creating: false,
+          currentGame: null,
+          playing: false,
+          deleting: false,
+          userMessage: ''
+        });
+      })
   }
 
 
   onEditClick = gameId => {
     return fetchGameData(gameId)
       .then(gameData => {
-        this.setState({currentGame: gameData});
+        this.setState({currentGame: gameData, userMessage: ''});
       })
   }
 
@@ -96,7 +117,7 @@ export class TeacherProfileMain extends React.Component {
   toggleDeletingState = gameId => {
     let gameObj = this.props.userData.games.find(game => game.id === gameId);
     if (!gameObj) gameObj = false;
-    this.setState({deleting: gameObj});
+    this.setState({deleting: gameObj, userMessage: ''});
   }
 
 
@@ -108,10 +129,11 @@ export class TeacherProfileMain extends React.Component {
           games: updatedUserGames
         })
         this.props.updateUserData(updatedUserData);
-        this.setState({deleting: false});
+        this.setState({deleting: false, userMessage: successMessage});
       })
       .catch(errMessage => {
         console.log('Probably should error handle here...' + errMessage);
+        this.setState({deleting: false, userMessage: errMessage})
       });
   }
 
@@ -153,6 +175,7 @@ export class TeacherProfileMain extends React.Component {
 
         <div className='teacher-dashboard-games'>
           <CreateNewButton setCreatingState={this.setCreatingState}/>
+          <p className='user-message'>{this.state.userMessage}</p>
           <GameList 
             games={this.props.userData.games} 
             onEditClick={this.onEditClick} 
