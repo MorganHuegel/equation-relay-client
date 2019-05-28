@@ -10,7 +10,7 @@ export function DashboardMenu (props) {
   propsScope = props;
   const menuButtons = dashboardButtons.map(button => {
     const selected = button.buttonText === 'Created Games' ? 'selected' : '';
-    return <DashboardMenuItem buttonText={button.buttonText} onClick={button.clickFunction} key={button.buttonText} selected={selected}/>
+    return <DashboardMenuItem buttonText={button.buttonText} onClick={props.clickInactiveDashboardButton} key={button.buttonText} selected={selected}/>
   })
   return (
     <ul className='dashboard-buttons'>

@@ -9,6 +9,7 @@ import { CreateGame } from './teacherGameCreation/createTitle/createGame';
 import { CreateQuestionsMain } from './teacherGameCreation/createQuestions/createQuestionsMain';
 import { CreateNewButton } from './teacherDashboard/createNewButton';
 import { DeleteLightBox } from './teacherDashboard/deleteLightBox';
+import { DashboardUserMessage } from './teacherDashboard/dashboardUserMessage';
 
 import { createNewGame } from '../fetchFunctions/teachers/createNewGame';
 import { validateTitle } from './teacherGameCreation/createTitle/validateTitle';
@@ -26,9 +27,15 @@ export class TeacherProfileMain extends React.Component {
       currentGame: null,
       playing: false,
       deleting: false,
-      userMessage: ''
+      userMessage: 'Testing'
     }
   }
+
+
+  clickInactiveDashboardButton = () => {
+    this.setState({userMessage: 'This button whack, yo!'})
+  }
+
 
   clickPlayLive = (gameId) => {
     return startGameSession(gameId)
@@ -51,6 +58,7 @@ export class TeacherProfileMain extends React.Component {
         })
       })
   }
+
 
   closeLiveGame = () => {
     this.setState({
@@ -132,7 +140,6 @@ export class TeacherProfileMain extends React.Component {
         this.setState({deleting: false, userMessage: successMessage});
       })
       .catch(errMessage => {
-        console.log('Probably should error handle here...' + errMessage);
         this.setState({deleting: false, userMessage: errMessage})
       });
   }
@@ -171,11 +178,11 @@ export class TeacherProfileMain extends React.Component {
         { createGameLightbox }
         <h2>Hello {this.props.userData.username}!</h2>
 
-        <DashboardMenu logout={this.logout}/>
+        <DashboardMenu logout={this.logout} clickInactiveDashboardButton={this.clickInactiveDashboardButton}/>
 
         <div className='teacher-dashboard-games'>
           <CreateNewButton setCreatingState={this.setCreatingState}/>
-          <p className='user-message'>{this.state.userMessage}</p>
+          <DashboardUserMessage userMessage={this.state.userMessage} closeUserMessage={() => this.setState({userMessage: ''})}/>
           <GameList 
             games={this.props.userData.games} 
             onEditClick={this.onEditClick} 

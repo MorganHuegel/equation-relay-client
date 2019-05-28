@@ -1,0 +1,30 @@
+.dashboard-user-message {
+  width: calc(100vw);
+  font-style: italic;
+  background-color: rgb(80, 60, 60);
+  padding: 15px;
+  color: rgb(70, 0, 0);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.dashboard-user-message button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  position: absolute;
+  top: 12px;
+  left: 16px;
+}
+
+.dashboard-user-message button:hover, .dashboard-user-message button:focus {
+  cursor: pointer;
+  text-shadow: 0px 0px 2px rgb(80, 60, 60);
+}
+
+.dashboard-user-message p {
+  padding: 10px 10px 10px 18px;
+  border: 1px dashed white;
+  background-color: rgb(220, 220, 220);
+}

@@ -6,14 +6,6 @@
   margin: 0 auto;
 }
 
-.teacher-profile-main .user-message {
-  font-style: italic;
-  background-color: rgb(220, 220, 220);
-  border: 1px dashed white;
-  padding: 3px;
-  color: rgb(70, 0, 0);
-}
-
 
 @media only screen and (min-width: 1000px) {
   .teacher-dashboard-games {
