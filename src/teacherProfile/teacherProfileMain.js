@@ -32,8 +32,10 @@ export class TeacherProfileMain extends React.Component {
   }
 
 
-  clickInactiveDashboardButton = () => {
-    this.setState({userMessage: 'This button whack, yo!'})
+  clickInactiveDashboardButton = (buttonText) => {
+    if (buttonText !== 'Created Games') {
+      this.setState({userMessage: `The ${buttonText} feature is not available yet.`})
+    }
   }
 
 
