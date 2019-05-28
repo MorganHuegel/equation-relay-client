@@ -2,11 +2,25 @@
   width: calc(100vw);
   font-style: italic;
   background-color: rgb(80, 60, 60);
-  padding: 15px;
+  padding: 0;
   color: rgb(70, 0, 0);
   position: fixed;
   top: 0;
   left: 0;
+
+  overflow: hidden;
+  max-height: 0px;
+  padding: 0px;
+  transition: max-height 0.5s ease-out;
+}
+
+.dashboard-user-message.expanded {
+  max-height: 100px;
+  transition: max-height 0.5s ease-out;
+}
+
+.dashboard-user-message .message-container {
+  padding: 15px;
 }
 
 .dashboard-user-message button {

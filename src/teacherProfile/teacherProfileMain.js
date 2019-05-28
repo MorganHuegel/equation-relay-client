@@ -27,7 +27,7 @@ export class TeacherProfileMain extends React.Component {
       currentGame: null,
       playing: false,
       deleting: false,
-      userMessage: 'Testing'
+      userMessage: ''
     }
   }
 
