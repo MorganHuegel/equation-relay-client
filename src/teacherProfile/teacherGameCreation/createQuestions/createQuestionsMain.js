@@ -8,6 +8,7 @@ import { fetchUserData } from '../../../fetchFunctions/teachers/fetchUserData';
 import { deleteQuestion } from '../../../fetchFunctions/teachers/deleteQuestion';
 import { changeQuestionSetAndSave } from './createQuestionsMainUtils';
 import { QuestionNavigatorMain } from './questionNavigatorMain';
+import { ConfirmNoSaveQuestion } from './confirmNoSaveQuestion';
 
 export class CreateQuestionsMain extends React.Component {
   constructor (props) {
@@ -15,7 +16,8 @@ export class CreateQuestionsMain extends React.Component {
 
     this.state = {
       questionIndex: 0,
-      errorMessage: ''
+      errorMessage: '',
+      confirmNoSave: true
     }
 
     this.changeQuestionSetAndSave = changeQuestionSetAndSave.bind(this);
@@ -67,11 +69,14 @@ export class CreateQuestionsMain extends React.Component {
       equationSet = [1, 2, 3, 4].map(num => <NewEquationInput equationNum={num} key={num.toString() + this.state.questionIndex.toString()}/>);
     }
 
+    const confirmDeleteLightbox = <ConfirmNoSaveQuestion confirmNoSave={this.state.confirmNoSave} questionNumber={this.state.questionIndex + 1}/>
+
     const previousButton = this.state.questionIndex === 0 ? null : 
-      <button type='button' className='previous-question' onClick={() => this.changeQuestionSetAndSave(this.state.questionIndex - 1)}>Previous Question</button>;
+      <button type='button' className='previous-question' onClick={() => this.changeQuestionsNoSave(this.state.questionIndex - 1)}>Previous Question</button>;
 
     return (
       <div className='create-questions-main' data-questionid={currentQuestion ? currentQuestion.id : null}>
+        { confirmDeleteLightbox }
         <QuestionNavigatorMain currentGame={this.props.currentGame} changeQuestionsNoSave={this.changeQuestionsNoSave} questionIndex={this.state.questionIndex}/>
         <h2>{this.props.currentGame.title}</h2>
         <p className='error-message'>{this.state.errorMessage}</p>
@@ -86,7 +91,8 @@ export class CreateQuestionsMain extends React.Component {
         <span className='float-right-container'>
           {previousButton}
           <button type='button' className='next-question' onClick={() => this.changeQuestionSetAndSave(this.state.questionIndex + 1)}>
-            {this.state.questionIndex === this.props.currentGame.questions.length - 1 ? 'Add' : 'Next'} Question
+          {/* Save / {this.state.questionIndex >= this.props.currentGame.questions.length - 1 ? ' Add' : ' Next'} Question */}
+            Save Question
           </button>
         </span>
       </div>

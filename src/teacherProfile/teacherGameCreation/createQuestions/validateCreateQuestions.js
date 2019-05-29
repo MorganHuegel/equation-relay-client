@@ -51,6 +51,9 @@ export function validateCreateQuestions () {
 
 
 export function valdiateAnswerOnBlur (event, component) {
+  // ----------------- REMOVE THIS LINE FOR LIVE APP ---------------- //
+  if (1 + 1 === 2) return;
+  // ---------------------------------------------------------------- //
   let question, answer;
   const input = event.target;
   const inputId = input.id;
