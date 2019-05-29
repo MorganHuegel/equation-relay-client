@@ -28,7 +28,6 @@ export class TeachersMain extends React.Component {
       return fetchUserData(token)
         .then(userData => {
           this.props.updateUserData(userData);
-          this.props.setFetchingDataState(false);
         })
         .catch(errorMessage => {
           localStorage.removeItem('authToken');
@@ -47,7 +46,10 @@ export class TeachersMain extends React.Component {
   }
 
   toggleLoginRegister = () => {
-    this.setState({registering: !this.state.registering})
+    this.setState({
+      errorMessage: "",
+      registering: !this.state.registering
+    })
   }
 
   onSubmitLogin = (e) => {
@@ -59,8 +61,10 @@ export class TeachersMain extends React.Component {
       const password = document.getElementById('password').value;
       this.setState({fetchingData: true}, () => {
         return loginUserFetch(username, password)
-          .then(() => this.setState({fetchingData: false}))
-          .catch(errorMessage => this.setState({errorMessage, fetchingData: false}))
+          .then(() => this.setState({errorMessage: ""}))
+          .catch(errorMessage => {
+            this.setState({errorMessage, fetchingData: false})
+          })
       });
     }
   }
@@ -73,10 +77,15 @@ export class TeachersMain extends React.Component {
       const username = document.getElementById('username').value;
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
-      this.setState({fetchingData: true}, () => {
+      this.setState({
+        errorMessage: "",
+        fetchingData: true
+      }, () => {
         return registerUserFetch(username, password, email)
           .then( () => this.setState({fetchingData: false}))
-          .catch(errorMessage => this.setState({errorMessage, fetchingData: false}))
+          .catch(errorMessage => {
+            this.setState({errorMessage, fetchingData: false})
+          })
       })
     }
   }
@@ -84,7 +93,11 @@ export class TeachersMain extends React.Component {
 
   seeDemoAccount = () => {
     if (this.state.registering) {
-      this.setState({registering: false}, this.seeDemoAccount);
+      this.setState({
+        errorMessage: "",
+        fetchingData: false,
+        registering: false
+      }, this.seeDemoAccount);
     } else {
       document.getElementById('username').value = 'bobuser';
       document.getElementById('password').value = 'baseball';
@@ -107,7 +120,7 @@ export class TeachersMain extends React.Component {
 
     const loadingSpinner = this.state.fetchingData ? (
       <div>
-        <Spinner name='circle' color='blue' className='loading-spinner' fadeIn='half'/> 
+        <Spinner name='circle' color='rgb(220, 220, 220)' className='loading-spinner' fadeIn='half'/> 
         <p className='spinner-text'>Loading...</p>
       </div>
     ) : null;

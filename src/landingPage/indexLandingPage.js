@@ -21,7 +21,7 @@ export class IndexLandingPage extends React.Component {
   }
 
   updateUserData = userData => {
-    this.setState({userData})
+    this.setState({userData, fetchingData: false})
   }
 
   setFetchingDataState = (bool) => {
@@ -39,7 +39,7 @@ export class IndexLandingPage extends React.Component {
           <Route path='/join/:sessionCode' component={JoinMain}/>
           <Route exact path='/teachers' render={props => {
             if (this.state.fetchingData) {
-              return <Spinner name='ball-clip-rotate' color='fuchsia' className='loading-spinner' fadeIn='none'/>
+              return <Spinner name='ball-clip-rotate' color='rgb(220, 220, 220)' className='loading-spinner' fadeIn='none'/>
             }
             else if (!this.state.userData) {
               return <TeachersMain updateUserData={this.updateUserData} setFetchingDataState={this.setFetchingDataState}/>

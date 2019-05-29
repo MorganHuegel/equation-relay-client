@@ -11,7 +11,10 @@ export class PlayerJoinedAndWaiting extends React.Component {
 
   componentWillUnmount () {
     //Get rid of sparkles
-    document.getElementById('sparkles-container').style.display = 'none';
+    const sparklesContainer = document.getElementById('sparkles-container');
+    if (sparklesContainer) {
+      sparklesContainer.style.display = 'none';
+    }
   }
 
   render(props){

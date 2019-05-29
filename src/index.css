@@ -6,7 +6,7 @@ body {
   min-height: 100vh;
   min-width: 100vw;
   background-color: rgb(50, 120, 130);
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   box-sizing: border-box;
   margin: 0;
 }

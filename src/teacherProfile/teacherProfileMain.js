@@ -9,6 +9,7 @@ import { CreateGame } from './teacherGameCreation/createTitle/createGame';
 import { CreateQuestionsMain } from './teacherGameCreation/createQuestions/createQuestionsMain';
 import { CreateNewButton } from './teacherDashboard/createNewButton';
 import { DeleteLightBox } from './teacherDashboard/deleteLightBox';
+import { DashboardUserMessage } from './teacherDashboard/dashboardUserMessage';
 
 import { createNewGame } from '../fetchFunctions/teachers/createNewGame';
 import { validateTitle } from './teacherGameCreation/createTitle/validateTitle';
@@ -25,9 +26,18 @@ export class TeacherProfileMain extends React.Component {
       creating: false,
       currentGame: null,
       playing: false,
-      deleting: false
+      deleting: false,
+      userMessage: ''
     }
   }
+
+
+  clickInactiveDashboardButton = (buttonText) => {
+    if (buttonText !== 'Created Games') {
+      this.setState({userMessage: `The ${buttonText} feature is not available yet.`})
+    }
+  }
+
 
   clickPlayLive = (gameId) => {
     return startGameSession(gameId)
@@ -36,17 +46,29 @@ export class TeacherProfileMain extends React.Component {
           creating: false,
           currentGame: null,
           playing: sessionCode,
-          deleting: false
+          deleting: false,
+          userMessage: ''
+        })
+      })
+      .catch(errorMessage => {
+        this.setState({
+          creating: false,
+          currentGame: null,
+          playing: false,
+          deleting: false,
+          userMessage: errorMessage
         })
       })
   }
+
 
   closeLiveGame = () => {
     this.setState({
       creating: false,
       currentGame: null,
       playing: false,
-      deleting: false
+      deleting: false,
+      userMessage: ''
     })
   }
 
@@ -73,17 +95,26 @@ export class TeacherProfileMain extends React.Component {
       .then(gameData => {
         this.setState({
           currentGame: gameData,
-          creating: false
+          creating: false,
+          userMessage: ''
         });
       })
-      .catch(errMessage => console.log(errMessage))
+      .catch(errMessage => {
+        this.setState({
+          creating: false,
+          currentGame: null,
+          playing: false,
+          deleting: false,
+          userMessage: ''
+        });
+      })
   }
 
 
   onEditClick = gameId => {
     return fetchGameData(gameId)
       .then(gameData => {
-        this.setState({currentGame: gameData});
+        this.setState({currentGame: gameData, userMessage: ''});
       })
   }
 
@@ -96,7 +127,7 @@ export class TeacherProfileMain extends React.Component {
   toggleDeletingState = gameId => {
     let gameObj = this.props.userData.games.find(game => game.id === gameId);
     if (!gameObj) gameObj = false;
-    this.setState({deleting: gameObj});
+    this.setState({deleting: gameObj, userMessage: ''});
   }
 
 
@@ -108,10 +139,10 @@ export class TeacherProfileMain extends React.Component {
           games: updatedUserGames
         })
         this.props.updateUserData(updatedUserData);
-        this.setState({deleting: false});
+        this.setState({deleting: false, userMessage: successMessage});
       })
       .catch(errMessage => {
-        console.log('Probably should error handle here...' + errMessage);
+        this.setState({deleting: false, userMessage: errMessage})
       });
   }
 
@@ -146,19 +177,24 @@ export class TeacherProfileMain extends React.Component {
 
     return (
       <div className='teacher-profile-main'>
-        { createGameLightbox }
-        <h2>Hello {this.props.userData.username}!</h2>
+        <div className='content-container'>
+          
+          { createGameLightbox }
+          <h2>Hello {this.props.userData.username}!</h2>
 
-        <DashboardMenu logout={this.logout}/>
+          <DashboardMenu logout={this.logout} clickInactiveDashboardButton={this.clickInactiveDashboardButton}/>
 
-        <div className='teacher-dashboard-games'>
-          <CreateNewButton setCreatingState={this.setCreatingState}/>
-          <GameList 
-            games={this.props.userData.games} 
-            onEditClick={this.onEditClick} 
-            deleteGameClick={this.deleteGameClick} 
-            toggleDeletingState={this.toggleDeletingState}
-            clickPlayLive={this.clickPlayLive}/>
+          <div className='teacher-dashboard-games'>
+            <CreateNewButton setCreatingState={this.setCreatingState}/>
+            <DashboardUserMessage userMessage={this.state.userMessage} closeUserMessage={() => this.setState({userMessage: ''})}/>
+            <GameList 
+              games={this.props.userData.games} 
+              onEditClick={this.onEditClick} 
+              deleteGameClick={this.deleteGameClick} 
+              toggleDeletingState={this.toggleDeletingState}
+              clickPlayLive={this.clickPlayLive}/>
+          </div>
+
         </div>
       </div>
     )

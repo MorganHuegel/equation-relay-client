@@ -27,7 +27,7 @@ export function Header(){
 
   return (
     <header className='landing-page-header'>
-      <h1><span>Equation</span><span>Relay</span></h1>
+      <h1><a href='/'><span>Equation</span><span>Relay</span></a></h1>
 
       <ul className='nav-list'>
         <li>

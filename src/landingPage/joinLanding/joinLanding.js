@@ -15,7 +15,13 @@ export class JoinLanding extends React.Component {
   }
 
   componentDidMount(){
-    document.getElementById('sparkles-container').style.display = 'initial';
+    const sparklesContainer = document.getElementById('sparkles-container');
+    if (sparklesContainer) {
+      sparklesContainer.style.display = 'initial';
+    }
+    if (sessionStorage.getItem('redirectToJoin')) {
+      sessionStorage.clear();
+    }
   }
 
   onSubmit = (e) => {

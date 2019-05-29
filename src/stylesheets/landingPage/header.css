@@ -23,7 +23,7 @@
 
 .landing-page-header ul {
   width: 100vw;
-  margin: 30px 0 30px -20px;
+  margin: 15px 0 0 -20px;
   background-color: rgb(40, 110, 120);
 }
 
@@ -64,7 +64,7 @@
 .landing-page-header .nav-list li,
 .landing-page-header .nav-list.slideup,
 .landing-page-header .nav-list {
-  max-height: 0;
+  max-height: 0px;
   overflow-y: hidden;
   -webkit-transition: max-height 1.5s ease-in-out;
   -moz-transition: max-height 1.5s ease-in-out;

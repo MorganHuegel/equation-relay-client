@@ -32,9 +32,10 @@ export function registerUserFetch (username, password, email) {
     })
     .catch(err => {
       if (err instanceof Array) { // <---- Graphql error
-        return err[0].message;
+        const errorMessage = err[0].message;
+        return Promise.reject(errorMessage);
       } else {
-        return "somehow not a graphql error?";
+        return Promise.reject("Somehow not a graphql error??");
       }
     })
 }
