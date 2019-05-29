@@ -151,7 +151,7 @@ export function player_Removed (gameSessionData, component) {
 
   // If it was the current player's teammate that was removed
   const playerTeam = gameSessionData.teamList.find(team => team._id.toString() === component.state.currentTeam._id);
-  if (playerTeam.players.length !== component.state.currentTeam.length) {
+  if (playerTeam && (playerTeam.players.length !== component.state.currentTeam.length) ) {
     return component.setState({
       gameSession: gameSessionData,
       currentTeam: playerTeam
