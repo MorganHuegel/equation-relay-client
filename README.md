@@ -25,6 +25,7 @@ Teachers and students alike are tired of boring old worksheets.  Equation Relay 
 
 * Back-end
     * Node/Express
+    * Wolfram Alpha Microservice (Axios)
     * GraphQL
     * Web Sockets (socket.io)
     * MongoDB
