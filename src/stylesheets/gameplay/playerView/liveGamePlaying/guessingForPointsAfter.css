@@ -4,11 +4,12 @@
 
 .guessing-for-points-after h3 {
   font-size: 3rem;
-  margin: 50px 0;
+  margin: 80px 0;
 }
 
 .guessing-for-points-after p {
   font-style: italic;
+  color: white;
 }
 
 .guessing-for-points-after.positive {

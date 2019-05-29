@@ -2,7 +2,12 @@
   background-color: rgb(233, 233, 255);
   text-align: left;
   padding: 20px;
-  max-width: 1000px;
+  margin-left: -20px;
+  width: 100vw;
+}
+
+.teacher-profile-main .content-container {
+  max-width: 1300px;
   margin: 0 auto;
 }
 
@@ -10,7 +15,8 @@
 @media only screen and (min-width: 1000px) {
   .teacher-dashboard-games {
     display: inline-block;
-    width: 650px;
-    margin-left: calc(100% - 900px);
+    width: calc(100vw - 350px);
+    max-width: 966px;
+    margin-left: 50px;
   }
 }

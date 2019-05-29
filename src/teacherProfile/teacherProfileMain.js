@@ -177,20 +177,24 @@ export class TeacherProfileMain extends React.Component {
 
     return (
       <div className='teacher-profile-main'>
-        { createGameLightbox }
-        <h2>Hello {this.props.userData.username}!</h2>
+        <div className='content-container'>
+          
+          { createGameLightbox }
+          <h2>Hello {this.props.userData.username}!</h2>
 
-        <DashboardMenu logout={this.logout} clickInactiveDashboardButton={this.clickInactiveDashboardButton}/>
+          <DashboardMenu logout={this.logout} clickInactiveDashboardButton={this.clickInactiveDashboardButton}/>
 
-        <div className='teacher-dashboard-games'>
-          <CreateNewButton setCreatingState={this.setCreatingState}/>
-          <DashboardUserMessage userMessage={this.state.userMessage} closeUserMessage={() => this.setState({userMessage: ''})}/>
-          <GameList 
-            games={this.props.userData.games} 
-            onEditClick={this.onEditClick} 
-            deleteGameClick={this.deleteGameClick} 
-            toggleDeletingState={this.toggleDeletingState}
-            clickPlayLive={this.clickPlayLive}/>
+          <div className='teacher-dashboard-games'>
+            <CreateNewButton setCreatingState={this.setCreatingState}/>
+            <DashboardUserMessage userMessage={this.state.userMessage} closeUserMessage={() => this.setState({userMessage: ''})}/>
+            <GameList 
+              games={this.props.userData.games} 
+              onEditClick={this.onEditClick} 
+              deleteGameClick={this.deleteGameClick} 
+              toggleDeletingState={this.toggleDeletingState}
+              clickPlayLive={this.clickPlayLive}/>
+          </div>
+
         </div>
       </div>
     )
