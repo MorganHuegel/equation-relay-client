@@ -6,7 +6,7 @@ import { NewEquationInput } from './newEquationInput';
 
 import { fetchUserData } from '../../../fetchFunctions/teachers/fetchUserData';
 import { deleteQuestion } from '../../../fetchFunctions/teachers/deleteQuestion';
-import { changeQuestionSetAndSave } from './createQuestionsMainUtils';
+import { changeQuestionSetAndSave, checkIfQuestionChanged } from './createQuestionsMainUtils';
 import { QuestionNavigatorMain } from './questionNavigatorMain';
 import { ConfirmNoSaveQuestion } from './confirmNoSaveQuestion';
 
@@ -17,10 +17,11 @@ export class CreateQuestionsMain extends React.Component {
     this.state = {
       questionIndex: 0,
       errorMessage: '',
-      confirmNoSave: true
+      confirmNoSave: false
     }
 
     this.changeQuestionSetAndSave = changeQuestionSetAndSave.bind(this);
+    this.checkIfQuestionChanged = checkIfQuestionChanged.bind(this);
   }
 
   componentWillUnmount () {
@@ -35,11 +36,17 @@ export class CreateQuestionsMain extends React.Component {
   }
 
   deleteQuestion = () => {
+    if (this.state.questionIndex >= this.props.currentGame.questions.length) {
+      return this.changeQuestionsNoSave(this.state.questionIndex - 1);
+    }
     const gameId = this.props.currentGame.id;
     const questionId = this.props.currentGame.questions[this.state.questionIndex].id;
     return deleteQuestion(gameId, questionId)
       .then(updatedGameData => {
-        this.props.setCurrentGame(updatedGameData);
+        const newQuestionIndex = this.state.questionIndex >= 1 ? this.state.questionIndex - 1 : 0;
+        return this.setState({questionIndex: newQuestionIndex}, () => {
+          this.props.setCurrentGame(updatedGameData);
+        })
       })
       .catch(errorMessage => {
         console.log('ERROR HANDLE HERE: ', errorMessage)
@@ -47,8 +54,17 @@ export class CreateQuestionsMain extends React.Component {
       })
   }
 
-  changeQuestionsNoSave = (questionIndex) => {
-    this.setState({questionIndex, errorMessage: ''});
+  toggleConfirmNoSave = (indexNum) => {
+    const changedInputs = this.checkIfQuestionChanged();
+    if (changedInputs && !(indexNum === this.state.questionIndex)) {
+      this.setState({confirmNoSave: indexNum})
+    } else {
+      this.changeQuestionsNoSave(indexNum);
+    }
+  }
+
+  changeQuestionsNoSave = (questionIndex = this.state.confirmNoSave) => {
+    this.setState({questionIndex, errorMessage: '', confirmNoSave: false});
   }
 
   render(){
@@ -69,15 +85,25 @@ export class CreateQuestionsMain extends React.Component {
       equationSet = [1, 2, 3, 4].map(num => <NewEquationInput equationNum={num} key={num.toString() + this.state.questionIndex.toString()}/>);
     }
 
-    const confirmDeleteLightbox = <ConfirmNoSaveQuestion confirmNoSave={this.state.confirmNoSave} questionNumber={this.state.questionIndex + 1}/>
+    const confirmDeleteLightbox = <ConfirmNoSaveQuestion 
+      confirmNoSave={this.state.confirmNoSave} 
+      questionNumber={this.state.questionIndex + 1} 
+      toggleConfirmNoSave={this.toggleConfirmNoSave}
+      changeQuestionsNoSave={this.changeQuestionsNoSave}/>
 
     const previousButton = this.state.questionIndex === 0 ? null : 
-      <button type='button' className='previous-question' onClick={() => this.changeQuestionsNoSave(this.state.questionIndex - 1)}>Previous Question</button>;
+      <button type='button' className='previous-question' onClick={() => this.toggleConfirmNoSave(this.state.questionIndex - 1)}>Previous Question</button>;
 
     return (
       <div className='create-questions-main' data-questionid={currentQuestion ? currentQuestion.id : null}>
         { confirmDeleteLightbox }
-        <QuestionNavigatorMain currentGame={this.props.currentGame} changeQuestionsNoSave={this.changeQuestionsNoSave} questionIndex={this.state.questionIndex}/>
+
+        <QuestionNavigatorMain 
+          currentGame={this.props.currentGame} 
+          toggleConfirmNoSave={this.toggleConfirmNoSave} 
+          changeQuestionsNoSave={this.changeQuestionsNoSave} 
+          questionIndex={this.state.questionIndex}/>
+
         <h2>{this.props.currentGame.title}</h2>
         <p className='error-message'>{this.state.errorMessage}</p>
         <h3>
@@ -86,15 +112,17 @@ export class CreateQuestionsMain extends React.Component {
             <i className="fas fa-trash-alt"></i>
           </button>
         </h3>
+
         {equationSet}
+
         <button type='reset' onClick={() => this.props.setCurrentGame(null)}>Finish</button>
         <span className='float-right-container'>
           {previousButton}
           <button type='button' className='next-question' onClick={() => this.changeQuestionSetAndSave(this.state.questionIndex + 1)}>
-          {/* Save / {this.state.questionIndex >= this.props.currentGame.questions.length - 1 ? ' Add' : ' Next'} Question */}
-            Save Question
+            Save {'&'} Next Question
           </button>
         </span>
+
       </div>
     )
   }
