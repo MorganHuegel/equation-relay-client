@@ -24,6 +24,7 @@ export class CreateQuestionsMain extends React.Component {
     this.checkIfQuestionChanged = checkIfQuestionChanged.bind(this);
   }
 
+
   componentWillUnmount () {
     const token = localStorage.getItem('authToken');
     if (token) {
@@ -34,6 +35,7 @@ export class CreateQuestionsMain extends React.Component {
         .catch(e => console.log('Could not update user data.'))
     }
   }
+
 
   deleteQuestion = () => {
     if (this.state.questionIndex >= this.props.currentGame.questions.length) {
@@ -54,18 +56,28 @@ export class CreateQuestionsMain extends React.Component {
       })
   }
 
+
   toggleConfirmNoSave = (indexNum) => {
     const changedInputs = this.checkIfQuestionChanged();
+
     if (changedInputs && !(indexNum === this.state.questionIndex)) {
-      this.setState({confirmNoSave: indexNum})
+      this.setState({confirmNoSave: indexNum});
+    } else if (indexNum === 'finish') {
+      this.props.setCurrentGame(null);
     } else {
       this.changeQuestionsNoSave(indexNum);
     }
   }
 
+
   changeQuestionsNoSave = (questionIndex = this.state.confirmNoSave) => {
-    this.setState({questionIndex, errorMessage: '', confirmNoSave: false});
+    if (questionIndex === 'finish') {
+      this.props.setCurrentGame(null);
+    } else {
+      this.setState({questionIndex, errorMessage: '', confirmNoSave: false});
+    }
   }
+
 
   render(){
     let questionSetLength = this.props.currentGame.questions.length || 1;
@@ -115,7 +127,7 @@ export class CreateQuestionsMain extends React.Component {
 
         {equationSet}
 
-        <button type='reset' onClick={() => this.props.setCurrentGame(null)}>Finish</button>
+        <button type='reset' onClick={() => this.toggleConfirmNoSave('finish')}>Finish</button>
         <span className='float-right-container'>
           {previousButton}
           <button type='button' className='next-question' onClick={() => this.changeQuestionSetAndSave(this.state.questionIndex + 1)}>
