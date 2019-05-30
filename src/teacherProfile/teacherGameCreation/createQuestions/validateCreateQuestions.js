@@ -4,7 +4,6 @@ export function validateCreateQuestions () {
   const equationInputs = [...document.getElementsByClassName('create-equation-input')];
   const answerInputs = [...document.getElementsByClassName('create-answer-input')];
 
-  // console.log(typeof equationInputs, Array.isArray(equationInputs), equationInputs);
   equationInputs.forEach((equationInput, index) => {
     const value = equationInput.value;
 
@@ -52,7 +51,7 @@ export function validateCreateQuestions () {
 
 export function valdiateAnswerOnBlur (event, component) {
   // ----------------- REMOVE THIS LINE FOR LIVE APP ---------------- //
-  if (1 + 1 === 2) return;
+  // if (1 + 1 === 2) return;
   // ---------------------------------------------------------------- //
   let question, answer;
   const input = event.target;
