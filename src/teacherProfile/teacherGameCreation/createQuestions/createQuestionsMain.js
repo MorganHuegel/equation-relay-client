@@ -38,9 +38,14 @@ export class CreateQuestionsMain extends React.Component {
 
 
   deleteQuestion = () => {
-    if (this.state.questionIndex >= this.props.currentGame.questions.length) {
+    // If user clicks delete when there are no questions saved yet
+    if (this.props.currentGame.questions.length === 0) {
+      return;
+    // If user clicks delete on a question that has not been saved yet
+    } else if (this.state.questionIndex >= this.props.currentGame.questions.length) {
       return this.changeQuestionsNoSave(this.state.questionIndex - 1);
     }
+
     const gameId = this.props.currentGame.id;
     const questionId = this.props.currentGame.questions[this.state.questionIndex].id;
     return deleteQuestion(gameId, questionId)
