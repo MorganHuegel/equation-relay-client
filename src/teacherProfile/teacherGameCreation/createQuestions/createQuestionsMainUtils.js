@@ -30,3 +30,32 @@ export function changeQuestionSetAndSave (questionIndex) {
     this.setState({errorMessage: err.message});
   }
 }
+
+export function checkIfQuestionChanged () {
+  if (!this.props.currentGame.questions[this.state.questionIndex]) {
+    return true;
+  }
+
+  const equationInputs = [...document.getElementsByClassName('create-equation-input')];
+  const answerInputs = [...document.getElementsByClassName('create-answer-input')];
+
+  let changed = false;
+
+  equationInputs.forEach( (equationInputField, index) => {
+    const savedInput = this.props.currentGame.questions[this.state.questionIndex][`equation${index + 1}`].equation;
+    const currentInput = equationInputField.value;
+    if (savedInput !== currentInput) {
+      changed = true;
+    }
+  })
+
+  answerInputs.forEach( (answerInputField, index) => {
+    const savedInput = this.props.currentGame.questions[this.state.questionIndex][`equation${index + 1}`].answer;
+    const currentInput = Number(answerInputField.value);
+    if (savedInput !== currentInput) {
+      changed = true;
+    }
+  })
+
+  return changed;
+}

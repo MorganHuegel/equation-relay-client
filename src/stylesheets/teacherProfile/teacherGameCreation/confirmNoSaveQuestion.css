@@ -1,0 +1,47 @@
+.delete-question-lightbox {
+  width: calc(100vw - 20px);
+  max-width: 600px;
+  margin: 16.5vh auto;
+  height: calc(66vh);
+  max-height: 600px;
+  background-color: white;
+  border-radius: 10px;
+  border: solid 2px rgb(50, 120, 130);
+  padding: 20px;
+}
+
+.delete-question-lightbox label {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 30px;
+  margin-top: calc(22vh - 85px);
+}
+
+.delete-question-lightbox button {
+  width: 100%;
+  max-width: 350px;
+  max-height: 100px;
+  height: 14vh;
+  display: block;
+  margin: 20px auto;
+  -webkit-transition: border-bottom 250ms linear, background-color 250ms linear;
+  -ms-transition: border-bottom 250ms linear, background-color 250ms linear;
+  transition: border-bottom 250ms linear, background-color 250ms linear;
+}
+
+.delete-question-lightbox button[type='submit'] {
+  color: white;
+  background-color: rgb(50, 120, 130);
+}
+.delete-question-lightbox button[type='submit']:hover, .delete-question-lightbox button[type='submit']:focus {
+  cursor: pointer;
+  background-color: white;
+  color: rgb(50, 120, 130);
+  border: 1px solid rgb(50, 120, 130);
+}
+
+.delete-question-lightbox button[type='reset'] {
+  color: white;
+  background-color: black;
+  margin: 20px auto;
+}
