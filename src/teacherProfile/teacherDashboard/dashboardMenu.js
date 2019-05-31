@@ -10,7 +10,7 @@ export function DashboardMenu (props) {
   propsScope = props;
   const menuButtons = dashboardButtons.map(button => {
     const selected = button.buttonText === 'Created Games' ? 'selected' : '';
-    return <DashboardMenuItem buttonText={button.buttonText} onClick={props.clickInactiveDashboardButton} key={button.buttonText} selected={selected}/>
+    return <DashboardMenuItem buttonText={button.buttonText} onClick={button.clickFunction ? button.clickFunction : props.clickInactiveDashboardButton} key={button.buttonText} selected={selected}/>
   })
   return (
     <ul className='dashboard-buttons'>
@@ -25,23 +25,23 @@ export function DashboardMenu (props) {
 const dashboardButtons = [
   {
     buttonText: 'Created Games', 
-    clickFunction: () => console.log('Created Game')
+    clickFunction: null
   },
   {
     buttonText: 'Profile Info', 
-    clickFunction: () => console.log('Profile Info')
+    clickFunction: null
   },
   {
     buttonText: 'Favorites', 
-    clickFunction: () => console.log('Favorites')
+    clickFunction: null
   },
   {
     buttonText: 'Game Stats', 
-    clickFunction: () => console.log('Game Stats')
+    clickFunction: null
   },
   {
     buttonText: 'Browse Public Games', 
-    clickFunction: () => console.log('Browse Public Games')
+    clickFunction: null
   },
   {
     buttonText: 'Logout', 
