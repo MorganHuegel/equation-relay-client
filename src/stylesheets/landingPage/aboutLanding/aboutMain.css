@@ -2,7 +2,7 @@
   text-align: left;
   color: white;
   max-width: calc(100vw - 100px);
-  margin: 0 auto;
+  margin: 20px auto 0 auto;
 }
 
 .about-main h2 {
