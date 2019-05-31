@@ -23,28 +23,16 @@ export class LiveGamePlayingMain extends React.Component {
   }
 
   componentWillMount(){
-    //Will update gameSession data with
+    //Will update gameSession data before it mounts
     this.props.socket.emit('nextQuestion', {
       teamId: this.props.teamData._id, 
       playerId: this.props.currentUser._id
     });
   }
 
-  componentDidMount(){
-    // GETS the first question before page load
-    const gameId = this.props.gameSessionData.gameId;
-    const questionIndex = this.props.teamData.currentQuestion - 1;
-    return fetchQuestion(gameId, questionIndex)
-      .then(questionData => {
-        this.setState({currentQuestion: questionData, errorMessage: null});
-      })
-      .catch(errMessage => {
-        console.log('ERROR HANDLE HERE, COMPONENT DID MOUNT', errMessage);
-      });
-  }
 
   componentDidUpdate(prevProps, prevState){
-    // If team has moved on to next question
+    // If team has moved on to next question (also gets called after page mounts)
     if (prevProps.teamData.currentQuestion !== this.props.teamData.currentQuestion) {
       const gameId = this.props.gameSessionData.gameId;
       const questionNumber = this.props.teamData.currentQuestion - 1;

@@ -23,6 +23,11 @@ export function teacherSetupSocket (component) {
     })
     component.setState({gameSession: newGameState})
   })
+  socket.on('nextQuestion', (updatedGameData) => {
+    if (updatedGameData) {
+      component.setState({gameSession: updatedGameData})
+    }
+  });
   socket.on('error', (errMessage) => console.log(errMessage))
 }
 

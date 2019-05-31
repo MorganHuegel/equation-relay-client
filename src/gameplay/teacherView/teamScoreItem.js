@@ -10,7 +10,11 @@ export function TeamScoreItem (props) {
         {props.team.teamName}
       </h3>
       <p className='team-points'>{props.team.points} Points</p>
-      <p className='team-questions-answered'>{props.team.currentQuestion} Questions Answered</p>
+      <p className='team-questions-answered'>
+        {props.team.currentQuestion > 0 ? props.team.currentQuestion - 1 : 0} 
+        {props.team.currentQuestion === 2 ? ' Question ' : ' Questions '} 
+        Answered
+      </p>
     </li>
   )
 }
